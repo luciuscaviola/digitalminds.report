@@ -65,7 +65,7 @@ body {
 .report-header {
   display: flex;
   flex-direction: column;
-  padding: 4em 2em 6em 2em;
+  padding: 4em 2em 8em 2em;
   min-height: 40vh;
   justify-content: center;
   align-items: center;
@@ -109,7 +109,7 @@ body {
   padding: 2em;
   align-items: start;
   max-width: 62em;
-  margin: -3em auto 0 auto;
+  margin: -5em auto 0 auto;
 
   border-radius: 1em;
   background-color: var(--background-color);
@@ -292,4 +292,16 @@ hr {
 
 .consideration-list h3 {
   margin: 0 0 1em 0;
+}
+
+.report-body img {
+  background-color: white;
+  border: 1px solid var(--separator-color);
+  border-radius: 0.5em;
+  padding: 1em;
+  box-shadow: 0 0.5em 1em -0.5em rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 2em auto;
 }

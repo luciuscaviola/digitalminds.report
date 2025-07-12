@@ -77,6 +77,7 @@ const html = `<!DOCTYPE html>
 <body>
   <div class="top-bar">
     <a href="/" class="wordmark">
+      <img src="digitalminds.svg" alt="Digital Minds Logo" class="logo">
       <span class="primary">digitalminds<\/span><span class="secondary">.report<\/span>
     <\/a>
     <div class="year">2025<\/div>

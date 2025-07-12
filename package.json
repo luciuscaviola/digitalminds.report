@@ -1,0 +1,21 @@
+{
+  "name": "digitalminds.report",
+  "version": "1.0.0",
+  "description": "A project to generate an HTML report from Markdown.",
+  "type": "module",
+  "scripts": {
+    "generate": "node --experimental-strip-types  src/scripts/generate-report.ts",
+    "watch": "chokidar \"src/**/*\" \"forecasting-2025/**/*.css\" -c \"npm run generate\"",
+    "tsc": "tsc --noEmit"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "showdown": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.13",
+    "@types/showdown": "^2.0.6",
+    "chokidar-cli": "^3.0.0",
+    "typescript": "^5.8.3"
+  }
+}

@@ -40,6 +40,7 @@ body {
   align-items: center;
   padding: 1em 2em;
   border-bottom: 1px solid var(--separator-color);
+  font-size: 0.9em;
 }
 
 .year {
@@ -48,7 +49,6 @@ body {
 }
 
 .wordmark {
-  font-size: 1.2em;
   font-weight: var(--font-weight-bold);
   text-decoration: none;
 }

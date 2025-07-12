@@ -2,6 +2,10 @@
 
 This project generates a static HTML report from a Markdown file. It uses a combination of Node.js, TypeScript, and Showdown to convert the Markdown content into a styled HTML page.
 
+## Requirements
+
+- Node.js v22 or above
+
 ## Folder Structure
 
 ```

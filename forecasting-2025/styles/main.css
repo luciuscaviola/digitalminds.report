@@ -256,6 +256,22 @@ a:hover {
   margin-bottom: 2em;
 }
 
+.author-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 0.8em;
+  color: var(--accent-secondary);
+  padding-bottom: 1.5em;
+  border-bottom: 1px solid var(--separator-color);
+}
+
+.author-block p {
+  margin: 0;
+}
+
 .abstract {
   background-color: var(--abstract-bg-color);
   padding: 1.5em;
@@ -288,7 +304,7 @@ hr {
   border: 0;
   height: 1px;
   background: var(--separator-color);
-  margin: 2em 0;
+  margin: 1em 0;
 }
 
 .consideration-list {

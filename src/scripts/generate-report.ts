@@ -85,8 +85,12 @@ const html = `<!DOCTYPE html>
   ${headerHtml}
   <div class="main-content-wrapper">
     <div class="main-content">
+      <div class="author-block">
+        <p class="authors"><strong>${config.authorsTitle}</strong> ${config.authors}</p>
+        <p class="university">${config.university}</p>
+      </div>
       <nav class="toc">
-        <h2>${config.tocTitle}<\/h2>
+        <h2>${config.tocTitle}</h2>
         <ul>
           ${tocHtml}
         <\/ul>

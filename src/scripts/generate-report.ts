@@ -63,18 +63,20 @@ const headerHtml = `
 `;
 
 const tocHtml = toc
-  .map((item) => `<li class="toc-level-${item.level}"><a href="#${item.id}">${item.text}<\/a><\/li>`)
+  .map((item) => `<li class="toc-level-${item.level}"><a href="#${item.id}" class="nav-link">${item.text}<\/a><\/li>`)
   .join("\n");
 
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>${config.header.title}<\/title>
   <link rel="stylesheet" href="styles/main.css?v=${Date.now()}">
 <\/head>
 <body>
+    <div class="overlay"><\/div>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="navigation"><span class="menu-icon"><\/span><\/button>
   <div class="top-bar">
     <a href="/" class="wordmark">
       <img src="digitalminds.svg" alt="Digital Minds Logo" class="logo">
@@ -89,8 +91,8 @@ const html = `<!DOCTYPE html>
         <p class="authors"><strong>${config.authorsTitle}</strong> ${config.authors}</p>
         <p class="university">${config.university}</p>
       </div>
-      <nav class="toc">
-        <h2>${config.tocTitle}</h2>
+      <nav class="toc" id="navigation">
+        <h2>${config.tocTitle}<\/h2>
         <ul>
           ${tocHtml}
         <\/ul>
@@ -100,6 +102,7 @@ const html = `<!DOCTYPE html>
       <\/article>
     <\/div>
   <\/div>
+  <script src="report-interactivity.js"><\/script>
 <\/body>
 <\/html>`;
 

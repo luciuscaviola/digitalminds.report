@@ -87,9 +87,23 @@ const html = `<!DOCTYPE html>
   ${headerHtml}
   <div class="main-content-wrapper">
     <div class="main-content">
-      <div class="author-block">
-        <p class="authors"><strong>${config.authorsTitle}</strong> ${config.authors}</p>
-        <p class="university">${config.university}</p>
+      <div class="meta-block">
+        <div class="meta-item">
+          <span class="meta-label">${config.meta.authorsTitle}</span>
+          <span class="meta-value">
+            ${config.meta.authors
+              .map((author) => `${author.name} (${author.university})`)
+              .join(", ")}
+          </span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Published:</span>
+          <span class="meta-value">${config.meta.publicationDate}</span>
+        </div>
+        <div class="meta-links">
+          <a href="${config.meta.pdfLink}" class="meta-link">${config.meta.pdfLabel}</a>
+          <a href="${config.meta.dataLink}" class="meta-link">${config.meta.dataLabel}</a>
+        </div>
       </div>
       <nav class="toc" id="navigation">
         <h2>${config.tocTitle}</h2>

@@ -7,7 +7,16 @@ export const config = {
       "We survey 67 experts on digital minds. They see a 90% chance digital minds are possible and 65% they arrive by 2100. Many expect rapid growth in digital mind welfare and major societal disagreement over their rights.",
   },
   tocTitle: "Table of Contents",
-  authorsTitle: "Authors:",
-  authors: "Lucius Caviola & Bradford Saad",
-  university: "University of Oxford",
+  meta: {
+    authorsTitle: "Authors:",
+    authors: [
+      { name: "Lucius Caviola", university: "University of Cambridge" },
+      { name: "Brad Saad", university: "University of Oxford" },
+    ],
+    publicationDate: "August 2025",
+    pdfLink: "http://google.com",
+    pdfLabel: "PDF version",
+    dataLink: "http://google.com",
+    dataLabel: "Data & Code",
+  },
 } as const;

@@ -198,7 +198,7 @@ a:hover {
   font-family: var(--primary-font);
   font-weight: var(--font-weight-bold);
   color: var(--accent-secondary);
-  font-size: 0.9em;
+  font-size: 0.8em;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin: 0 0 1em 0;
@@ -212,8 +212,9 @@ a:hover {
 
 .toc li a {
   display: block;
-  padding: 0.25em 1em;
-  color: var(--primary-color);
+  padding: 0.3em 0.75em;
+  color: var(--accent-secondary);
+  font-size: 0.9em;
   text-decoration: none;
   border-left: 2px solid transparent;
 }
@@ -265,10 +266,10 @@ a:hover {
   left: 0;
 }
 
-.author-block {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.meta-block {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1em;
   grid-column: 1 / -1;
   font-size: 0.8em;
   color: var(--accent-secondary);
@@ -276,8 +277,33 @@ a:hover {
   border-bottom: 1px solid var(--separator-color);
 }
 
-.author-block p {
-  margin: 0;
+.meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-label {
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 0.25em;
+}
+
+.meta-value {
+  color: var(--primary-color);
+}
+
+.meta-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-link {
+  color: var(--link-color);
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+}
+
+.meta-link:hover {
+  text-decoration: underline;
 }
 
 /* GENERIC COMPONENTS */

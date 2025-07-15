@@ -3,7 +3,7 @@ import showdown, { type ShowdownExtension } from "showdown";
 
 import { config } from "../forecasting-2025/header.ts";
 
-const considerationListRegex = /(<h3[^<]+?<\/h3>\s*(?:<p>[\s\S]+?<\/p>)?\s*<ul>[\s\S]+?<\/ul>)/g;
+const considerationListRegex = /(<h4[^<]+?<\/h4>\s*(?:<p>[\s\S]+?<\/p>)?\s*<ul>[\s\S]+?<\/ul>)/g;
 
 interface TocItem {
   level: number;
@@ -35,9 +35,9 @@ const basicExtendions: ShowdownExtension[] = [
 
 const tocExtension: ShowdownExtension = {
   type: "output",
-  regex: /<h([1-6]) id="(.+?)">(.+?)<\/h[1-6]>/g,
+  regex: /<h([2-3]) id="(.+?)">(.+?)<\/h[2-3]>/g,
   replace: (match: string, level: string, id: string, text: string): string => {
-    toc.push({ level: parseInt(level), id, text });
+    toc.push({ level: parseInt(level) - 1, id, text });
     return match;
   },
 };
@@ -56,14 +56,14 @@ const bodyContent = converter.makeHtml(markdown);
 
 const headerHtml = `
   <header class="report-header">
-    <div class="report-label">${config.header.label}<\/div>
-    <h1 class="report-title">${config.header.title}<\/h1>
-    <p class="report-subtitle">${config.header.subtitle}<\/p>
-  <\/header>
+    <div class="report-label">${config.header.label}</div>
+    <h1 class="report-title">${config.header.heading}</h1>
+    <p class="report-subtitle">${config.header.subtitle}</p>
+  </header>
 `;
 
 const tocHtml = toc
-  .map((item) => `<li class="toc-level-${item.level}"><a href="#${item.id}" class="nav-link">${item.text}<\/a><\/li>`)
+  .map((item) => `<li class="toc-level-${item.level}"><a href="#${item.id}" class="nav-link">${item.text}</a></li>`)
   .join("\n");
 
 const html = `<!DOCTYPE html>
@@ -71,19 +71,19 @@ const html = `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>${config.header.title}<\/title>
+  <title>${config.header.title}</title>
   <link rel="stylesheet" href="styles/main.css?v=${Date.now()}">
-<\/head>
+</head>
 <body>
-    <div class="overlay"><\/div>
-    <button class="menu-toggle" aria-expanded="false" aria-controls="navigation"><span class="menu-icon"><\/span><\/button>
+    <div class="overlay"></div>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="navigation"><span class="menu-icon"></span></button>
   <div class="top-bar">
     <a href="/" class="wordmark">
       <img src="digitalminds.svg" alt="Digital Minds Logo" class="logo">
-      <span class="primary">digitalminds<\/span><span class="secondary">.report<\/span>
-    <\/a>
-    <div class="year">2025<\/div>
-  <\/div>
+      <span class="primary">digitalminds</span><span class="secondary">.report</span>
+    </a>
+    <div class="year">2025</div>
+  </div>
   ${headerHtml}
   <div class="main-content-wrapper">
     <div class="main-content">
@@ -92,18 +92,18 @@ const html = `<!DOCTYPE html>
         <p class="university">${config.university}</p>
       </div>
       <nav class="toc" id="navigation">
-        <h2>${config.tocTitle}<\/h2>
+        <h2>${config.tocTitle}</h2>
         <ul>
           ${tocHtml}
-        <\/ul>
-      <\/nav>
+        </ul>
+      </nav>
       <article class="report-body">
         ${bodyContent}
-      <\/article>
-    <\/div>
-  <\/div>
-  <script src="report-interactivity.js"><\/script>
-<\/body>
-<\/html>`;
+      </article>
+    </div>
+  </div>
+  <script src="report-interactivity.js"></script>
+</body>
+</html>`;
 
 fs.writeFileSync("forecasting-2025/index.html", html);

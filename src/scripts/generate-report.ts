@@ -80,7 +80,9 @@ const html = `<!DOCTYPE html>
   <div class="top-bar">
     <a href="/" class="wordmark">
       <img src="digitalminds.svg" alt="Digital Minds Logo" class="logo">
-      <span class="primary">digitalminds</span><span class="secondary">.report</span>
+      <div class="text">
+        Digital Minds <span class="secondary">Report</span>
+      </div> 
     </a>
     <div class="year">2025</div>
   </div>
@@ -91,9 +93,7 @@ const html = `<!DOCTYPE html>
         <div class="meta-item">
           <span class="meta-label">${config.meta.authorsTitle}</span>
           <span class="meta-value">
-            ${config.meta.authors
-              .map((author) => `${author.name} (${author.university})`)
-              .join(", ")}
+            ${config.meta.authors.map((author) => `${author.name} (${author.university})`).join(", ")}
           </span>
         </div>
         <div class="meta-item">

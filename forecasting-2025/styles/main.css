@@ -104,7 +104,7 @@ a:hover {
   height: 2em;
 }
 
-.wordmark .primary {
+.wordmark .text {
   color: var(--accent-primary);
 }
 
@@ -132,8 +132,8 @@ a:hover {
 }
 
 .report-header .report-label {
-  font-size: 0.9em;
-  color: var(--header-text-subtle-color);
+  font-size: 1.2em;
+  color: var(--header-text-color);
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   letter-spacing: 1px;

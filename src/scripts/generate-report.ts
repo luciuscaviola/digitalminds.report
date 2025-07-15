@@ -78,13 +78,15 @@ const html = `<!DOCTYPE html>
     <div class="overlay"></div>
     <button class="menu-toggle" aria-expanded="false" aria-controls="navigation"><span class="menu-icon"></span></button>
   <div class="top-bar">
-    <a href="/" class="wordmark">
-      <img src="digitalminds.svg" alt="Digital Minds Logo" class="logo">
-      <div class="text">
-        Digital Minds <span class="secondary">Report</span>
-      </div> 
-    </a>
-    <div class="year">2025</div>
+    <div class="top-bar-content">
+      <a href="/" class="wordmark">
+        <img src="digitalminds.svg" alt="Digital Minds Logo" class="logo">
+        <div class="text">
+          Digital Minds <span class="secondary">Report</span>
+        </div> 
+      </a>
+      <div class="year">2025</div>
+    </div>
   </div>
   ${headerHtml}
   <div class="main-content-wrapper">

@@ -9,8 +9,8 @@
   --accent-secondary: #566573;
   --background-color: #fcfcfc;
   --link-color: var(--accent-primary);
-  --abstract-bg-color: #f8f9fa;
-  --abstract-border-color: #e9ecef;
+  --box-bg-color: #f8f9fa;
+  --box-border-color: #e9ecef;
   --separator-color: #dee2e6;
   --header-bg-color: #2c3e50;
   --header-text-color: #ffffff;
@@ -228,7 +228,7 @@ a:hover {
 }
 
 .toc li a:hover {
-  background-color: var(--abstract-bg-color);
+  background-color: var(--box-bg-color);
 }
 
 .toc li a.active {
@@ -334,13 +334,6 @@ a:hover {
 }
 
 /* GENERIC COMPONENTS */
-.abstract {
-  background-color: var(--abstract-bg-color);
-  padding: 1.5em;
-  margin-bottom: 2em;
-  border-left: 5px solid var(--abstract-border-color);
-}
-
 .footnotes {
   font-size: 0.9em;
   border-top: 1px solid var(--separator-color);
@@ -351,6 +344,16 @@ a:hover {
 .footnote-ref {
   vertical-align: super;
   font-size: 0.8em;
+}
+
+.footnotes li p {
+  display: inline;
+}
+
+.footnote-backref {
+  font-size: 0.8em;
+  text-decoration: none;
+  margin-left: 0.5em;
 }
 
 .reference-list {
@@ -370,10 +373,10 @@ hr {
 }
 
 .consideration-list {
-  background-color: var(--abstract-bg-color);
+  background-color: var(--box-bg-color);
   padding: 1.5em;
   margin: 2em 0;
-  border-left: 5px solid var(--abstract-border-color);
+  border-left: 5px solid var(--box-border-color);
 }
 
 .consideration-list h4 {

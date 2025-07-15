@@ -12,6 +12,7 @@ interface TocItem {
 }
 
 const toc: TocItem[] = [];
+const footnotes: { [key: string]: string } = {};
 
 const basicExtendions: ShowdownExtension[] = [
   {
@@ -20,11 +21,6 @@ const basicExtendions: ShowdownExtension[] = [
     replace: (match: string) => {
       return `<div class="authors">${match}<\/div>`;
     },
-  },
-  {
-    type: "output",
-    regex: /<blockquote>/g,
-    replace: '<blockquote class="abstract">',
   },
   {
     type: "output",
@@ -42,13 +38,34 @@ const tocExtension: ShowdownExtension = {
   },
 };
 
+const footnoteExtension: ShowdownExtension[] = [
+  {
+    type: "lang",
+    regex: /\[\^(\d{1,3})\]: (.*)/g,
+    replace: (match: string, a: string, b: string) => {
+      footnotes[a] = b;
+      return "";
+    },
+  },
+  {
+    type: "lang",
+    regex: /\[\^(\d{1,3})\]/g,
+    replace: (match: string, a: string) => {
+      const footnoteText = stripMarkdownAndEscape(footnotes[a]);
+      return `<sup id="fnref-${a}" class="footnote-ref"><a href="#fn-${a}" title="${footnoteText}">${a}</a></sup>`;
+    },
+  },
+];
+
 const considerationListExtension: ShowdownExtension = {
   type: "output",
   regex: considerationListRegex,
   replace: '<div class="consideration-list">$1</div>',
 };
 
-const converter = new showdown.Converter({ extensions: [basicExtendions, tocExtension, considerationListExtension] });
+const converter = new showdown.Converter({
+  extensions: [basicExtendions, tocExtension, considerationListExtension, footnoteExtension],
+});
 
 const markdown = fs.readFileSync("src/forecasting-2025/report.md", "utf8");
 
@@ -66,6 +83,20 @@ const tocHtml = toc
   .map((item) => `<li class="toc-level-${item.level}"><a href="#${item.id}" class="nav-link">${item.text}</a></li>`)
   .join("\n");
 
+const footnotesHtml = `
+  <div class="footnotes">
+    <h2>Footnotes</h2>
+    <ol>
+      ${Object.entries(footnotes)
+        .map(
+          ([key, value]) =>
+            `<li id="fn-${key}">${converter.makeHtml(value)}<a href="#fnref-${key}" class="footnote-backref">↩</a></li>`
+        )
+        .join("\n")}
+    </ol>
+  </div>
+`;
+
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,8 +106,8 @@ const html = `<!DOCTYPE html>
   <link rel="stylesheet" href="styles/main.css?v=${Date.now()}">
 </head>
 <body>
-    <div class="overlay"></div>
-    <button class="menu-toggle" aria-expanded="false" aria-controls="navigation"><span class="menu-icon"></span></button>
+  <div class="overlay"></div>
+  <button class="menu-toggle" aria-expanded="false" aria-controls="navigation"><span class="menu-icon"></span></button>
   <div class="top-bar">
     <div class="top-bar-content">
       <a href="/" class="wordmark">
@@ -115,6 +146,7 @@ const html = `<!DOCTYPE html>
       </nav>
       <article class="report-body">
         ${bodyContent}
+        ${footnotesHtml}
       </article>
     </div>
   </div>
@@ -123,3 +155,14 @@ const html = `<!DOCTYPE html>
 </html>`;
 
 fs.writeFileSync("forecasting-2025/index.html", html);
+
+function stripMarkdownAndEscape(text: string) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, "$1")
+    .replace(/\[(.*?)\]\((.*?)\)/g, "$1")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}

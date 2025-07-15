@@ -1,7 +1,7 @@
 import fs from "fs";
 import showdown, { type ShowdownExtension } from "showdown";
 
-import { config } from "../forecasting-2025/header.ts";
+import { config } from "../forecasting-2025/config.ts";
 
 const considerationListRegex = /(<h4[^<]+?<\/h4>\s*(?:<p>[\s\S]+?<\/p>)?\s*<ul>[\s\S]+?<\/ul>)/g;
 

@@ -54,8 +54,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (prefersReducedMotion()) {
         window.scrollTo(0, targetPosition);
+        history.pushState(null, null, targetId);
       } else {
-        smoothScrollTo(targetPosition, ANIMATION_DURATION);
+        smoothScrollTo(targetPosition, ANIMATION_DURATION, targetId);
       }
     }
   }
@@ -64,12 +65,10 @@ document.addEventListener("DOMContentLoaded", function () {
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
 
-  function smoothScrollTo(targetPosition, duration) {
+  function smoothScrollTo(targetPosition, duration, targetId) {
     const startPosition = window.pageYOffset;
     const distance = targetPosition - startPosition;
     let startTime = null;
-
-    console.log({ startPosition, targetPosition, distance });
 
     function animation(currentTime) {
       if (startTime === null) startTime = currentTime;
@@ -79,10 +78,11 @@ document.addEventListener("DOMContentLoaded", function () {
       const easing = progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
 
       window.scrollTo(0, startPosition + distance * easing);
-      console.log(startPosition + distance * easing);
 
       if (timeElapsed < duration) {
         requestAnimationFrame(animation);
+      } else {
+        history.pushState(null, null, targetId);
       }
     }
 

@@ -57,6 +57,14 @@ const footnoteExtension: ShowdownExtension[] = [
   },
 ];
 
+const imageExtension: ShowdownExtension = {
+  type: "output",
+  regex: /<img src=".*?" alt="([a-z_]+)" \/>/g,
+  replace: (match: string, alt: string) => {
+    return `<img src="images/${alt}.svg" alt="${alt}" />`;
+  },
+};
+
 const considerationListExtension: ShowdownExtension = {
   type: "output",
   regex: considerationListRegex,
@@ -64,12 +72,13 @@ const considerationListExtension: ShowdownExtension = {
 };
 
 const converter = new showdown.Converter({
-  extensions: [basicExtendions, tocExtension, considerationListExtension, footnoteExtension],
+  extensions: [basicExtendions, tocExtension, considerationListExtension, footnoteExtension, imageExtension],
 });
 
 const markdown = fs.readFileSync("src/forecasting-2025/report.md", "utf8");
-
-const bodyContent = converter.makeHtml(markdown);
+const h2Index = markdown.indexOf("## ");
+if (h2Index === -1) throw new Error("No H2 level heading found.");
+const bodyContent = converter.makeHtml(markdown.substring(h2Index));
 
 const headerHtml = `
   <header class="report-header">

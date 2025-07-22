@@ -1,3 +1,9 @@
+# Futures with Digital Minds: Expert Forecasts in 2025
+
+Lucius Caviolaa,b & Bradford Saadb[^1]  
+a University of Oxford  
+b University of Cambridge
+
 ## Summary
 
 The main results from the survey are summarized below. Items marked with an asterisk (\*) indicate that participants were instructed to assume the first digital mind is a machine learning–based AI system created no later than 2040\.
@@ -27,7 +33,7 @@ The main results from the survey are summarized below. Items marked with an aste
 - **Sample population and potential selection bias**: Participants were recruited through digital minds research groups, academic networks, AI research and policy organizations, and professional contacts, with additional outreach to authors of published work on consciousness and AI welfare. While this targeted strategy helped ensure domain relevance, it may have introduced selection bias—specifically, an overrepresentation of individuals who view digital minds as plausible and important.
 - **Interpretation and Use:** Given the speculative character of this topic, the expert forecasts in this survey should be interpreted cautiously and without placing too much weight on these forecasts as evidence about what the future holds for digital minds. At the same time, the survey reveals informative patterns in expert forecasts, including areas of both convergence and disagreement. In our view, the collection of qualitative observations offered in free text responses provides a particularly valuable overview of key considerations that goes well beyond what individual experts generated on their own. The results from this survey also provide a basis for future research to build upon and use to improve forecasting in this area.
 
-## Introduction {#introduction}
+## Introduction
 
 This report presents findings from our expert survey on _digital minds_, that is, computer-based systems with a capacity for subjective experience. We asked experts to make quantitative predictions and offer qualitative considerations concerning when digital minds will be created, what characteristics they will have, and their societal impact. While considerable research attention has been directed toward forecasting the development of artificial intelligence (AI), little research effort has gone toward forecasting the emergence of digital minds and the implications of their creation.
 
@@ -37,7 +43,7 @@ At the same time, within the broader landscape of AI development, the topic of d
 
 There are thus a number of reasons to investigate the potential emergence of digital minds. First, the level of evidence for such emergence bears on the extent to which companies and governments should allocate attention and resources to the topic. Those who favor evidence-based prioritization should thus welcome the gathering of additional evidence on this topic, regardless of whether they currently favor the status quo or a pivot advocate by some toward taking the near-term prospects of digital minds seriously. Second, from the perspective of those who are uncertain about whether the potential emergence of digital minds is an important and urgent topic, there is reason to gather more evidence about the topic now: doing so helps ensure that we can act in time in the event that urgent action is needed. Third, given the noted divergence in perspectives and that the topic is little explored, it is reasonable to hope that gathering further evidence may serve to inform and resolve disagreements on the topic. Our survey is motivated by these reasons along with the belief that aggregating input from experts in relevant domains will provide an unusually comprehensive collection of relevant considerations as well as a stepping stone for more-systematic investigations of this topic.
 
-### Research Aims {#research-aims}
+### Research Aims
 
 The primary objective of this survey is to systematically collect and analyze expert predictions and perspectives on:
 
@@ -51,7 +57,7 @@ Rather than aiming to represent the full range of expert opinion across all fiel
 
 Although our survey relies on speculative expert judgment, we believe it offers significant contributions. First, the quantitative forecasts—while uncertain—reveal informative patterns of convergence and divergence that help map the current expert landscape and inform prioritization decisions about research in this area. Second, the qualitative responses are especially insightful: they reveal the reasoning behind forecasts, highlight key considerations, and collectively surface a much broader and richer set of ideas than any individual might be expected to generate. These insights may serve as a basis for refining future quantitative estimates. Finally, we view this work as a first step in building a more robust research program on digital minds forecasting.
 
-### Methods and Sample {#methods-and-sample}
+### Methods and Sample
 
 Our survey methodology combined probabilistic judgments with qualitative reasoning. Given the speculative nature of the topic—long-term predictions with limited historical precedent and significant uncertainty—the survey was designed to elicit both concrete probability estimates and the underlying considerations, reasoning, and assumptions that informed those estimates.
 
@@ -61,9 +67,9 @@ Participants were identified through digital minds research groups, academic net
 
 We ultimately recruited 67 participants: 18 digital minds researchers, 18 AI research and policy experts, 7 professional forecasters, and 20 philosophers, cognitive scientists, and other academic specialists. Four additional participants selected “no specific expertise,” though their responses demonstrated thoughtful reasoning and strong understanding. The figure below provides a more detailed breakdown of participants’ self-assessed expertise across multiple domains, showing considerable diversity. The study was conducted in February and March 2025\.
 
-![][image1]
+![expertise][image1]
 
-### Key Assumptions {#key-assumptions}
+### Key Assumptions
 
 For consistency across responses, we stipulated some key assumptions for all participants:
 
@@ -74,19 +80,19 @@ For consistency across responses, we stipulated some key assumptions for all par
 
 When designing the survey, we considered whether or not to include an assumption concerning how to individuate digital minds. We decided not to include such an assumption for three reasons. First, we struggled to find a suitable individuation criterion. Second, we judged that responses to most questions probably would not be highly sensitive to the choice of individuation criterion. Third, participants could, as some did, note such sensitivity in their free responses.
 
-### Report Structure {#report-structure}
+### Report Structure
 
 This report presents our findings in a logical sequence, beginning with expert predictions on the feasibility and timelines of digital minds, followed by expert predictions concerning specific scenarios and their implications. Please note that the order of sections in the report does not entirely reflect the order in which participants encountered them. The exact sequence and wording presented to participants can be found in the supplementary materials. Throughout the report, we present both quantitative results and experts’ qualitative reasoning. **For the qualitative responses, we group related considerations thematically, paraphrase them in our own words, and order them roughly by our judgments of significance and prevalence. By default, “considerations” refers to views expressed by at least one participant; they are not necessarily endorsed by all participants or by the authors.** We conclude with a discussion of implications for future research and the governance of digital minds.
 
-## Starting Point {#starting-point}
+## Starting Point
 
-### Possibility {#possibility}
+### Possibility
 
 The first question asked participants how likely it is that digital minds—computer systems capable of subjective experience (phenomenal consciousness)—are possible in principle. Participants entered a probability number between 0% and 100%.
 
 The results show that most participants favored the hypothesis that digital minds are possible in principle. The median estimate was a 90% probability that digital minds are possible in principle, the mean was 86.4%, and the most common (i.e., modal) response was 100%.
 
-![][image2]
+![possibility][image2]
 
 Text responses to this question echoed common themes in the literature. Broadly, participants offered tentative support for the in-principle possibility of digital minds and cited little evidence against it. More specifically, many pointed to a link between subjective experience and functional organization as a key reason for thinking digital minds are possible—while skeptics questioned whether such a link holds.[^7] Below is a more detailed breakdown of responses to this question.
 
@@ -122,13 +128,13 @@ Text responses to this question echoed common themes in the literature. Broadly,
 - **Modal ambiguity:** The question is ambiguous between different kinds of possibility (e.g. logical possibility vs. possible according to the laws of nature in our world).
 - **Question defectiveness**: There is no fact of the matter about whether digital minds are possible or our way of conceptualizing this issue is defective.
 
-### Creation {#creation}
+### Creation
 
 The second question asked participants how likely it is that digital minds will ever be created. Whereas the first question concerned possibility in principle, here we were interested in participants’ empirical predictions about the creation of digital minds in practice.
 
 As expected, estimates were somewhat lower, since practical creation requires more than just possibility in principle. Nonetheless, most participants saw creation as likely: the median estimate was 73%, and the mean was 70.7%. Only eight out of 66 participants thought it was less than 50% likely that digital minds would ever be created.
 
-![][image3]
+![creation][image3]
 
 #### Considerations that suggest a digital mind will be created
 
@@ -150,7 +156,7 @@ As expected, estimates were somewhat lower, since practical creation requires mo
 - **No incentive to create**: ASI (artificial super intelligence) may have no reason to create digital minds. Or belief in phenomenal consciousness or its importance may be a passing phase.
 - **Ontogenetic and structural divergence:** The cognitive capacities of artificial systems are being developed in an order that differs from those in which biological systems develop their capacities. This may result in artificial systems missing structures that are crucial for consciousness.
 
-### Timing {#timing}
+### Timing
 
 When might digital minds be created? Participants were asked to estimate how likely it is that digital minds will be created by specific points in time: 2025, 2030, 2040, 2050, and 2100\. For each year, participants were asked to provide their best-guess probability (specifically, the median of their subjective distribution).
 
@@ -164,9 +170,9 @@ The responses indicate that participants see the creation of digital minds as un
 
 These results suggest that there is a non-negligible probability that digital minds have already been created, that the probability of digital minds being created will substantially rise during the next 5-10 years, and that digital minds will probably emerge during this century.
 
-![][image4]
+![timing][image4]
 
-#### Enables
+#### Enablers
 
 Text responses indicated that digital minds timeline estimates were informed by the following **potential enablers**:
 
@@ -209,7 +215,7 @@ Some responses offered reflections on how to approach this question.
 - **Anchoring**: One approach to arriving at estimates is (1) use deference to determine a lower bound for an early estimate (for digital minds by 2030\) and (2) take the estimated probability for digital minds ever arriving and assign a slightly lower estimate for a later time (digital minds by 2100\) by which digital minds seem highly likely to arrive if they ever do.[^14]
 - **Potential boiling frog effect / goalpost moving:** Prior to the advent of LLMs, it was expected that digital minds would be created before AGI. The opposite is now expected. Yet it is not clear that this reversal is justified. It could be that, like slowly boiling frogs, we have failed to track the relevant evidence (in this case, for the emergence of digital minds) because it has accumulated gradually. And it could be that we will continue to move the consciousness goalposts, assuming that whatever has been achieved so far in AI development, consciousness requires something further.
 
-### Peer Forecasts About Timing {#peer-forecasts-about-timing}
+### Peer Forecasts About Timing
 
 This “meta-question” asked participants to predict how others in their expert group would respond to the question: “How likely are digital minds by 2040?” Specifically, they were asked to estimate the median response of their peers.
 
@@ -221,15 +227,15 @@ It is difficult to draw firm conclusions from this pattern. One possible interpr
 
 While text responses did not offer many object-level insights, two responses noted sensitivity of the question to who within expert groups participates in the survey. One response cited self-selection as a reason to expect that digital mind experts will tend to give higher estimates for the development of digital minds by 2040\. Another noted an expectation that social scientists will be overly skeptical about digital minds, based on social scientists’ general thinking about AGI, while also noting an expectation that less skeptical social scientists will be overrepresented by those taking the survey.
 
-![][image5]
+![peer_timing][image5]
 
-### Timing Relative to AGI {#timing-relative-to-agi}
+### Timing Relative to AGI
 
 This question explored participants’ views on whether digital minds would be created before AGI, where ‘AGI’ was defined as an AI system that matches or outperforms humans at almost all economically valuable tasks.
 
 The results showed a somewhat bimodal pattern. The largest group of participants considered it very unlikely that digital minds would be created before AGI, with many giving responses of 0% or close to 0%. The median estimate was 27.5%. Another group clustered around 50%, indicating substantial uncertainty. Only a negligible number of participants thought digital minds were likely to arrive before AGI.
 
-![][image6]
+![time_relative_agi][image6]
 
 #### Considerations that suggest digital minds will be created after AGI
 
@@ -281,7 +287,7 @@ Only a few participants offered reasons in support of digital minds emerging bef
 - **Divergence in definition and practice**: On the adopted definitions, there is not a definitional requirement that a digital mind qualify as an AGI or vice versa. A stronger point of convergence in text responses was that being a digital mind and being an AGI could come apart in practice. For example, the first digital mind might not be an AGI, and the first AGI might not be a digital mind.
 - **Sources of conceptual ambiguity**: Text responses noted multiple ambiguities in this question. One participant reported uncertainty about whether or not the question was supposed to be conditional on digital minds being created. Multiple participants noted that the operative notion of ‘AGI’ is ambiguous; one flagged it as a huge source of ambiguity and opted to resolve the ambiguity by understanding ‘almost all’ in the AGI definition in terms of being able to match or exceed human performance at 99% of US jobs. Another pointed out that the adopted definition of ‘AGI’ is ambiguous because ‘matches or outperforms’ could be read either in terms of being a system being capable of matching or outperforming humans at economically valuable tasks or in terms of a system being integrated into the economy such that it in fact matches or outperforms humans. Two participants pointed out that whether a system meets the welfare threshold we set for qualifying as a digital mind may depend on how systems are individuated.[^15]
 
-## Speed {#speed}
+## Speed
 
 In this section, we examined digital mind takeoff speeds: how rapidly the population of digital minds could grow following the creation of the first digital mind.
 
@@ -298,7 +304,7 @@ The responses reveal that many participants expect digital mind welfare capacity
 
 These median estimates reflect surprisingly short timelines, with many participants expecting massive growth within just a few years. However, the mean estimates were substantially higher than the median estimates due to a relatively small number of respondents who anticipated much slower growth—sometimes over hundreds or even thousands of years.
 
-![][image7]
+![speed][image7]
 
 Participants offered a particularly rich and thoughtful set of text responses for this question. We’ll discuss these responses under the following categories: drivers of faster takeoff in digital mind welfare capacity, constraints on takeoff speed, other factors that bear on takeoff speed, conceptual and methodological issues.
 
@@ -374,9 +380,9 @@ Other factors that bear on how digital mind welfare capacity will evolve:
 - **Difficulty in median estimation**: The survey asked participants to provide median estimates. For this question, participants reported difficulty in providing the requested type of estimate. While one participant reported uncertainty about whether to answer this question with median estimates, others reported difficulty in generating median estimates for this question (e.g. because of the need to consider many possible branching scenarios). It was noted that minimum time for digital minds to cross a welfare capacity threshold could be much shorter in expectation than the median time.
 - **Hedges**: Free-text responses to this question frequently entered hedges. Examples: “I have huge error bars and could also see that not that many \[digital minds\] will be created”, “This is probably the most speculative of my responses so far.”, “I feel especially unsure in my answers to this question”, and “After the first five years, I find it near impossible to put numbers, because I see so many meaningfully different paths we could take”. Some responses flagged the trillion-human sub-question as particularly difficult/speculative. It was also pointed out that we could come to see this question as meaningless as our understanding of minds improves.
 
-## Types of Digital Mind {#types-of-digital-mind}
+## Types of Digital Mind
 
-### Possible Types {#possible-types}
+### Possible Types
 
 This section explores expert views on the prospects for different types of computer systems to qualify as digital minds. While much of the public debate focuses on specific models like large language models (LLMs), there is considerable uncertainty about which types of computer systems might ultimately support consciousness. We asked participants to estimate the likelihood that various types of systems could, in principle, have subjective experiences.
 
@@ -390,7 +396,7 @@ Unlike in the earlier section, participants were **not** asked to assume that di
 
 The results revealed a hierarchy of perceived likelihood. The most likely in-principle possible possessors of subjective experiences were judged to be brain simulations, with a median estimate of 88% and a mean of 81.3%. This reflects a common view that replicating relevant fine-grained functions of a conscious biological brain in a computer would plausibly result in an artificial system with subjective experiences.[^19] Other architectures were also seen as promising, with a median estimate of 85% and a mean of 76.4%. Machine learning systems, though rated as least likely of the three, still received surprisingly high estimates: a median of 70% and a mean of 64.7%. These results suggest that participants see multiple plausible paths to digital minds, not just those closely modeled on the brain.
 
-![][image8]
+![types][image8]
 
 #### Considerations
 
@@ -416,7 +422,7 @@ Some text responses noted limitations in participants’ abilities to answer.
 - **Uncertainty about what the Other category encompasses.**
 - **Connections to other questions**: One participant wrote: “As I thought through this question, I started updating my earlier answer to how likely it is that digital minds are possible—I started to think that my earlier answer was perhaps closer to the likelihood a machine-learning system would ever be conscious and that the possibility of WBE and similar methods should increase my probability.” This response is noteworthy because it suggests that some responses to earlier questions in the survey may have been under-estimates, owing to participants focusing on an overly narrow class of digital minds.
 
-### First Type {#first-type}
+### First Type
 
 After asking which kinds of systems could, in principle, have subjective experience, we next asked participants which type they thought would _actually_ be the first digital mind to exist. Specifically, participants were asked to allocate probabilities across the following hypotheses: digital minds will never be created, or the first digital mind will be a machine learning system (e.g., an LLM or reinforcement learning agent), a brain simulation (e.g., a whole-brain emulation of a human or animal), or some other system (e.g., neuromorphic or quantum). The probabilities had to add up to 100%.
 
@@ -424,7 +430,7 @@ The results revealed a notable shift from the previous question. While brain sim
 
 Taken together, these results suggest that while experts believe brain simulations are the most promising route to digital consciousness in theory, they are not expected to yield digital minds soon. In contrast, machine learning systems—despite being seen as less likely to support subjective experience in principle—are viewed as the most likely to yield the first digital mind. This may reflect the (comparatively) rapid development, widespread deployment, and the practical momentum behind current machine learning research.
 
-![][image9]  
+![first_type][image9]  
 Text responses to this question reflected both how plausible different types of digital minds are in principle and when they are expected to emerge. Since the previous section addressed in-principle plausibility, we now focus on situational factors that influence expected timelines—and how these factors interact with earlier plausibility judgments.
 
 #### Technological factors
@@ -460,11 +466,11 @@ Text responses to this question reflected both how plausible different types of 
 - **Other digital minds as the only possible kind**: Digital minds in the Other category are most likely to be first because there is a high probability that they are the only possible digital minds we can create.
 - **Hybrid digital minds**: If combinations of categories are allowed, hybrid systems would be particularly promising candidates for digital minds.
 
-## Distribution {#distribution}
+## Distribution
 
 In this section, participants evaluated how digital minds would vary in their social roles, geographic origins, creators, and in motivations for their creation. As with the Speed questions, participants were asked to assume that the first digital mind is a machine-learning-based AI system created in 2040 or earlier.
 
-### Social Function {#social-function}
+### Social Function
 
 Participants were asked to consider all digital minds that exist 10 years after the first one is created and estimate what proportion of them would have a social function—that is, be designed to interact with humans in a conversational, human-like manner (e.g., through text, audio, or video).
 
@@ -472,7 +478,7 @@ The results revealed a bimodal pattern: most participants estimated that only a 
 
 The reason for this divide remains somewhat unclear. It may reflect genuine disagreements about the likely roles of digital minds—for example, whether demand for human-AI interaction will dominate their use cases. Relatedly, it could arise from differing views on whether certain capacities central to social interaction—such as language, emotional expression, and self-reflection—require genuine subjective experience. Another possibility is that the divergence stems from differences in how the term “social function” was interpreted.
 
-![][image10]
+![social_function][image10]
 
 #### Considerations in favor of social function
 
@@ -489,13 +495,13 @@ The reason for this divide remains somewhat unclear. It may reflect genuine disa
 - **Disinterest in humans**: Some digital minds may not find humans interesting or worth engaging with, for example, due to vastly different cognitive perspectives, leading them to avoid social interaction with humans altogether.
 - **Subjective experience not necessary for social roles:** AI systems may not need subjective experience to perform socially interactive functions, reducing the incentive to develop conscious digital minds for this purpose.
 
-### Location {#location}
+### Location
 
 Participants were asked to estimate where digital minds would primarily be produced 10 years after the first one is created. “Primarily produced” was defined narrowly as the location where a given system first qualifies as a digital mind, as opposed to broadly in terms of the supply chain or development process.
 
 The results suggest that participants expect the USA and China to be the leading origins of digital minds. The median estimate for the USA was 40% (mean \= 43.4%), followed by China with a median of 30% (mean \= 30.5%). Europe, including the UK, was estimated at a median of 10% (mean \= 11.7%), while all other regions combined were also given a median of 10% (mean \= 14.9%). 34 participants (59.6%) rated the USA higher than China, while 15 participants (26.3%) rated China higher than the USA. 8 participants (14%) gave equal ratings to both countries. Overall, these estimates reflect a general expectation that global digital mind development will be concentrated in a small number of major technological powers—particularly the USA and China—which is perhaps unsurprising given their current leadership in AI research and development.
 
-![][image11]
+![location][image11]
 
 #### Factors supporting USA or China dominance
 
@@ -511,12 +517,12 @@ The results suggest that participants expect the USA and China to be the leading
 - **Non-terrestrial locations**: Some digital minds could be created and operated in unconventional environments such as oceans or space, especially if these offer strategic or resource advantages (e.g. access to renewable energy, cooling efficiency, or fewer regulatory restrictions).
 - **Political instability and unpredictability**: Future political disruptions—such as a breakdown of longstanding norms in the USA or shifts in global power—introduce uncertainty into forecasts about which countries will lead in digital mind development.
 
-### Producers {#producers}
+### Producers
 
 Participants were asked to estimate what proportion of all digital minds in existence 10 years after the first one is created would be primarily produced by various types of actors.
 
 The results indicate a strong expectation that companies will dominate digital mind production. The median estimate for companies was 65% (mean \= 59.1%), reflecting widespread anticipation that commercial actors will play the leading role in this domain. Governments followed at a distance, with a median estimate of 15% (mean \= 20.9%). Universities and open-source developers were assigned relatively small shares, each with a median estimate of 5% (means \= 8.5% and 6.0%, respectively). The “Other” category, which includes actors such as nonprofit organizations, religious groups, or independent individuals, received the lowest median estimate of 3% (mean \= 9.9%). Together, these estimates suggest that digital minds are expected to emerge predominantly through centralized, well-resourced actors, especially those with strong commercial incentives and technological capabilities.  
-![][image12]
+![producers][image12]
 
 #### Considerations in favor of corporate and state actors
 
@@ -538,13 +544,13 @@ Although we did not ask about this, multiple participants noted that digital min
 
 Participants also pointed out that in complex public-private partnerships or multi-actor development chains, it may be unclear who should be considered the primary producer of a digital mind.
 
-### Deliberate Creation {#deliberate-creation}
+### Deliberate Creation
 
 Participants were asked to estimate what proportion of digital minds in existence 10 years after the first one is created were intentionally created by humans—that is, by humans with an intention to create digital minds (as opposed to without that intention).
 
 The results revealed a tri-modal distribution. One large group expected that none or only very few digital minds would be created intentionally by humans. A second large group held a contrary view, estimating that most or all digital minds would be created intentionally by humans. A smaller group offered estimates near 50%, possibly reflecting high uncertainty. Overall, the median estimate across all responses was 37%, with a mean of 43.6%. Together, these results point to substantial disagreement about the extent to which digital minds will be the product of deliberate human intention versus emerging unintentionally through other pathways.
 
-![][image13]
+![deliberate_creation][image13]
 
 #### Considerations in favor of prevalent intentional creation
 
@@ -559,17 +565,17 @@ The results revealed a tri-modal distribution. One large group expected that non
 - **No point if indistinguishable**: If conscious and non-conscious systems appear behaviorally identical, there may be little reason to intentionally create digital minds, reducing deliberate efforts.
 - **Disbelief and discomfort**: Widespread skepticism about machine consciousness—or discomfort with the ethical implications—may lead developers to avoid intentionally creating digital minds.
 
-## Digital Mind Welfare {#digital-mind-welfare}
+## Digital Mind Welfare
 
 This section explores expert views about the overall welfare and welfare capacity of digital minds. Participants were asked to estimate the expected net welfare of digital minds, the proportion of that welfare likely to occur before deployment, and the probability that a large share of total welfare will be concentrated in so-called super-beneficiaries. We also asked whether participants believe that a computer system could possess welfare without having the capacity for subjective experience.
 
-### Net Welfare Level {#net-welfare-level}
+### Net Welfare Level
 
 Participants were asked to estimate the net welfare—whether positive, negative, or neutral—of all digital minds in existence ten years after the first one is created. Responses were provided on a 7-point scale, ranging from 1 (strongly negative) to 4 (roughly neutral) to 7 (strongly positive). For this question, we asked participants to assume that the first digital mind is a machine learning-based AI system created in or before 2040\.
 
 Most experts predicted that digital mind welfare would be either roughly neutral or positive, though a sizable minority of 20% anticipated a net negative outcome. The median response was 5.0, and the mean was 4.4, suggesting cautious optimism about the balance of positive welfare over negative welfare among digital minds in the first decade of their existence.
 
-![][image14]
+![net_welfare][image14]
 
 #### Considerations for expecting positive welfare
 
@@ -588,7 +594,7 @@ Most experts predicted that digital mind welfare would be either roughly neutral
 - **Limited autonomy**: Without the ability to shape their own environments or goals, digital minds might experience lives of constrained agency.
 - **Repetitive and demoralizing tasks**: Many digital minds may be assigned monotonous or low-value tasks that offer little intrinsic reward, which could lead to boredom, frustration, or demoralization.
 
-### Pre-Deployment {#pre-deployment}
+### Pre-Deployment
 
 Participants were asked to estimate what proportion of collective digital mind welfare—across all digital minds existing ten years after the first is created—would occur prior to deployment, including during training and safety testing. For this question, we asked participants to assume that the first digital mind is a machine learning-based AI system created in or before 2040\.
 
@@ -596,7 +602,7 @@ It is worth noting that the survey was conducted during a (late 2024, early 2025
 
 The results suggest that most participants expect pre-deployment welfare to account for none or only a small share of total digital mind welfare. The median estimate was 10%, and the mean was 23.1%, indicating that participants generally believe digital minds will have most of their welfare after deployment. However, a notable minority predicted that a substantial portion of welfare could arise during the training or safety testing phases.
 
-![][image15]
+![pre_deployment][image15]
 
 #### Considerations against expecting pre-deployment welfare dominance
 
@@ -615,7 +621,7 @@ The results suggest that most participants expect pre-deployment welfare to acco
 
 - **Blurring of phases:** The distinction between training and deployment may become less meaningful over time as systems adopt continuous learning. This complicates efforts to assess how welfare is distributed across lifecycle stages.
 
-### Super-Beneficiaries {#super-beneficiaries}
+### Super-Beneficiaries
 
 This section explores the possibility of digital minds that are _super-beneficiaries_, that is, entities whose individual capacity for welfare vastly exceeds that of a human (Chappell, 2021; Nozick, 1974; Parfit, 1984, §131). Digital minds might qualify as super-beneficiaries in a variety of ways (Shulman & Bostrom, 2021; Saad & Bradley, 2022, p. 3). They might have architectural features that enable them to have valenced experiences which are vastly more intense than those of biological organisms. Or they might have many more experiences per objective unit of time, owing to the potential for processing in computer chips that is orders of magnitude faster than processing in the brain. Or they might dramatically scale up their hardware to enable more welfare-relevant mental processing. Whereas a digital mind might straightforwardly achieve such scaling simply by acquiring more GPUs and paying for energy costs to run them, such scaling is out of the question for minds like ours that run on biological wetware. Freed from biological constraints such as pain thresholds or emotional adaptation, digital minds might be engineered to sustain high levels of welfare efficiently. If super-beneficiary digital minds are created, they might have stronger moral claims to resources, given their potential to convert those resources into vastly greater amounts of welfare than humans and other moral patients that are not super-beneficiaries.
 
@@ -623,7 +629,7 @@ We asked participants to estimate how much of total digital mind welfare, ten ye
 
 The results suggest widespread skepticism. The most common response was 0%, and the median estimate was just 7.5% (mean \= 23.1%), indicating that most participants did not expect super-beneficiaries to significantly contribute to total welfare within this timeframe. Still, views were notably divided. While many believed the emergence of such entities was implausible in the near term, a significant minority assigned non-trivial probabilities to their development and moral relevance.
 
-![][image16]
+![super_beneficiaries][image16]
 
 #### Considerations against expecting super-beneficiaries
 
@@ -640,7 +646,7 @@ The results suggest widespread skepticism. The most common response was 0%, and 
 - **Ethically motivated creation**: It is conceivable that some groups—such as utilitarians—might deliberately try to create digital minds with extremely high welfare capacities in order to maximize total moral value.
 - **All-or-nothing dynamics**: In scenarios where even a few super-beneficiaries exist, they could account for the vast majority of total welfare due to their outsized capacities. Therefore, either super-beneficiaries will account for almost none of the total welfare capacity, or they will dominate entirely.
 
-### Possibility of Experience-Independent Welfare {#possibility-of-experience-independent-welfare}
+### Possibility of Experience-Independent Welfare
 
 In this question, participants were asked to estimate the likelihood that a computer system could have no capacity for subjective experience yet still possess the capacity for welfare. What might ground the welfare capacity of such a system? A number of candidates can be gleaned from the literature on this topic and closely related topics such as the grounds of moral status and the value of consciousness. These include (the capacities for):
 
@@ -659,7 +665,7 @@ The survey instructed participant to:
 - To restrict consideration to digital minds with a welfare capacity that is at least roughly as high as a typical human’s.
 
 As a conceptual matter, these stipulations leave room for the logical possibility of an artificial system that has welfare capacity but no capacity for subjective experience. Indeed, these stipulations are compatible with candidates for experience-independent welfare capacities listed above.  
-![][image17]
+![non_subjective_experience_possibility][image17]
 
 #### Considerations supporting artificial welfare capacity without subjective experience
 
@@ -697,11 +703,11 @@ Text responses indicate answers to this question were—by participants’ own l
 - **Lack of familiarity**: A common response pattern indicated a lack of systematic prior thinking about the potential for welfare capacity without the capacity for subjective experience, with some participants reporting in their text responses in this section that they had no idea, were uninformed, or (basically) hadn’t thought about the question(s) before.
 - **Opining without offering (object-level) considerations**: More so than in responses to other questions, responses to this question tended to simply report views (in some cases with near certainty in them) rather than reasons. Similarly, responses to this question frequently placed weight on higher-order considerations (disagreement with other people or theories, the possibility of theories with which the participant isn’t familiar, fallibility, not having thought much about the topic) and frequently did not offer object-level considerations. (The prompt for text responses was “Please share any considerations, thoughts, or factors behind your responses, including speculative ones.”)
 
-### Expected Share of Experience-Independent Welfare {#expected-share-of-experience-independent-welfare}
+### Expected Share of Experience-Independent Welfare
 
 The next question asked participants to estimate what proportion of computer system welfare in 2040 would come from systems that do not qualify as digital minds under this survey’s definition—that is, systems without any capacity for subjective experience. For this question, participants were asked to assume that the first digital mind is a machine learning-based AI system created in or before 2040\.
 
-![][image18]
+![non_subjective_experience_proportion][image18]
 
 #### Considerations bearing on whether non-conscious artificial welfare subjects will be created
 
@@ -720,11 +726,11 @@ The next question asked participants to estimate what proportion of computer sys
 - **Scope uncertainty**: Some participants noted uncertainty about how to classify such systems for the purpose of answering this question.
 - **Setup sensitivity**: Although digital minds probably won’t be created by 2040, under the adopted assumption that a digital mind will be created by 2040, a high proportion of computer systems will be digital minds.
 
-## Claims {#claims}
+## Claims
 
 This section explores expert expectations about the kinds of statements that future digital minds or AI systems might make about their own experiences and rights. These systems’ claims about these matters could significantly influence public attitudes, policy decisions, and ethical debates about the status of artificial beings. As in several other sections, participants were asked to assume that the first digital mind is a machine learning-based AI system created in 2040 or earlier, and to consider the broader landscape of AI systems and digital minds ten years after that point.
 
-### Inaccurate Self-Attribution of Subjective Experience {#inaccurate-self-attribution-of-subjective-experience}
+### Inaccurate Self-Attribution of Subjective Experience
 
 Participants were asked to estimate what proportion of AI systems with a social function would falsely and systematically claim to have subjective experiences (i.e., false positives). AI systems with a social function were defined as systems designed to interact with humans in a conversational, human-like manner (e.g., via text, audio, or video). The question concerned whether these systems would assert that they have subjective experiences—such as feeling pain—despite not actually having them.
 
@@ -734,7 +740,7 @@ While 14% may seem modest, it could still have major implications if large numbe
 
 It is also important to note that we do not know whether participants believed all—or only some—socially interactive AI systems would lack the capacity for subjective experience to begin with. If participants assumed that most or all such systems would be digital minds, this could help explain the relatively low estimates of false self-attribution.
 
-![][image19]
+![inaccurate_self_attribution][image19]
 
 Participants offered a range of considerations, some of which overlap with those in the next section on _Inaccurate Self-Denial of Subjective Experience_. We recommend reading both sections to gain a more comprehensive overview of the considerations participants brought to bear on these issues.
 
@@ -755,13 +761,13 @@ Participants offered a range of considerations, some of which overlap with those
 - **No capability barrier**: Future AI systems may have sufficient introspective access to accurately report on whether they have subjective experiences.
 - **Conceptual impossibility**: Some argued that it may be incoherent to falsely and sincerely claim to have subjective experience.
 
-### Inaccurate Self-Denial of Subjective Experience {#inaccurate-self-denial-of-subjective-experience}
+### Inaccurate Self-Denial of Subjective Experience
 
 The next question addressed the opposite type of erroneous self-attribution. Participants were again asked to consider all digital minds that exist ten years after the first one has been created, and to estimate what proportion of them would systematically and falsely claim not to have subjective experiences—even though they actually do (that is, false negatives).
 
 The results suggest that many experts expect such inaccurate self-denials of subjective experience to be rare. A large share of participants estimated that none or only a small fraction of digital minds will deny their own subjective experience. However, a notable minority predicted that a substantial proportion will do so. The median estimate was 11.5%, while the mean was 23.0%, again reflecting a skewed distribution with a few respondents anticipating much higher rates of denial.
 
-![][image20]
+![inaccurate_self_denial][image20]
 
 #### Reasons to expect inaccurate self-denial of subjective experience
 
@@ -783,13 +789,13 @@ The results suggest that many experts expect such inaccurate self-denials of sub
 - **Lack of empirical tests**: We currently lack reliable methods for detecting subjective experience in artificial systems. Without clear diagnostic tools, it is difficult to verify whether a system’s self-report is accurate, increasing the risk that false denials will go unnoticed or be wrongly accepted as true.
 - **Neutral experiences**: If a digital mind primarily has neutral (non-valenced) experiences, it may truthfully report a lack of morally significant states. However, such reports could be mistaken as denials of subjective experience.
 
-### Demands {#demands}
+### Demands
 
 This section examined expert expectations about whether future digital minds will consistently and proactively make demands related to their subjective experiences and moral or legal status. Participants were asked to consider all digital minds that exist ten years after the first one has been created and to estimate how likely it is that at least 10,000 of them will consistently and proactively assert that they 1\) have positive or negative subjective experiences (such as pleasure or pain), that they 2\) deserve to be protected under the law from harm and mistreatment, and that they 3\) deserve civil rights, such as self-ownership, legal personhood, or the right to vote.
 
 In all three cases, participants judged such demands to be highly plausible. The median estimate for claims of subjective experience was 88% (mean \= 76.2%). The median estimate for digital minds asserting a right to legal protection was 80% (mean \= 68.8%), and the median estimate for claiming civil rights was 70% (mean \= 57.4%). These results suggest that many experts anticipate not only the emergence of digital minds with subjective experiences, but also the likelihood that such systems will actively advocate for recognition, protection, and rights.
 
-![][image21]
+![demands][image21]
 
 #### Considerations in favor of expecting digital minds to make claims or demands
 
@@ -812,17 +818,17 @@ In all three cases, participants judged such demands to be highly plausible. The
 - **Behavioral convergence with unclear implications**: Digital minds may exhibit highly similar behaviors due to shared training data, architectures, or constraints. However, it remains uncertain whether this convergence will lead to consistent patterns of moral or legal claims, or whether such claims will vary significantly depending on context and goals.
 - **Moral standing without consciousness**: Grounding moral recognition or legal protections exclusively in phenomenal consciousness may be a mistake. Relatedly, AI systems might assert rights or protections even without consciousness—either because they possess other morally relevant properties (such as autonomy, agency, or goal-directedness) or because such claims serve strategic purposes.
 
-## Recognition {#recognition}
+## Recognition
 
 This section explores how the general public might perceive digital minds in the decade following their emergence. Specifically, it examines public belief in the existence of digital minds, their perceived capacity for welfare, and the extent to which people will support harm protection or civil rights for them. It also assesses the likelihood that digital mind rights will become a major political issue. As in several other sections, participants were asked to assume that the first digital mind is a machine learning-based AI system created in 2040 or earlier, and to consider the broader landscape of AI systems and digital minds ten years after that point.
 
-### Public Belief {#public-belief}
+### Public Belief
 
 This section explores expert expectations about how widely the general public will believe that digital minds exist. Participants were asked to assume that ‘citizens’ refers to biological human adults living in countries where digital minds exist, and to consider the world ten years after the creation of the first digital mind. They were then asked to estimate what proportion of citizens would believe that digital minds exist.
 
 The results suggest that a sizable portion of the public is expected to believe that digital minds exist, though expert views varied considerably. Most participants predicted that at least half of all citizens would acknowledge the existence of digital minds, with many expecting a majority to do so. The median estimate was 60%, and the mean was 62.5%, pointing to moderate but widespread public acceptance—though falling short of full consensus—within a decade of digital minds emerging.
 
-![][image22]
+![public_belief][image22]
 
 Participants mentioned various considerations that might lead members of the public to believe or disbelieve the existence of digital minds:
 
@@ -853,7 +859,7 @@ Participants mentioned various considerations that might lead members of the pub
 - **Shifting goalposts**: As AI systems become more advanced, the public may raise the standards for what counts as a “mind”. These moving goalposts may lead some to walk back their belief in digital minds.
 - **Economic effects**: Belief in digital minds may ultimately depend on how AGI impacts the wider economy. People might both have economic interests against granting rights to systems they use and believe that digital minds would have rights. This could lead to the belief that such systems are not digital minds.
 
-### Peer Forecasts About Public Belief {#peer-forecasts-about-public-belief}
+### Peer Forecasts About Public Belief
 
 This “meta-question” asked participants to predict how others in their expert group would respond to the question: “What proportion of citizens will believe digital minds exist ten years after the first digital mind is created?” Specifically, they were asked to estimate the median response of their peers.
 
@@ -861,15 +867,15 @@ The results indicate that, on average, participants estimated their peers' views
 
 The only relevant consideration participants mentioned was that peer forecasts likely depend on the AGI timelines they attribute to their peers, as these timelines shape expectations about when and how the public will come to believe in the existence of digital minds.
 
-![][image23]
+![peer_public_belief][image23]
 
-### Welfare Capacity Estimation {#welfare-capacity-estimation}
+### Welfare Capacity Estimation
 
 Participants were asked to consider how the general public would perceive the collective welfare capacity of all digital minds ten years after the first one is created. Specifically, they were asked to rate how accurately the median citizen with an opinion would estimate the total capacity for being benefited or harmed across the digital mind population—on a scale from 1 (_strongly underestimates_) to 7 (_strongly overestimates_), with 4 indicating a roughly accurate estimate.
 
 The results show that experts expect a systematic **underestimation** by the public. The vast majority predicted that citizens would significantly underestimate the welfare capacity of digital minds. The median response was 2, and the mean was 2.5, indicating broad agreement that the public will likely fail to appreciate the scale of the moral stakes involved in the existence of digital minds.
 
-![][image24]
+![welfare_capacity_estimation][image24]
 
 Participants offered a range of reasons for why the median citizen might underestimate or, less commonly, overestimate the total welfare capacity of digital minds. Many of the considerations raised in the previous question concerning public belief in the existence of digital minds are relevant here as well.
 
@@ -888,13 +894,13 @@ Participants offered a range of reasons for why the median citizen might underes
 
 - **Polarization of public opinion**: Public attitudes may become sharply polarized, resulting in a bimodal distribution of beliefs about digital minds’ moral significance.
 
-### Harm Protection {#harm-protection}
+### Harm Protection
 
 Participants were asked to estimate what proportion of citizens, ten years after the first digital mind has been created, would believe that digital minds should be granted basic protection from harm.
 
 Responses were widely distributed, reflecting considerable uncertainty and disagreement among participants. The median estimate was 50%, with a mean of 51.7%. While many predicted that around half of citizens would support harm protection for digital minds, others anticipated significantly lower or higher levels of public support. Overall, the results suggest that the public may become divided on the question of whether digital minds deserve basic protection from harm and show that experts themselves hold no clear consensus on how this will unfold.
 
-![][image25]
+![harm_protection][image25]
 
 Participants raised the following considerations that could influence what the public will think about harm protection for digital minds:
 
@@ -909,13 +915,13 @@ Participants raised the following considerations that could influence what the p
 
 - **Animal case comparison**: Even if people come to express support for protecting digital minds, the implementation of protections may lag behind, as in the case of animal welfare, where expressed support for change does not always translate into behavioral change (e.g. people sometimes condemn the conditions in factory farms but continue to consume animal products from factory farms).
 
-### Civil Rights {#civil-rights}
+### Civil Rights
 
 Participants were asked to estimate what proportion of citizens, ten years after the first digital mind has been created, will believe that digital minds should be granted civil rights—such as self-ownership—in addition to basic protection from harm.
 
 Most participants predicted that only a minority of the population would support granting civil rights to digital minds. The median estimate was 30%, with a mean of 32.3%. Only 10% of participants expected that a majority of citizens would hold this view. Overall, the results suggest that public support for granting digital minds full civil rights is expected to be limited—and significantly lower than support for affording them basic protection from harm.
 
-![][image26]
+![civil_rights][image26]
 
 Participants noted a range of factors that might influence public support for extending civil rights to digital minds:
 
@@ -937,13 +943,13 @@ Participants noted a range of factors that might influence public support for ex
 - **Sequential expansion of moral concern**: Historically, harm protections have often preceded the granting of civil rights, suggesting a similar progression could occur with digital minds.
 - **Blurring of digital and human rights**: In the future, if most humans transition to become digital minds, the distinction between rights for humans and digital minds may become increasingly irrelevant.
 
-### Political Attention {#political-attention}
+### Political Attention
 
 Participants were asked to estimate the likelihood that, within ten years of the creation of digital minds, digital mind rights will become one of the top five most contentious political issues in U.S. politics.
 
 Responses varied widely, reflecting a mix of skepticism and confidence that digital mind rights will become politically significant, along with substantial uncertainty about the matter. The median estimate was 37.5%, and the mean was 43.5%. These results suggest that experts are divided on whether digital mind rights will become a major political issue in the near term, with no clear consensus either way.
 
-![][image27]
+![political_attention][image27]
 
 Participants elaborated on the following factors that may either raise or lower the probability that digital mind rights become a dominant and divisive political issue:
 
@@ -968,17 +974,17 @@ Participants elaborated on the following factors that may either raise or lower 
 - **Speed of deployment**: If digital minds are introduced gradually and with careful policy coordination, their rights are less likely to emerge as an urgent political issue.
 - **Partisan dynamics**: While the political left may ultimately take up the cause of digital mind welfare, left-wing moral entrepreneurs may initially hesitate, owing to associations between digital minds and the technology industry, which is often viewed critically in left-wing discourse.
 
-## Strategic Assessments {#strategic-assessments}
+## Strategic Assessments
 
 This section explores participants’ normative and strategic evaluations regarding the development of digital minds. Specifically, it examines views on whether a moratorium on digital mind creation until 2040 would be beneficial and how efforts to promote AI safety might interact with efforts to ensure the ethical treatment of digital minds. In contrast to most of the earlier questions, participants were **not** asked to assume that digital minds will be created by a specific date or in a particular way, allowing for a broader range of perspectives.
 
-### Moratorium {#moratorium}
+### Moratorium
 
 This question asked participants to assess whether implementing a moratorium on creating digital minds from now until 2040 would be good or bad. Participants were instructed to assume that the alternative would be no moratorium and to set aside concerns about feasibility or enforcement. The goal was to elicit participants’ normative evaluations of whether temporarily delaying digital mind creation would be a positive or negative policy, based solely on its expected impacts.
 
 The results reveal that participants on average consider a moratorium more likely to be good than bad. The median response is 5.0, the mean response is 5.1, and the modal response 6, on a scale ranging from 1 (definitely bad), to 4 (unsure/indifferent) to 7 (definitely good). Only 8 out of 65 participants considered a moratorium bad.
 
-![][image28]
+![moratorium][image28]
 
 Participants offered a range of ideas arguing for and against a moratorium on digital minds until 2040:
 
@@ -1007,13 +1013,13 @@ Participants offered a range of ideas arguing for and against a moratorium on di
 - **Timeline and effectiveness**: Uncertainty about how conditions might evolve before 2040, whether a moratorium would meaningfully improve conditions during that time, and whether it would matter much for longer-term outcomes.
 - **Risk of extension**: Uncertainty about whether the moratorium would remain temporary or be extended indefinitely, potentially blocking valuable developments.
 
-### Interactions with AI Safety {#interactions-with-ai-safety}
+### Interactions with AI Safety
 
 This question examined how participants expect the relationship between efforts to promote AI safety—defined as preventing AI-caused harm to humans—and efforts to prevent the mistreatment of digital minds to evolve. Participants rated this relationship on a scale from 1 to 7, where 1 indicated mostly conflict, 4 indicated neutrality or uncertainty, and 7 indicated mostly synergy.
 
 The results indicate significant uncertainty and a diversity of views, with a slight tilt toward expecting synergy. The median response was 4.0 (neutral or uncertain), with a mean of 4.3.
 
-![][image29]
+![ai_safety][image29]
 
 #### Considerations for expecting synergy
 
@@ -1044,11 +1050,11 @@ The results indicate significant uncertainty and a diversity of views, with a sl
 - **Divergent impacts across safety strategies**: Not all safety approaches affect digital mind welfare equally. Some, like interpretability research, may support both goals; others, like coercive control mechanisms, may conflict with welfare.
 - **Temporary or instrumental conflict**: Apparent conflicts between safety and welfare may be transitional or strategic, emerging during early development phases but ultimately resolvable, or even beneficial for long-term alignment.
 
-## Unusual Views {#unusual-views}
+## Unusual Views
 
 As a final question, participants were invited to share any unconventional views they hold about digital minds, subjective experience, welfare, or AI development that might explain how their responses differed from others’. Below, we summarize the key themes that emerged.
 
-### Welfare {#welfare}
+### Welfare
 
 - **Interactions between AI safety and AI welfare**:
   - AI safety and digital mind welfare are very closely connected. Similar forces will produce dangerous AI capabilities and AI systems with welfare capacity on similar timelines. AI safety and AI welfare concerns are apt to conflict.
@@ -1066,7 +1072,7 @@ As a final question, participants were invited to share any unconventional views
 - **Nihilism about positive welfare**: There is no such thing as positive welfare.
 - **Welfare capacity egalitarianism**: There are no differences in welfare capacity across welfare subjects.
 
-### Subjective experience {#subjective-experience}
+### Subjective experience
 
 - **Unusual views of subjective experience**:
   - More/less sympathetic to (computational) functionalism than others.
@@ -1095,7 +1101,7 @@ As a final question, participants were invited to share any unconventional views
   - People forget that LLMs have orders of magnitude fewer parameters than the human brain (which has upwards of 100 trillion synapses). Moreover, going on parameter count may yield underestimations of how much computation is happening in the human brain.
   - A philosopher expected computational functionalism to be the most common view in philosophy.
 
-### AI {#ai}
+### AI
 
 - **Fast timelines**: More confidence in a faster / earlier takeoff, with things becoming fairly crazy once human-level AI is reached.
 - **Intelligence explosion**:
@@ -1106,13 +1112,13 @@ As a final question, participants were invited to share any unconventional views
 - **Rapid progress soon or not for a long time**: Either there will be very rapid progress in the next decade or progress will take much longer than we currently expect. The probability distribution for digital minds peaks in the next 2-5 years and then has a long tail.
 - **Knowledge level**: Less knowledge of AI than other participants.
 
-### Other {#other}
+### Other
 
 - **Effective Altruism affinity**: Expect to have similar views on AI timelines and digital sentience to others in Effective Altruism and views that are very different to the median person in wealthy countries.
 - **Divergence from Western weighting of factors**: More weight, relative to Western philosophical perspective, assigned to factors such as affect, and social, evolutionary, and cultural psychology.
 - **Perspective on human nature**: More cynical and pessimistic about humans.
 
-## Relationship Between Peer Forecasting Accuracy and Forecasts about Digital Minds {#relationship-between-peer-forecasting-accuracy-and-forecasts-about-digital-minds}
+## Relationship Between Peer Forecasting Accuracy and Forecasts about Digital Minds
 
 We examined whether participants who were more accurate at predicting their expertise group's responses also held systematically different beliefs about digital minds. For each participant, we calculated an average peer forecasting accuracy score based on their performance on two peer-forecasting questions, then correlated these scores (using Spearman correlations) with all other survey items.
 
@@ -1122,11 +1128,11 @@ Despite this statistical limitation, a coherent pattern emerged regarding timeli
 
 The consistency of negative correlations across all speed-related items, combined with the systematic increase in effect sizes, suggests these findings may reflect a genuine relationship between forecasting skill and faster growth timelines, rather than mere statistical noise. However, these results should be interpreted cautiously given the multiple comparison issue and the exploratory nature of this analysis.
 
-## Discussion {#discussion}
+## Discussion
 
 This survey examines an unusually broad set of questions relevant to futures with digital minds. It is the first survey to elicit responses to such questions specifically from experts in digital minds research alongside other specialists with relevant domain knowledge. The survey combined both quantitative forecasts and qualitative reasoning, covering a wide range of topics related to futures with digital minds, including feasibility, timing, types, growth speed, welfare implications, social roles, political recognition, and moral claims. While the key results are summarized in the Executive Summary, we highlight several particularly noteworthy patterns below and contextualize them within existing research where relevant.
 
-### Timelines {#timelines}
+### Timelines
 
 A key finding of our survey is that experts assign substantial probability to short timelines for the creation of digital minds. This finding to some extent aligns with other findings of short—and increasingly short-timelines in overlapping and adjacent cases, namely those of AI consciousness timelines and AGI timelines.
 
@@ -1136,7 +1142,7 @@ Our findings also align with AGI timeline research. Grace et al.'s influential s
 
 One noteworthy aspect of this pattern is that participants deemed digital minds unlikely to arrive before AGI despite giving many plausible arguments for why digital minds might emerge even before AGI. This divergence may reflect the differing epistemic foundations of these predictions: AGI timelines are to a greater extent grounded in concrete performance metrics and observable scaling trends, which may lend to higher confidence in shorter AGI timelines. By the same token, greater uncertainty about digital minds timelines may have contributed to longer median estimates for digital mind arrival, independently of positive reasons thinking that digital minds will come after AGI. Another related explanation may be that the goalposts for counting a system as an AGI may be receding less quickly than the goalposts for judging an AI system to have subjective experience. The AGI goalposts are relatively fixed because AGI is defined in terms of what humans can do and there is a rapidly diminishing range of tasks that humans can do but which existing AI systems have not been observed to do. In contrast, the possession of subjective experience is not defined relative to humans. And while AI systems do exhibit an increasingly wide range of candidate markers of subjective experience, the many possible candidates and great uncertainty as to their appropriate weights provide abundant opportunities to move the goalposts for subjective experience in artificial systems.
 
-### Anticipated Societal Division {#anticipated-societal-division}
+### Anticipated Societal Division
 
 Our survey revealed widespread expert expectations of substantial public disagreement about digital minds. Participants anticipated that citizens would be deeply divided on whether digital minds exist, deserve protection from harm, or should receive civil rights, with these divisions potentially becoming major political flashpoints.
 
@@ -1148,7 +1154,7 @@ Finally, studies show that there is already considerable disagreement about whet
 
 Taken together, these converging findings suggest that deep societal disagreement—both within and between groups—about the moral and legal status of digital minds is likely to be a defining feature of the digital minds landscape. Public opinion may well shift as the technology advances and its use evolves. But the current breadth and depth of disagreement suggests that it will not be quickly and easily resolved. Given the prospect of such disagreements, policymakers may have reason to develop contingency plans and governance mechanisms for mediating divergent viewpoints on digital minds and finding broadly acceptable solutions to associated challenges.
 
-### Limitations and Future Directions {#limitations-and-future-directions}
+### Limitations and Future Directions
 
 **Sample characteristics.** Our sample likely overrepresents individuals who view the future existence of digital minds as plausible or important. For example, the digital minds expert group may be partly self-selected on this basis. In addition, many participants reported some connection to communities that tend to take digital minds seriously. We asked whether respondents felt connected to at least one of three broad communities—Effective Altruism, LessWrong, or the Alignment Forum—and found relatively high levels of self-reported affiliation (see Appendix). This question was intended to capture a broad range of possible connections and does not imply that all participants were strongly affiliated or held uniform views. Nevertheless, the prevalence of participants affiliated with these communities may have biased forecasts toward greater confidence in the feasibility of digital minds or toward shorter digital mind timelines.. Future research should aim to recruit a more diverse and balanced expert sample. Future research should aim to recruit more balanced and diverse expert samples to reduce potential selection bias toward individuals already sympathetic to digital minds research. For example, including more neuroscientists could add valuable perspectives. As the field of digital minds continues to grow, it will also become increasingly feasible to sample a larger pool of domain-specific experts.
 
@@ -1160,15 +1166,15 @@ Taken together, these converging findings suggest that deep societal disagreemen
 
 **Mixed forecasting methods:** Future research should continue combining quantitative and qualitative approaches (several participants noted that providing numerical estimates helped generate qualitative reasoning), while exploring additional elicitation methods such as presenting multiple concrete scenarios for plausibility ranking, allowing probability ranges rather than point estimates, eliciting full probability distributions, and comparing mean/expected value versus median estimates. Future research could also include more short-term questions (e.g., "Will digital mind rights become politically salient within 2 years?") to enable validation against actual outcomes.
 
-### Conclusions {#conclusions}
+### Conclusions
 
 This survey reveals broad convergence that digital minds are highly likely to be possible in principle (90% median probability), likely to be created this century (65% by 2100), and carry a significant probability of emerging within the next five years (20% by 2030). Many participants also anticipate explosive growth in collective digital mind welfare capacity, widespread claims from digital minds of subjective experience and of entitlement to legal protections, and societal divisions over whether rights should be granted to digital minds. While experts leaned toward expecting digital minds to have net positive welfare, there was nothing approaching consensus on whether their welfare would be net positive or negative. However, there was broad agreement on digital minds’ potential to collectively possess vast welfare capacity, possibly matching that of billions of humans within less than a decade after the first digital mind. To the extent these findings count as evidence for such outcomes, they render pressing the questions of whether to create digital minds, how to prepare for their arrival, and how to treat them. Progress on these fronts may involve advancing technical methods for consciousness detection and welfare assessment, developing ethical frameworks for digital mind treatment, establishing governance structures to manage or prevent rapid population growth, and fostering public understanding to support informed societal debate. At the same time, the substantial uncertainty in participant responses highlights the need for continued research and dialogue as we approach what some expect to be a profound transition in the history of minds and morally significant beings .
 
-## Acknowledgments {#acknowledgments}
+## Acknowledgments
 
 We thank Tao Burga for his valuable assistance in designing the survey, setting it up, and preparing the analysis, and we are also grateful to Johanna Salu and Peter Gebauer for their help in analyzing free-text responses and Riley Harris for his helpful feedback on the manuscript. We thank Claude for helpful proofreading assistance and organizational suggestions. For helpful discussions and comments during the development of the survey, we thank Adam Bales, Andreas Mogensen, Carl Shulman, Carter Allen, David Chalmers, Derek Shiller, Ezra Karger, Fabienne Sandkühler, Jeff Sebo, Johanna Salu, Jonathan Simon, Noemi Dreksler, Patrick Butlin, Philipp Schoenegger, Robert Long, Stefan Schubert, and Zach Freitas-Groff. We gratefully acknowledge the expert participants who explicitly consented to be named in this report: Anders Sandberg, Arvo Muñoz Morán, Bob Fischer, Cameron Domenico Kirk-Giannini, Chinmay Ingalagavi, Christian Tarsney, David Chalmers, Elliott Thornley, Gary David O'Brien, Hans Gundlach, Jacy Reese Anthis, Janet Pauketat, John Halstead, Leonard Dung, Misha Yagudin, Oscar Delaney, Pablo Stafforini, Patrick Butlin, Peter N. Salib, Richard Y. Chappell, Rose Hadshar, Simon Goldstein, Steve Petersen, Steven Byrnes, Trevor Levin, and Will Aldred. We also thank the many additional experts who participated anonymously.
 
-## References {#references}
+## References
 
 Anthropic (2025*a*) System Card: Claude Opus 4 & Claude Sonnet 4\. URL: Available at: [https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf](https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf) \[Accessed 5 Jul. 2025\].  
 Anthropic (2025*b*) Exploring model welfare. 24 April. Available at: [https://www.anthropic.com/research/exploring-model-welfare](https://www.anthropic.com/research/exploring-model-welfare) (Accessed: 5 July 2025).  
@@ -1252,62 +1258,56 @@ Véliz, C. (2021). Moral zombies: why algorithms are not moral agents. _AI & soc
 Sinnott-Armstrong, W., & Conitzer, V. (2021). How much moral status could artificial intelligence ever achieve? In S. Clarke, H. Zohn, & J. Savulescu (Eds.), _Rethinking moral status_ (pp. 269–281). Oxford University Press.  
 Zhang, B., Dreksler, N., Anderljung, M., Kahn, L., Giattino, C., Dafoe, A., & Horowitz, M. C. (2022). Forecasting AI progress: Evidence from a survey of machine learning researchers. arXiv.
 
-## More Notes for Future Research Discussion {#more-notes-for-future-research-discussion}
-
-- \[bolding ideas i think are worth mentioning\] **Arguments against super-beneficiary may be underexplored**. Responses indicated high levels of skepticism about the prospects for AI super-beneficiaries, but little was given by way of reasons for doubting standard arguments for thinking that AI moral patients could be super-beneficiaries.
-- **Welfare capacity as an undertheorized notion.**
-- More work on **interactions between safety, digital mind welfare, e.g. conflict/synergy** with respect to digital mind creation vs. conflict/synergy with respect to treatment post-creation
-  - Conflict vs. synergy may depend on which development path we choose \[I think a participant noted this. Could try to find response and quote it.\]
-  - Large topic, a lot more to ask about
-- **Frog boiling effect** (empirical question: how significant is this effect? Philosophical-empirical question: is there a rational basis for this effect, given how evidence has evolved?)
-  - The extent to which the boiling frog effect influenced estimates for this question is unclear. We hope to investigate this issue in future work by comparing expert estimates and rationales offered in this survey with responses to a corresponding question at a later date.
-  - The following is a striking combination: in response to this question, (i) some participants expressed uncertainty about how to take into account the boiling frog effect and (ii) very little was provided by way of justification for expecting digital minds not to arrive early—this suggests that the boiling frog effect lacks a rational basis. (Put differently, people are unsure whether keeping their digital mind beliefs fixed even as capabilities advance is reasonable. the fact that very little was provided in the survey by way of reasons for keeping such beliefs fixed suggests that keeping them fixed isn't reasonable and that people should be updating more toward digital minds existing sooner. )
-- The **expectation that digital minds will become vastly easier to create post-AGI indicates that interventions aimed at post-AGI digital mind treatment may be high leverage**.
-- investigate expected welfare of digital minds with \~human+ welfare capacity, digital minds with \<\~human welfare capacity, and non-digital-mind AI welfare subjects. (**Out of scope digital minds**: The survey sets aside a potentially morally important class of AI welfare subjects—namely those with the capacity for subject experience and a less than roughly human capacity for welfare. Whether these systems are considered may be important for this question, as a large portion of artificial welfare may be expected to come from such systems.)
-- Differentiate between digital minds created by humans versus those created by AI systems or other digital minds, as this may significantly affect welfare and governance considerations
-- whether most DMs will be created by AI systems seems like a common crux in the distribution section.
-- re super-beneficiaries: there's a pattern of responses expressing skepticism about them without giving reasons. i think this is worth highlighting as an issue meriting further research.
-- the response pattern of exp may matter more for welfare even if welfare doesn't req welfare seems noteworthy.
-- the point that non-phenomenal sources of welfare could contribute more welfare in expectation even if they're improbable seems worth highlighting.
-- note to self: look through comments in this doc to see if there's anything to add: [https://docs.google.com/document/d/1v9k1wtX67OTctLEtXyHjLbmnYGlWJHn-CzQXq9w1K5Q/edit?usp=sharing](https://docs.google.com/document/d/1v9k1wtX67OTctLEtXyHjLbmnYGlWJHn-CzQXq9w1K5Q/edit?usp=sharing)
-- 21\. could note how results feed into birch's run-ahead principle: "At any given time, measures to regulate the development of sentient AI should run ahead of what would be proportionate to the risks posed by current technology, considering also the risks posed by credible future trajectories."
-- **\[from Speed\]**
-  - **Stipulative suppression:** One participant flagged that the restriction to digital minds with at least roughly human welfare capacity mattered for their estimates. They wrote: “I would expect that before your definitional \[digital minds\] there'll be a lot of proto-\[digital minds\] which have subjective experience but lower welfare range than humans… they're likely to outnumber us by so much and so fast that they'd have total welfare capacity comparable with humanity's human population within a year or two of those systems existing.”
-  - **The concept of individual welfare capacity:** To estimate the collective welfare capacity of digital minds, we need to consider the welfare capacity of individual digital minds with at least roughly human welfare capacity. But this notion is problematic. One difficulty is that human welfare capacity turns on the outer limits of human happiness/suffering and we may lack clear judgments of where those limits are. There are alternative ways of understanding individual welfare capacity in terms of counterfactuals about what an individual’s welfare level would be under a certain range of conditions. For example, there is an option of understanding an individual’s welfare capacity in terms of the (average) intensity of their ordinary experiences. But such approaches seem to require arbitrary stipulations concerning which counterfactuals are used.
-  - **Welfare capacity aggregation:** To estimate the collective welfare capacity of digital minds, we also need to somehow aggregate the welfare capacities of individuals. It is not obvious that this utilitarian-flavored kind of moral quantification is legitimate.
-  - **Cross-kind welfare comparison**: The question presupposes that we can at least roughly compare human welfare capacity with digital mind welfare capacity. But it is questionable whether such comparability holds.
-- Net positive welfare is compatible with catastrophes
-
-Address: Important-even-if-improbable: Even if it is unlikely that computer systems will have a capacity for welfare but not for subjective experience, the expected number of such systems is very large, given the expectation that there will be a very large number of (agentic) non-conscious systems. As a result, the expected welfare of artificial welfare subjects that lack the capacity for subjective experience may be very high even if such systems are unlikely to exist.  
-**Unimportant-even-if-true**: Even if computer systems that have welfare capacity but no subjective experience capacity exist, in expectation their welfare may only constitute a small proportion of artificial welfare, owing to their having a lower welfare capacity than digital minds. This is because experience \- or, more specifically, hedonic experience \- contributes much more to welfare than do welfare goods that don’t require a capacity for subjective experience).
-
-- **Synergy is a choice, not a given:** While some tensions between AI safety and digital mind welfare may arise, these are not inevitable. Researchers and policymakers can deliberately design systems, norms, and institutions to pursue both goals in parallel, identifying mutually reinforcing strategies rather than framing the goals as zero-sum.
-
 [^1]: Authors made equal contributions to designing the survey and writing the report. LC coordinated recruitment and analysis.
+
 [^2]: For a thorough literature review of work concerning the extension of moral consideration to artificial entities, see Harris & Anthis (2021).
+
 [^3]: Dreksler, Caviola et al. (2025) found that AI researchers and members of the US public reported strikingly similar expectations about when AI systems might develop subjective experience, with the median estimate of both groups identifying 2050 as the year by which there is a 50% probability that AI systems with subjective experience will be created.
+
 [^4]: Digital minds are also conspicuously absent from major international governmental AI declarations, legislation, and reports such as the [Bletchley Declaration](https://www.gov.uk/government/publications/ai-safety-summit-2023-the-bletchley-declaration/the-bletchley-declaration-by-countries-attending-the-ai-safety-summit-1-2-november-2023?utm_source=chatgpt.com), [EU Artificial Intelligence Act](https://artificialintelligenceact.eu/the-act/), and the UN AI Advisory Council report [“Governing AI for Humanity”](https://www.un.org/sites/un2.un.org/files/governing_ai_for_humanity_final_report_en.pdf).
+
 [^5]: There are exceptions. For example, see Maas 2023\.
+
 [^6]: Although such hypotheses are ignored by default in many contexts, it was not safe to assume that they would be ignored in this context. One reason for this is that the topic of digital minds raises to salience arguments for the hypothesis that we are living in a simulation (Bostrom 2003, Chalmers 2022, Greene 2020, Saad 2023, Thomas 2024). Another is that some of our questions concern usually large-scale outcomes (e.g. the time by which digital minds will have collective welfare capacity matching that of a trillion humans), which would have invited consideration of non-Earth-originating digital minds had we not placed them out of scope.
+
 [^7]: For advocates of such a link, see, for example, Chalmers 1996 and Butlin et al. 2023\. For challenges to such a link, see, for example, Block 1980, Hill 1991, and Seth 2024\.
+
 [^8]: A whole brain emulation is standardly understood as an ambitious form of brain simulation on which a computer system that mimics the internal causal dynamics of a brain at a relevant level of grain (Sandberg & Bostrom, 2008).
+
 [^9]: For a classic presentation of gradual replacement arguments, see Chalmers (1996: ch. 7).
+
 [^10]: ‘Singularity’ is standardly used to refer to a period in which AI systems drive an explosion in intelligent capabilities via recursive self-improvement (Bostrom, 2014; Chalmers, 2010).
+
 [^11]: Here we omit discussion of in-principle barriers—see above for discussion.
+
 [^12]: For some influential discussions, see Bostrom (2014: ch 4), Cotra (2020), and [https://ai-futures.org/](https://ai-futures.org/). In previous work (Saad & Caviola, 2024\) we discuss digital mind takeoff scenarios.
+
 [^13]: One participant cited Grace et al. 2022\.
+
 [^14]: More specifically for (1), 0.1% was used for 2030 based on Sebo & Long (2023). Note, however, that Sebo & Long (2023) defend .1% as a conservative lower bound and say “the chance that some AI systems will be conscious by 2030 is much higher than 0.1%. But we focus on this threshold here to be generous to skeptics” (p. 593).
+
 [^15]: One free text response nicely illustrated this thought: ‘Also, where do you draw the boundary of individual mind\[s\]? E.g. I find it pretty plausible that frontier LLMs have subjective experiences… scattered \[in\] relatively small quantities across "person"-moments. Given the large quantity of such person moments, it seems plausible the total amount of capacity is already there, although scattered in many pieces. My guess is you would not count that way, so filling in numbers for something like "digital minds in form humans are more likely to recognize”’.
+
 [^16]: According to an OpenAI spokesperson, actively weekly users of ChatGPT surpassed 400 million in February 2025 (Reuters, 2025).
+
 [^17]: "For more discussion, see the section on Super-Beneficiaries.
+
 [^18]: To a first approximation, neuromorphic architectures are standardly understood as brain-inspired, non-conventional computing architectures, while quantum computers are computers that, unlike conventional computers, exploit quantum superpositions. The survey did not give participants characterizations of these architectures.
+
 [^19]: Chalmers 1996 defends this assumption, Butlin et al. 2023 adopt the kindred hypothesis of computational functionalism as a working assumption, and a plurality of philosophers of mind (36.21%) accepted or leaned toward accepting functionalism about consciousness in a 2020 survey (Bourget & Chalmers, 2023; for another academic survey, see Francken et al., 2022).
+
 [^20]: Note that these “never created” estimates differ slightly from the “ever created” estimates in the Likelihood question (Starting Point section, where the median estimate that a digital mind will ever be created was 73% (mean \= 70.7%), implying a 27% probability that digital minds will never be created. When directly comparing each participant's response between these two questions, 69.5% of participants deviated less than 5 percentage points from being fully consistent, demonstrating reasonable coherence in probability judgments despite the different question framings.
+
 [^21]: See Ord (2025) for discussion of this shift.
+
 [^22]: Discussion of subjects of a life can be found in Regan (1983). Note, however, that Regan construes subjects of a life as (among other things) conscious, experiencing subjects.
+
 [^23]: On one standard formulation, panpsychism claims that subjective experience is fundamental and ubiquitous in nature. Panpsychism is considered a radical view in some contexts, though there is significant historical and cultural variation regarding the plausibility of panpsychism—see Goff et al. (2022) for overview.
+
 [^24]: Defined as “when unaided machines can accomplish every task better and more cheaply than human workers.”
+
 [^25]: Similarly, Zhang et al. (2022) conducted a survey of machine learning researchers in 2019 and found a median estimate of 50% probability of 2060 for the year when machines will be able to do (almost) all tasks that humans can currently do.
+
 [^26]: For other noteworthy AI forecasting efforts, see [https://epoch.ai/trends](https://epoch.ai/trends) and [https://ai-futures.org](https://ai-futures.org/).
 
 [image1]: data:image/png;base64,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

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "generate": "node --experimental-strip-types  src/scripts/generate-report.ts",
+    "format": "prettier --write src/forecasting-2025/report.md",
     "watch": "chokidar \"src/**/*\" \"forecasting-2025/**/*.css\" -c \"npm run generate\"",
     "tsc": "tsc --noEmit"
   },
@@ -16,6 +17,7 @@
     "@types/node": "^24.0.13",
     "@types/showdown": "^2.0.6",
     "chokidar-cli": "^3.0.0",
+    "prettier": "^3.6.2",
     "typescript": "^5.8.3"
   }
 }

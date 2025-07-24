@@ -1,22 +1,30 @@
 export const config = {
   header: {
     title: "Futures with Digital Minds: Expert Forecasts in 2025",
-    label: "Futures with Digital Minds:",
-    heading: "Expert Forecasts in 2025",
+    label: "Expert Forecasts in 2025",
+    heading: "Futures with Digital Minds",
     subtitle:
-      "We survey 67 experts on digital minds. They see a 90% chance digital minds are possible and 65% they arrive by 2100. Many expect rapid growth in digital mind welfare and major societal disagreement over their rights.",
+      "In a survey, experts estimated a 65% likelihood that computer systems with subjective experience will exist by 2100 and a 20% likelihood by 2030, predicting rapid expansion after their creation, major societal debates over their rights, and uncertain implications for AI safety.",
   },
   tocTitle: "Table of Contents",
   meta: {
     authorsTitle: "Authors:",
     authors: [
-      { name: "Lucius Caviola", university: "University of Cambridge" },
-      { name: "Brad Saad", university: "University of Oxford" },
+      { 
+        name: "Lucius Caviola", 
+        university: "University of Cambridge",
+        website: "https://luciuscaviola.com"
+      },
+      { 
+        name: "Brad Saad", 
+        university: "University of Oxford",
+        website: "https://sites.google.com/a/brown.edu/brad-saad/"
+      },
     ],
     publicationDate: "August 2025",
-    pdfLink: "http://google.com",
+    pdfLink: "digital_minds_forecasting_2025.pdf",
     pdfLabel: "PDF version",
-    dataLink: "http://google.com",
-    dataLabel: "Data & Code",
+dataLink: "javascript:prompt('Cite as (text is pre-selected for copying):', 'Caviola, L., & Saad, B. (2025). Futures with digital minds: Expert forecasts in 2025.');void 0",
+    dataLabel: "Cite",
   },
 } as const;

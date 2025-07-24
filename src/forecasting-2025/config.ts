@@ -24,7 +24,7 @@ export const config = {
     publicationDate: "August 2025",
     pdfLink: "digital_minds_forecasting_2025.pdf",
     pdfLabel: "PDF version",
-dataLink: "javascript:prompt('Cite as (text is pre-selected for copying):', 'Caviola, L., & Saad, B. (2025). Futures with digital minds: Expert forecasts in 2025.');void 0",
+dataLink: "javascript:prompt('Citation (press Ctrl+C or Cmd+C to copy):', 'Caviola, L., & Saad, B. (2025). Futures with digital minds: Expert forecasts in 2025.');void 0",
     dataLabel: "Cite",
   },
 } as const;

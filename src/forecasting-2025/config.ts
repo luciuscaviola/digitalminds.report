@@ -4,7 +4,7 @@ export const config = {
     label: "Expert Forecasts in 2025",
     heading: "Futures with Digital Minds",
     subtitle:
-      "In a survey, experts estimated a 65% likelihood that computer systems with subjective experience will exist by 2100 and a 20% likelihood by 2030, predicting rapid expansion after their creation, major societal debates over their rights, and uncertain implications for AI safety.",
+      "In this survey, experts estimated a 20% likelihood that digital minds—computer systems with subjective experience—will exist by 2030 and 65% by 2100, anticipating rapid population growth after their creation. Views were divided on a moratorium, implications for AI safety, and broader socio‑political consequences.",
   },
   tocTitle: "Table of Contents",
   meta: {

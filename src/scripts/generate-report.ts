@@ -50,12 +50,14 @@ const footnoteExtension: ShowdownExtension[] = [
   {
     type: "lang",
     regex: /\[\^(\d{1,3})\]/g,
-    replace: (match: string, a: string) => {
-      const footnoteText = stripMarkdownAndEscape(footnotes[a]);
-      return `<sup id="fnref-${a}" class="footnote-ref"><a href="#fn-${a}" title="${footnoteText}">${a}</a></sup>`;
-    },
+    replace: (match: string, a: string) => getFootnoteLink(a),
   },
 ];
+
+function getFootnoteLink(a: string) {
+  const footnoteText = stripMarkdownAndEscape(footnotes[a]);
+  return `<sup id="fnref-${a}" class="footnote-ref"><a href="#fn-${a}" title="${footnoteText}">${a}</a></sup>`;
+}
 
 const imageExtension: ShowdownExtension = {
   type: "output",
@@ -78,7 +80,14 @@ const referencesExtension: ShowdownExtension = {
 };
 
 const converter = new showdown.Converter({
-  extensions: [basicExtensions, tocExtension, considerationListExtension, footnoteExtension, imageExtension, referencesExtension],
+  extensions: [
+    basicExtensions,
+    tocExtension,
+    considerationListExtension,
+    footnoteExtension,
+    imageExtension,
+    referencesExtension,
+  ],
 });
 
 const markdown = fs.readFileSync("src/forecasting-2025/report.md", "utf8");
@@ -145,6 +154,7 @@ const html = `<!DOCTYPE html>
           <span class="meta-label">${config.meta.authorsTitle}</span>
           <span class="meta-value">
             ${authorsHtml}
+            ${getFootnoteLink("1")}
           </span>
         </div>
         <div class="meta-item">

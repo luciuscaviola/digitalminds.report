@@ -113,6 +113,12 @@ const authorLinks = config.meta.authors.map((author) => {
 
 const authorsHtml = beautifulJoin(authorLinks);
 
+const sliderHtml = `
+  <div class="hero-visual-slider">
+    <img src="images/timing.svg" alt="Timing of AI development" />
+  </div>
+`;
+
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,6 +133,7 @@ const html = `<!DOCTYPE html>
   ${headerHtml}
   <div class="main-content-wrapper">
     <div class="main-content">
+      ${sliderHtml}
       <div class="meta-block">
         <div class="meta-item">
           <span class="meta-label">${config.meta.authorsTitle}</span>

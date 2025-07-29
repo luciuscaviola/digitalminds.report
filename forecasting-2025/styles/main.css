@@ -293,6 +293,18 @@ a:hover {
   text-decoration: underline;
 }
 
+.hero-visual-slider {
+  grid-column: 1 / -1;
+}
+
+.hero-visual-slider img {
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 1em;
+  border: 1px solid var(--separator-color);
+  padding: var(--content-padding);
+}
+
 /* GENERIC COMPONENTS */
 .footnotes {
   font-size: 0.9em;

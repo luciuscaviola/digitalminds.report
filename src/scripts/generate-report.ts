@@ -71,8 +71,14 @@ const considerationListExtension: ShowdownExtension = {
   replace: '<div class="consideration-list">$1</div>',
 };
 
+const referencesExtension: ShowdownExtension = {
+  type: "output",
+  regex: /(<h2 id="references">References<\/h2>[\s\S]*)/g,
+  replace: '<div class="references-section">$1</div>',
+};
+
 const converter = new showdown.Converter({
-  extensions: [basicExtensions, tocExtension, considerationListExtension, footnoteExtension, imageExtension],
+  extensions: [basicExtensions, tocExtension, considerationListExtension, footnoteExtension, imageExtension, referencesExtension],
 });
 
 const markdown = fs.readFileSync("src/forecasting-2025/report.md", "utf8");

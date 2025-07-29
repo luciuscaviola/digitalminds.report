@@ -355,6 +355,21 @@ hr {
   margin: 0 0 1em 0;
 }
 
+.references-section {
+  font-size: 0.9em;
+  border-top: 1px solid var(--separator-color);
+  padding-top: 1em;
+  margin-top: 2em;
+}
+
+.references-section h2 {
+  margin-top: 0;
+}
+
+.references-section p {
+  margin-bottom: 0.5em;
+}
+
 /* MOBILE & INTERACTIVITY */
 
 .menu-toggle {

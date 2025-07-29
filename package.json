@@ -4,7 +4,7 @@
   "description": "A project to generate an HTML report from Markdown.",
   "type": "module",
   "scripts": {
-    "generate": "node --experimental-strip-types  src/scripts/generate-report.ts",
+    "generate": "npm run format && node --experimental-strip-types  src/scripts/generate-report.ts",
     "format": "prettier --write src/forecasting-2025/report.md",
     "watch": "chokidar \"src/**/*\" \"forecasting-2025/**/*.css\" -c \"npm run generate\"",
     "tsc": "tsc --noEmit"

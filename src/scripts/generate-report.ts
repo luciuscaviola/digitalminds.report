@@ -14,7 +14,7 @@ interface TocItem {
 const toc: TocItem[] = [];
 const footnotes: { [key: string]: string } = {};
 
-const basicExtendions: ShowdownExtension[] = [
+const basicExtensions: ShowdownExtension[] = [
   {
     type: "output",
     regex: /<p><strong>Authors:.*<\/p>/,
@@ -72,7 +72,7 @@ const considerationListExtension: ShowdownExtension = {
 };
 
 const converter = new showdown.Converter({
-  extensions: [basicExtendions, tocExtension, considerationListExtension, footnoteExtension, imageExtension],
+  extensions: [basicExtensions, tocExtension, considerationListExtension, footnoteExtension, imageExtension],
 });
 
 const markdown = fs.readFileSync("src/forecasting-2025/report.md", "utf8");
@@ -106,6 +106,13 @@ const footnotesHtml = `
   </div>
 `;
 
+const authorLinks = config.meta.authors.map((author) => {
+  const university = author.university ? ` (${author.university})` : "";
+  return `<a href="${author.website}" target="_blank">${author.name}</a>${university}`;
+});
+
+const authorsHtml = beautifulJoin(authorLinks);
+
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -124,7 +131,7 @@ const html = `<!DOCTYPE html>
         <div class="meta-item">
           <span class="meta-label">${config.meta.authorsTitle}</span>
           <span class="meta-value">
-            ${config.meta.authors.map((author) => `${author.name} (${author.university})`).join(", ")}
+            ${authorsHtml}
           </span>
         </div>
         <div class="meta-item">
@@ -132,8 +139,8 @@ const html = `<!DOCTYPE html>
           <span class="meta-value">${config.meta.publicationDate}</span>
         </div>
         <div class="meta-links">
-          <a href="${config.meta.pdfLink}" class="meta-link">${config.meta.pdfLabel}</a>
-          <a href="${config.meta.dataLink}" class="meta-link">${config.meta.dataLabel}</a>
+          <a href="${config.meta.pdfLink}" target="_blank" class="meta-link">${config.meta.pdfLabel}</a>
+          <a href="${config.meta.citeLink}" class="meta-link">${config.meta.citeLabel}</a>
         </div>
       </div>
       <nav class="toc" id="navigation">
@@ -163,4 +170,14 @@ function stripMarkdownAndEscape(text: string) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+function beautifulJoin(strings: Array<string>): string {
+  if (strings.length < 2) {
+    return strings.join("");
+  } else {
+    const copy = [...strings];
+    const last = copy.pop();
+    return copy.join(", ") + " & " + last;
+  }
 }

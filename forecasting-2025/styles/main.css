@@ -86,46 +86,6 @@ a:hover {
 
 /* LAYOUT SECTIONS */
 
-/* Top Bar */
-.top-bar {
-  padding: 0.75em var(--content-padding);
-  border-bottom: 1px solid var(--separator-color);
-}
-
-.top-bar-content {
-  margin: 0 auto;
-  max-width: calc(var(--content-max-width) + 2 * var(--content-padding));
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.wordmark {
-  display: flex;
-  align-items: center;
-  font-weight: var(--font-weight-bold);
-  text-decoration: none;
-}
-
-.logo {
-  margin-right: 0.5em;
-  height: 2em;
-}
-
-.wordmark .text {
-  color: var(--accent-primary);
-}
-
-.wordmark .secondary {
-  color: var(--accent-secondary);
-}
-
-.year {
-  font-size: 0.8em;
-  font-weight: var(--font-weight-bold);
-  color: var(--accent-secondary);
-}
-
 /* Report Header */
 .report-header {
   display: flex;

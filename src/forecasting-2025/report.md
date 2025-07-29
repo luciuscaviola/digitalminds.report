@@ -1131,7 +1131,6 @@ As a final question, participants were invited to share any unconventional views
 - Median time from an automated AI researcher system to global energy capture multiplying 100-fold from 2022 levels is maybe 9 years.
 - Explosive growth of intelligence and industrial capacity is fairly likely.
 - Because post-singularity scenarios are difficult to reason about, a more business-as-usual scenario, albeit with high growth and perhaps a short period of explosive growth was assumed. This would explain differences in responses from participants who assumed worked singularity scenarios with greater departures from business as usual.
--
 
 **Relatively long timelines for AGI**: There is a less than 50% probability of AGI in the next two decades.
 

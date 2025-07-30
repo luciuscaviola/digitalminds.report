@@ -36,4 +36,12 @@ export const config = {
       "javascript:prompt('Citation (press Ctrl+C or Cmd+C to copy):', 'Caviola, L., & Saad, B. (2025). Futures with digital minds: Expert forecasts in 2025.');void 0",
     citeLabel: "Cite",
   },
+  heroSlides: [
+    { src: "timing", alt: "Timing of AI development" },
+    { src: "speed", alt: "Speed of digital mind takeoff" },
+    { src: "net_welfare", alt: "Net welfare of digital minds" },
+    { src: "public_belief", alt: "Public belief in digital minds" },
+    { src: "moratorium", alt: "Support for a moratorium" },
+    { src: "ai_safety", alt: "Interaction with AI safety" },
+  ],
 } as const;

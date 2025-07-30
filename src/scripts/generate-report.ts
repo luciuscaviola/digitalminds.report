@@ -145,7 +145,27 @@ const authorsHtml = beautifulJoin(authorLinks);
 
 const sliderHtml = `
   <div class="hero-visual-slider">
-    <img src="images/timing.svg" alt="Timing of AI development" />
+    <div class="slides">
+      ${config.heroSlides
+        .map(
+          (slide, index) =>
+            `<div class="slide" data-index="${index}"><img src="images/${slide.src}.svg" alt="${slide.alt}" /></div>`
+        )
+        .join("\n")}
+    </div>
+    <div class="slider-controls">
+      <div><button class="arrow prev" aria-label="Previous slide">⬅</button></div>
+      <div class="dots">
+        ${config.heroSlides
+          .map(
+            (_, index) => `<button class="dot" data-index="${index}" aria-label="Go to slide ${index + 1}"></button>`
+          )
+          .join("\n")}
+      </div>
+      <div>
+      <button class="arrow next" aria-label="Next slide">⮕</button>
+      </div>
+    </div>
   </div>
 `;
 

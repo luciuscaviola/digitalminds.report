@@ -25,6 +25,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
   updateActiveLink();
 
+  /** Slider */
+
+  const slider = document.querySelector(".hero-visual-slider");
+  const slides = slider.querySelectorAll(".slide");
+  const dots = slider.querySelectorAll(".dot");
+  const prevButton = slider.querySelector(".arrow.prev");
+  const nextButton = slider.querySelector(".arrow.next");
+
+  let currentSliderIndex = 0;
+  prevButton.addEventListener("click", () => {
+    if (currentSliderIndex > 0) {
+      currentSliderIndex--;
+      updateSlider();
+    }
+  });
+  nextButton.addEventListener("click", () => {
+    if (currentSliderIndex < slides.length - 1) {
+      currentSliderIndex++;
+      updateSlider();
+    }
+  });
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      currentSliderIndex = parseInt(dot.dataset.index);
+      updateSlider();
+    });
+  });
+
+  updateSlider();
+
   /** Utility methods */
 
   function toggleMenu() {
@@ -133,15 +163,29 @@ document.addEventListener("DOMContentLoaded", function () {
         lastExecTime = currentTime;
       } else {
         clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-          func.apply(this, args);
-          lastExecTime = Date.now();
-        }, delay - (currentTime - lastExecTime));
+        timeoutId = setTimeout(
+          () => {
+            func.apply(this, args);
+            lastExecTime = Date.now();
+          },
+          delay - (currentTime - lastExecTime)
+        );
       }
     };
   }
 
   function handleResize() {
     closeMenu();
+  }
+
+  function updateSlider() {
+    slides.forEach((slide, index) => {
+      slide.style.display = index === currentSliderIndex ? "block" : "none";
+    });
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === currentSliderIndex);
+    });
+    prevButton.style.display = currentSliderIndex === 0 ? "none" : "block";
+    nextButton.style.display = currentSliderIndex === slides.length - 1 ? "none" : "block";
   }
 });

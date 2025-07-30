@@ -3,8 +3,6 @@ import showdown, { type ShowdownExtension } from "showdown";
 
 import { config } from "../forecasting-2025/config.ts";
 
-const considerationListRegex = /(<h4[^<]+?<\/h4>\s*(?:<p>[\s\S]+?<\/p>)?\s*<ul>[\s\S]+?<\/ul>)/g;
-
 interface TocItem {
   level: number;
   id: string;
@@ -66,6 +64,16 @@ const imageExtension: ShowdownExtension = {
     return `<img src="images/${alt}.svg" alt="${alt}" />`;
   },
 };
+
+/**
+ * 1. Starts with a level-4 heading (<h4>).
+ * 2. It can optionally be followed by one or more paragraphs (<p>).
+ * 3. It must then have at least one unordered list (<ul>).
+ * 4. After the initial list, it includes any and all content that comes after it.
+ * 5. It stops right before it encounters the next heading (either <h2>, <h3>, or <h4>) or if it reaches the end of the document.
+ */
+const considerationListRegex =
+  /(<h4[^>]*>[\s\S]*?<\/h4>\s*(?:<p>[\s\S]+?<\/p>)?\s*<ul>[\s\S]+?<\/ul>[\s\S]*?)(?=<h[2-4]|$)/g;
 
 const considerationListExtension: ShowdownExtension = {
   type: "output",

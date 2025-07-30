@@ -227,7 +227,7 @@ a:hover {
   margin-bottom: 0.5em;
 }
 
-.report-body ul li::before {
+.report-body ul:not(.main-findings) li::before {
   content: "\2022";
   color: var(--accent-secondary);
   font-weight: bold;
@@ -236,6 +236,29 @@ a:hover {
   margin-left: -1em;
   position: absolute;
   left: 0;
+}
+
+ul.main-findings {
+  padding: 0;
+}
+
+ul.main-findings li {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: calc(var(--content-padding) / 2);
+  margin-bottom: 1rem;
+  border: 1px solid var(--separator-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+ul.main-findings li::before {
+  content: none;
+}
+
+ul.main-findings li strong {
+  display: block;
+  color: var(--accent-secondary);
+  font-weight: 600;
 }
 
 .report-body img {

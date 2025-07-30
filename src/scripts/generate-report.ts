@@ -87,6 +87,12 @@ const referencesExtension: ShowdownExtension = {
   replace: '<div class="references-section">$1</div>',
 };
 
+const mainFindingsExtension: ShowdownExtension = {
+  type: "output",
+  regex: /(<h2 id="summary"[^>]*>Summary<\/h2>\s*<p>[\s\S]*?<\/p>\s*)<ul>/g,
+  replace: '$1<ul class="main-findings">',
+};
+
 const converter = new showdown.Converter({
   extensions: [
     basicExtensions,
@@ -95,6 +101,7 @@ const converter = new showdown.Converter({
     footnoteExtension,
     imageExtension,
     referencesExtension,
+    mainFindingsExtension,
   ],
 });
 

@@ -25,7 +25,7 @@ This project generates a static HTML report from a Markdown file. It uses a comb
 │       └── generate-report.ts
 ├── package.json
 ├── tsconfig.json
-└── README.md
+└── README.md 
 ```
 
 ## How it Works

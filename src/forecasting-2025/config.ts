@@ -12,7 +12,7 @@ export const config = {
     label: "Expert Forecasts in 2025",
     heading: "Futures with Digital Minds",
     subtitle:
-      "Experts estimate a 20% likelihood that computer systems with subjective experience will exist by 2030 and 65% by 2100 (medians). Once created, their population is expected to expand rapidly with vast collective welfare potential. Views diverge on their welfare level, AI safety implications, and socio-political effects.",
+      "Most expert participants consider it at least 50% likely that computers capable of subjective experience will exist by 2050. Once created, their collective welfare capacity is estimated to exceed humanity’s within a decade. Views diverge on whether their welfare will be positive, AI safety implications, and socio‑political effects.",
   },
   tocTitle: "Table of Contents",
   meta: {

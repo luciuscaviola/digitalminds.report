@@ -1,3 +1,5 @@
+#
+
 # Futures with Digital Minds: Expert Forecasts in 2025
 
 Lucius Caviolaa,b & Bradford Saadb[^1]  
@@ -12,22 +14,22 @@ This survey gathered insights from 67 participants with relevant expertise to ex
 - **Creation:** The probability that digital mind will at some point be created was judged to be 73%. Only 12% of participants thought it was less than 50% probable.
 - **Timing:** The median estimated probabilities of digital minds being created by a given year were 4.5% by 2025, 20% by 2030, 40% by 2040, 50% by 2050, and 65% by 2100\. Reasons influencing these timelines included technological trends (e.g., AI scaling), regulatory developments, and the risk of preemptive catastrophe.
 - **Timing relative to AGI:** 89% judged digital minds unlikely to arrive before AGI. However, these estimates may partly reflect confidence in short AGI timelines and greater uncertainty about digital mind timelines, rather than strong confidence that digital minds must necessarily follow AGI.
-- **Speed[^2]:** Many expected rapid growth in digital minds’ collective welfare capacity after the first is created, with median estimates suggesting their collective welfare capacity could equal that of one billion humans within five years.
+- **Speed:** Many expected rapid growth in digital minds’ collective welfare capacity after the first is created, with median estimates suggesting their collective welfare capacity could equal that of one billion humans within five years.[^2]
 - **Types:** Brain simulations were viewed as most likely to support consciousness in principle, but machine learning–based AI systems were judged most likely to be the first digital minds.
-- **Social function:** Participants disagreed on how many digital minds would be designed specifically for social interaction with humans. Most participants expected only a small minority (median 10%), while about one-third anticipated that the majority would serve such social roles.
+- **Social function:** Participants disagreed on how many digital minds would be designed specifically for social interaction with humans. Most participants expected only a small minority (median 10%), while about one-third anticipated that the majority would serve such social roles.[^2]
 - **Location:** Digital mind production in the first decade is expected to be concentrated in a few powerful countries, especially the USA and China, though some mentioned production in oceans, space, or outsourced locations.
 - **Producers:** Companies were widely expected to lead digital mind development in the first decade, outpacing governments, universities, and others—mirroring current AI research and commercialization trends.
 - **Deliberate creation:** Opinions were split on whether digital minds would be created deliberately or emerge as byproducts of other developments.
-- **Net welfare:** There was no consensus on whether digital mind welfare would be net positive, neutral, or negative, though the overall leaning was slightly positive. Reasons for positive welfare included deliberate design for well-being and self-modification capabilities. Reasons for negative welfare included neglect of welfare in design, mistreatment, and suffering during training.
-- **Pre-deployment:** Most thought only a small share of digital mind welfare would occur pre-deployment, though some flagged intense training-related suffering as potentially dominant among valenced experiences.
-- **Super-beneficiaries:** Most were skeptical that super-beneficiary digital minds (with \>1,000× human welfare capacity) would contribute much to total welfare within ten years, though some saw them as potentially important.
-- **Experience-independent welfare:** Most doubted that computer systems could have welfare without subjective experience. However, arguments for such possibilities may be underappreciated, as the existing body of literature on this question was not well-represented in responses.
-- **Claims:** Most expected that a sizable number of digital minds will consistently and proactively claim to have subjective experience or be deserving of legal protections or further civil rights.
-- **Inaccurate self-attribution or self-denial:** Only a minority of AI systems without subjective experience were expected to falsely claim to have it. Similarly, only a minority of digital minds were expected to falsely deny possessing subjective experience. However, given potentially large populations, even small error rates could result in large absolute numbers of false claims in both directions.
-- **Public belief:** A substantial portion of the public was expected to believe in the existence of digital minds within ten years of their creation. However, responses reflected significant uncertainty and anticipated societal division, with beliefs likely varying across individuals and groups.
-- **Welfare capacity estimation:** Participants broadly expected the public to significantly underestimate the welfare capacity of digital minds, raising concerns that their moral significance may be underappreciated.
-- **Protections and rights:** Public support for protections was expected to vary by level: moderate support for basic harm protections may emerge within a decade, while support for full civil rights would remain limited.
-- **Political attention:** Participants were divided on whether digital mind rights would become a major political issue within a decade of the first digital mind
+- **Net welfare:** There was no consensus on whether digital mind welfare would be net positive, neutral, or negative, though the overall leaning was slightly positive. Reasons for positive welfare included deliberate design for well-being and self-modification capabilities. Reasons for negative welfare included neglect of welfare in design, mistreatment, and suffering during training.[^2]
+- **Pre-deployment:** Most thought only a small share of digital mind welfare would occur pre-deployment, though some flagged intense training-related suffering as potentially dominant among valenced experiences.[^2]
+- **Super-beneficiaries:** Most were skeptical that super-beneficiary digital minds (with \>1,000× human welfare capacity) would contribute much to total welfare within ten years, though some saw them as potentially important.[^2]
+- **Experience-independent welfare:** Most doubted that computer systems could have welfare without subjective experience. However, arguments for such possibilities may be underappreciated, as the existing body of literature on this question was not well-represented in responses.[^2]
+- **Claims:** Most expected that a sizable number of digital minds will consistently and proactively claim to have subjective experience or be deserving of legal protections or further civil rights.[^2]
+- **Inaccurate self-attribution or self-denial:** Only a minority of AI systems without subjective experience were expected to falsely claim to have it. Similarly, only a minority of digital minds were expected to falsely deny possessing subjective experience. However, given potentially large populations, even small error rates could result in large absolute numbers of false claims in both directions.[^2]
+- **Public belief:** A substantial portion of the public was expected to believe in the existence of digital minds within ten years of their creation. However, responses reflected significant uncertainty and anticipated societal division, with beliefs likely varying across individuals and groups.[^2]
+- **Welfare capacity estimation:** Participants broadly expected the public to significantly underestimate the welfare capacity of digital minds, raising concerns that their moral significance may be underappreciated.[^2]
+- **Protections and rights:** Public support for protections was expected to vary by level: moderate support for basic harm protections may emerge within a decade, while support for full civil rights would remain limited.[^2]
+- **Political attention:** Participants were divided on whether digital mind rights would become a major political issue within a decade of the first digital mind.[^2]
 - **Moratorium:** Views were mixed—leaning slightly positive—on whether a moratorium on creating digital minds until 2040 would be good or bad. Arguments for a moratorium included buying time to prepare and indirect AI safety benefits. Arguments against included delayed integration of safety measures and risks of later creation in higher-stakes contexts.
 - **Interactions with AI safety:** Participants were uncertain whether AI safety and digital mind welfare efforts would align or conflict. Mentioned potential synergies included alignment reducing the need for coercive control and shared technical tools (e.g., interpretability methods). Potential conflicts included safety measures such as monitoring and shutdown protocols that could harm digital minds, welfare protections limiting the ability to control AI behavior, and competition for scarce funding, talent, and regulatory attention.
 
@@ -1169,9 +1171,9 @@ Our findings also align with AGI timeline research. Grace et al.'s influential s
 
 One noteworthy aspect of this pattern is that participants deemed digital minds unlikely to arrive before AGI despite giving many plausible arguments for why digital minds might emerge even before AGI. This divergence may reflect the differing epistemic foundations of these predictions: AGI timelines are to a greater extent grounded in concrete performance metrics and observable scaling trends, which may lend to higher confidence in shorter AGI timelines. By the same token, greater uncertainty about digital minds timelines may have contributed to longer median estimates for digital mind arrival, independently of positive reasons thinking that digital minds will come after AGI. Another related explanation may be that the goalposts for counting a system as an AGI may be receding less quickly than the goalposts for judging an AI system to have a capacity for subjective experience. The AGI goalposts are relatively fixed because AGI is defined in terms of what humans can do and there is a rapidly diminishing range of tasks that humans can do but which existing AI systems have not been observed to do. In contrast, the capacity for subjective experience is not defined relative to humans. And while AI systems do exhibit an increasingly wide range of candidate markers of subjective experience, the many possible candidates and great uncertainty as to their appropriate weights provide abundant opportunities to move the goalposts for subjective experience in artificial systems.[^29]
 
-### Post-AGI as a potentially high leverage
+### The Post-AGI period may be high leverage
 
-Several themes in survey responses suggest that interventions that affect outcomes for digital minds that occur in the period following AGI may be particularly high leverage. First, most participants deemed it unlikely that digital minds will arrive before AGI, but likely that digital minds would arrive before 2050\. These results suggest that digital minds may arrive in the wake of AGI. Second, some participants noted that it may be (much) easier to create digital minds after AGI has been created. Third, there was also a related pattern of expecting AGI to have transformative effects such as significant acceleration of technological progress and growth in compute capacity. Plausibly, such effects in expectation increase not only the ease with which digital minds might be created also the collective welfare capacity of digital minds. This observation fits with participants’ expectation of rapid growth in digital mind welfare capacity following the creation of the first digital mind. In sum, these results may provid reason to expect the first digital minds to be created shortly after AGI, digital minds to become much easier to create during that period, and digital mind welfare capacity to grow rapidly in that period. If so, then those who are trying to improve outcomes for digital minds may have reason to prioritize interventions that would primarily improve outcomes for digital minds after AGI over interventions that would primarily improve outcomes for digital minds before AGI.
+Several themes in survey responses suggest that interventions that affect outcomes for digital minds that occur in the period following AGI may be particularly high leverage. First, most participants deemed it unlikely that digital minds will arrive before AGI, but likely that digital minds would arrive before 2050\. These results suggest that digital minds may arrive in the wake of AGI. Second, some participants noted that it may be (much) easier to create digital minds after AGI has been created. Third, there was also a related pattern of expecting AGI to have transformative effects such as significant acceleration of technological progress and growth in compute capacity. Plausibly, such effects in expectation increase not only the ease with which digital minds might be created but also the collective welfare capacity of digital minds. This observation fits with participants’ expectation of rapid growth in digital mind welfare capacity following the creation of the first digital mind. In sum, these results may provide reason to expect the first digital minds to be created shortly after AGI, digital minds to become much easier to create during that period, and digital mind welfare capacity to grow rapidly in that period. If so, then those who are trying to improve outcomes for digital minds may have reason to prioritize interventions that would primarily improve outcomes for digital minds after AGI over interventions that would primarily improve outcomes for digital minds before AGI.
 
 ### Anticipated Societal Division
 
@@ -1215,173 +1217,92 @@ We thank Tao Burga for his valuable assistance in designing the survey, setting 
 
 ## References
 
-Anthropic (2025*a*) System Card: Claude Opus 4 & Claude Sonnet 4\. URL: Available at: [https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf](https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf) \[Accessed 5 Jul. 2025\].
-
-Anthropic (2025*b*) Exploring model welfare. 24 April. Available at: [https://www.anthropic.com/research/exploring-model-welfare](https://www.anthropic.com/research/exploring-model-welfare) (Accessed: 5 July 2025).
-
-Anthis, J. R., Pauketat, J. V., Ladak, A., & Manoli, A. (2025, April). Perceptions of Sentient AI and Other Digital Minds: Evidence from the AI, Morality, and Sentience (AIMS) Survey. In Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems (pp. 1-22).
-
-Bales, A. (2025). Against willing servitude: Autonomy in the ethics of advanced artificial intelligence. _The Philosophical Quarterly_, pqaf031.
-
-Birch, J. (2024). _The edge of sentience: risk and precaution in humans, other animals, and AI_ (p. 398). Oxford University Press.
-
-Birhane, A., & van Dijk, J. (2020). Robot rights? Let’s talk about human welfare instead. In Proceedings of the AAAI/ACM conference on _AI, ethics, and society_ pp. 207–213.
-
-Block, N. (1980). Troubles with functionalism. _Readings in Philosophy of Psychology,_ 1, 268–305.
-
-Bourget, D., & Chalmers, D. (2023). Philosophers on philosophy: The 2020 philpapers survey. Philosophers' Imprint, 23\. [https://survey2020.philpeople.org/](https://survey2020.philpeople.org/)
-
-Bostrom, N. (2003). Are we living in a computer simulation?. _The philosophical quarterly_, 53(211), 243-255.
-
-Sandberg, A. & Bostrom, N. (2008) Whole brain emulation: A roadmap. Technical report 2008–3, Future for
-
-Humanity Institute, Oxford.
-
-Bostrom, N. (2014*a*) Superintelligence: Paths, dangers, strategies. OUP.
-
-Bostrom, N., & Shulman, C. (2022). Propositions concerning digital minds and society. _Cambridge Journal of Law, Politics, and Art,_ 3\.
-
-Bradley, A., & Saad, B. (forthcoming*a*). AI Alignment vs. AI Ethical Treatment: Ten Challenges. _Analytic Philosophy._
-
-Bradley, A., & Saad, B. (forthcoming*b*) Varieties of Moral Agency and Risks of Digital Dystopia. _American Philosophical Quarterly_.
-
-Bryson, J. J., Diamantis, M. E., & Grant, T. D. (2017). Of, for, and by the people: the legal lacuna of synthetic persons. _Artificial Intelligence and Law_, 25(3), 273-291.
-
-Butlin, P., Long, R., Elmoznino, E., Bengio, Y., Birch, J., Constant, A., ... & VanRullen, R. (2023). Consciousness in artificial intelligence: insights from the science of consciousness. arXiv preprint arXiv:2308.08708.
-
-Carruthers, P. (1992). _The animals issue: Moral theory in practice_. Cambridge University Press.
-
-Caviola, L., Sebo, J., & Birch, J. (2025). What will society think about AI consciousness? Lessons from the animal case. Trends in Cognitive Sciences.
-
-Chalmers, D. (1996). _The Conscious Mind: In Search of a Fundamental Theory_. Oxford University Press.
-
-Chalmers, D. (2010). The singularity: A philosophical analysis. _Journal of Consciousness Studies_, 17(9-10).
-
-Chalmers, D. (2022). _Reality+: Virtual Worlds and the Problems of Philosophy_. New York: W.W. Norton.
-
-Chalmers, D. (2023), Could a large language model be conscious?. URL: [https://philarchive.org/rec/CHACAL-3](https://philarchive.org/rec/CHACAL-3)
-
-Chappell, R.Y. (2021). Negative Utility Monsters. _Utilitas_, 33(4)417-421.
-
-Cotra, A. (2020) Forecasting Transformative AI with Biological Anchors. _Open Philanthropy._
-
-Crane, T. (2021). The AI ethics hoax. _IAI News_. Retrieved July 6, 2025, from [https://iai.tv/articles/the-ai-ethics-hoax-auid-1762](https://iai.tv/articles/the-ai-ethics-hoax-auid-1762)
-
-Davidson, T. (2021) Could Advanced AI Drive Explosive Economic Growth? Open Philanthropy.
-
-Dreksler, N., Caviola, L., Chalmers, D., Allen, C., Rand, A., Lewis, J., ... & Sebo, J. (2025). Subjective experience in AI systems: what do AI researchers and the public believe?. arXiv preprint arXiv:2506.11945.
-
-Dung, L. (2023). How to deal with risks of AI suffering. _Inquiry_, 1-29.
-
-Dung, L. (ms) _Saving Artificial Minds AI Suffering Risks and How to Reduce Them._
-
-Epoch AI. (2025). “Machine Learning Trends”. _Epoch AI_. [https://epoch.ai/trends](https://epoch.ai/trends)
-
-Fernandez, I., Kyosovska, N., Luong, J., & Mukobi, G. (2024). AI Consciousness and Public Perceptions: Four Futures. arXiv preprint arXiv:2408.04771.
-
-Fletcher, G. (2016). Objective list theories. In _The Routledge Handbook of Philosophy of Well-Being_. Routledge.
-
-Francken, J. et al. (2022). An academic survey on theoretical foundations, common assumptions and the current state of consciousness science. Neuroscience of consciousness, 2022(1)niac011.
-
-Gloor, L. (2016). Suffering-focused AI safety: Why “fail-safe” measures might be our top intervention. Foundational Research Institute, Report FRI-16, 1\.
-
-Goff, P., Seager, W., and Allen-Hermanson, S. (2022) "Panpsychism", The Stanford Encyclopedia of Philosophy (Summer 2022 Edition), Edward N. Zalta (ed.), URL: [https://plato.stanford.edu/archives/sum2022/entries/panpsychism/](https://plato.stanford.edu/archives/sum2022/entries/panpsychism/)
-
-Goldstein, S. & Kirk-Giannini, C.D. (2025). AI Wellbeing. _Asian Journal of Philosophy_.
-
-Grace, K.; Salvatier, J.; Dafoe, A.; Zhang, B.; and Evans, O. (2018) Viewpoint: when will AI exceed human
-
-performance? Evidence from AI Experts. _Journal of Artificial Intelligence Research_, pp. 729–754.
-
-Grace, K.; Stein-Perlman, Z.; Weinstein-Raun, B.; and Salvatier, J. (2022) Expert Survey on Progress in AI. _AI Impacts_, Aug 2022\. URL: [https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2022_expert_survey_on_progress_in_ai](https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2022_expert_survey_on_progress_in_ai)
-
-Grace, K., Stewart, H., Sandkühler, J. F., Thomas, S., Weinstein-Raun, B., & Brauner, J. (2024). Thousands of AI authors on the future of AI. arXiv preprint arXiv:2401.02843.
-
-Greene, P. (2020). The termination risks of simulation science. _Erkenntnis_, 85(2), 489-509.
-
-Harris, J., & Anthis, J. R. (2021). The moral consideration of artificial entities: a literature review. _Science and engineering ethics_, 27(4), 53\.
-
-Hanson, R. (2016). _The Age of Em: Work, Love, and Life when Robots Rule the Earth_. OUP.
-
-Hendrycks, D. (2025). _Introduction to AI safety, ethics, and society_ (p. 562). Taylor & Francis.
-
-Hill, C.S. (1991). Sensations: A defense of type materialism. Cambridge.
-
-Ladak, A. (2024). What would qualify an artificial intelligence for moral standing?. AI and Ethics, 4(2), 213-228.
-
-Lee, G. (2019). ‘Alien Subjectivity and the Importance of Consciousness,’ in A. Pautz and D. Stoljar (eds) _Blockheads\! Essays on Ned Block’s Philosophy of Mind and Consciousness_. Cambridge MA: MIT Press, pp. 215–242.
-
-Levy, N. (2014). The value of consciousness. _Journal of Consciousness Studies_, 21(1-2)127-138.
-
-Long, R., Sebo, J., Butlin, P., Finlinson, K., Fish, K., Harding, J., ... & Chalmers, D. (2024). Taking AI welfare seriously. arXiv preprint arXiv:2411.00986.
-
-Long, R., Sebo, J., & Sims, T. (2025). Is there a tension between AI safety and AI welfare?. _Philosophical Studies_, 1-29.
-
-Kagan, S. (2019). How to count animals, more or less. OUP.
-
-Maas, M. M. (2023). Concepts in Advanced AI Governance: A Literature Review of Key Terms and Definitions. AI Foundations Report, 3\.
-
-McLaughlin, B. (2019). Could an Android Be Sentient?. In Blockheads\!: Essays on Ned Block's Philosophy of Mind and Consciousness.
-
-Metaculus. (2025) Date of Artificial General Intelligence. Available at: https://www.metaculus.com/questions/5121/date-of-artificial-general-intelligence/ (Accessed: 23 June 2025).
-
-Moret, A. (2025). AI welfare risks. _Philosophical Studies_, 1-24.
-
-Nozick, R. (1974) Anarchy, State, and Utopia. Basic Books.
-
-Ord, T. (2024). Inference scaling reshapes AI governance. Retrieved June 5, 2025, from [https://www.tobyord.com/writing/inference-scaling-reshapes-ai-governance](https://www.tobyord.com/writing/inference-scaling-reshapes-ai-governance)
-
-Parfit, D. (1984). _Reasons and Persons_. OUP Oxford.
-
-Regan, T., (1983). _The Case for Animal Rights._ Berkeley: University of California Press.
-
-Reuters. (2025). OpenAI’s weekly active users surpass 400 million. _Reuters_. [https://www.reuters.com/technology/artificial-intelligence/openais-weekly-active-users-surpass-400-million-2025-02-20/](https://www.reuters.com/technology/artificial-intelligence/openais-weekly-active-users-surpass-400-million-2025-02-20/)
-
-Saad, Bradford (2023). Simulations and Catastrophic Risks. _Sentience Institute Report._
-
-Saad, B., & Bradley, A. (2022). Digital suffering: why it's a problem and how to prevent it. _Inquiry_, 1-36.
-
-Saad, B. and Caviola, L., 2024\. Digital Minds Takeoff Scenarios. _Effective Altruism Forum_. Available at: [https://forum.effectivealtruism.org/posts/2uGShxLsXWGExJYNL/digital-minds-takeoff-scenarios](https://forum.effectivealtruism.org/posts/2uGShxLsXWGExJYNL/digital-minds-takeoff-scenarios)
-
-Sandberg, A. & Bostrom, N. (2008) Whole brain emulation: A roadmap. Technical report 2008-3, Future for Humanity Institute, Oxford.
-
-Schwitzgebel, E. (2023*a*) The Coming Robot Rights Catastrophe. Blog of the American Philosophical Association. URL:[https://blog.apaonline.org/2023/01/12/the-coming-robot-rights-catastrophe/](https://blog.apaonline.org/2023/01/12/the-coming-robot-rights-catastrophe/)
-
-Schwitzgebel, E. (2023*b*) The Full Rights Dilemma for A.I. Systems of Debatable Personhood. arXiv preprint, arXiv:2303.17509v1 \[cs.CY\]. Available at: [https://arxiv.org/abs/2303.17509v1](https://arxiv.org/abs/2303.17509v1)
-
-Schwitzgebel, E. (2025) ‘Against Designing “Safe” and “Aligned” AI Persons (Even If They’re Happy)’ URL:[https://faculty.ucr.edu/\~eschwitz/SchwitzPapers/AgainstSafety-250530.pdf](https://faculty.ucr.edu/~eschwitz/SchwitzPapers/AgainstSafety-250530.pdf)
-
-Schwitzgebel, E., & Garza, M. (2015). A defense of the rights of artificial intelligences. Midwest Studies in Philosophy, (39):98-119.
-
-Schwitzgebel, E., & Garza, M. (2020) "Designing AI with Rights, Consciousness, Self-Respect, and Freedom" (2020), in S. Matthew Liao, ed., The Ethics of Artificial Intelligence. OUP.
-
-Sebo, J., & Long, R. (2025). Moral consideration for AI systems by 2030\. _AI and Ethics_, 5(1), 591-606.
-
-Seth, A. (2024). Conscious artificial intelligence and biological naturalism. PsyArXiv preprint.
-
-Shulman, C., & Bostrom, N. (2021). Sharing the world with digital minds. In Rethinking moral status.
-
-Sinnott-Armstrong, W., & Conitzer, V. (2021). How much moral status could artificial intelligence ever achieve. In Rethinking Moral Status.
-
-Shulman, C. (2010) Whole Brain Emulation and the Evolution of Superorganisms. _Machine Intelligence Research Institute._ URL: [https://intelligence.org/files/WBE-Superorgs.pdf](https://intelligence.org/files/WBE-Superorgs.pdf)
-
-Sterri, A. & Skjelbred, P. (2024) “Against AI Alignment”. URL:[https://akselsterri.no/wp-content/uploads/2020/04/against-ai-alignment-.docx.pdf](https://akselsterri.no/wp-content/uploads/2020/04/against-ai-alignment-.docx.pdf)
-
-Thomas, T. (2024). Simulation expectation. _Erkenntnis_, 1-18.
-
-Trammell, P., & Korinek, A. (2023). Economic growth under transformative AI (No. w31815). National Bureau of Economic Research.
-
-Tomasik, B. (2017). Artificial Intelligence and Its Implications for Future Suffering. Foundational Research Institute: Basel, Switzerland.
-
-Véliz, C. (2021). Moral zombies: why algorithms are not moral agents. _AI & society_, 36(2), 487-497.
-
-Sinnott-Armstrong, W., & Conitzer, V. (2021). How much moral status could artificial intelligence ever achieve? In S. Clarke, H. Zohn, & J. Savulescu (Eds.), _Rethinking moral status_ (pp. 269–281). Oxford University Press.
-
+Anthropic (2025*a*) System Card: Claude Opus 4 & Claude Sonnet 4\. URL: Available at: [https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf](https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf) \[Accessed 5 Jul. 2025\].  
+Anthropic (2025*b*) Exploring model welfare. 24 April. Available at: [https://www.anthropic.com/research/exploring-model-welfare](https://www.anthropic.com/research/exploring-model-welfare) (Accessed: 5 July 2025).  
+Anthis, J. R., Pauketat, J. V., Ladak, A., & Manoli, A. (2025, April). Perceptions of Sentient AI and Other Digital Minds: Evidence from the AI, Morality, and Sentience (AIMS) Survey. In Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems (pp. 1-22).  
+Bales, A. (2025). Against willing servitude: Autonomy in the ethics of advanced artificial intelligence. _The Philosophical Quarterly_, pqaf031.  
+Birch, J. (2024). _The edge of sentience: risk and precaution in humans, other animals, and AI_ (p. 398). Oxford University Press.  
+Birhane, A., & van Dijk, J. (2020). Robot rights? Let’s talk about human welfare instead. In Proceedings of the AAAI/ACM conference on _AI, ethics, and society_ pp. 207–213.  
+Block, N. (1980). Troubles with functionalism. _Readings in Philosophy of Psychology,_ 1, 268–305.  
+Bourget, D., & Chalmers, D. (2023). Philosophers on philosophy: The 2020 philpapers survey. Philosophers' Imprint, 23\. [https://survey2020.philpeople.org/](https://survey2020.philpeople.org/)  
+Bostrom, N. (2003). Are we living in a computer simulation?. _The philosophical quarterly_, 53(211), 243-255.  
+Sandberg, A. & Bostrom, N. (2008) Whole brain emulation: A roadmap. Technical report 2008–3, Future for  
+Humanity Institute, Oxford.  
+Bostrom, N. (2014*a*) Superintelligence: Paths, dangers, strategies. OUP.  
+Bostrom, N., & Shulman, C. (2022). Propositions concerning digital minds and society. _Cambridge Journal of Law, Politics, and Art,_ 3\.  
+Bradley, A., & Saad, B. (forthcoming*a*). AI Alignment vs. AI Ethical Treatment: Ten Challenges. _Analytic Philosophy._  
+Bradley, A., & Saad, B. (forthcoming*b*) Varieties of Moral Agency and Risks of Digital Dystopia. _American Philosophical Quarterly_.  
+Bryson, J. J., Diamantis, M. E., & Grant, T. D. (2017). Of, for, and by the people: the legal lacuna of synthetic persons. _Artificial Intelligence and Law_, 25(3), 273-291.  
+Butlin, P., Long, R., Elmoznino, E., Bengio, Y., Birch, J., Constant, A., ... & VanRullen, R. (2023). Consciousness in artificial intelligence: insights from the science of consciousness. arXiv preprint arXiv:2308.08708.  
+Carruthers, P. (1992). _The animals issue: Moral theory in practice_. Cambridge University Press.  
+Caviola, L., Sebo, J., & Birch, J. (2025). What will society think about AI consciousness? Lessons from the animal case. Trends in Cognitive Sciences.  
+Chalmers, D. (1996). _The Conscious Mind: In Search of a Fundamental Theory_. Oxford University Press.  
+Chalmers, D. (2010). The singularity: A philosophical analysis. _Journal of Consciousness Studies_, 17(9-10).  
+Chalmers, D. (2022). _Reality+: Virtual Worlds and the Problems of Philosophy_. New York: W.W. Norton.  
+Chalmers, D. (2023), Could a large language model be conscious?. URL: [https://philarchive.org/rec/CHACAL-3](https://philarchive.org/rec/CHACAL-3)  
+Chappell, R.Y. (2021). Negative Utility Monsters. _Utilitas_, 33(4)417-421.  
+Cotra, A. (2020) Forecasting Transformative AI with Biological Anchors. _Open Philanthropy._  
+Crane, T. (2021). The AI ethics hoax. _IAI News_. Retrieved July 6, 2025, from [https://iai.tv/articles/the-ai-ethics-hoax-auid-1762](https://iai.tv/articles/the-ai-ethics-hoax-auid-1762)  
+Davidson, T. (2021) Could Advanced AI Drive Explosive Economic Growth? Open Philanthropy.  
+Dreksler, N., Caviola, L., Chalmers, D., Allen, C., Rand, A., Lewis, J., ... & Sebo, J. (2025). Subjective experience in AI systems: what do AI researchers and the public believe?. arXiv preprint arXiv:2506.11945.  
+Dung, L. (2023). How to deal with risks of AI suffering. _Inquiry_, 1-29.  
+Dung, L. (ms) _Saving Artificial Minds AI Suffering Risks and How to Reduce Them._  
+Epoch AI. (2025). “Machine Learning Trends”. _Epoch AI_. [https://epoch.ai/trends](https://epoch.ai/trends)  
+Fernandez, I., Kyosovska, N., Luong, J., & Mukobi, G. (2024). AI Consciousness and Public Perceptions: Four Futures. arXiv preprint arXiv:2408.04771.  
+Fletcher, G. (2016). Objective list theories. In _The Routledge Handbook of Philosophy of Well-Being_. Routledge.  
+Francken, J. et al. (2022). An academic survey on theoretical foundations, common assumptions and the current state of consciousness science. Neuroscience of consciousness, 2022(1)niac011.  
+Gloor, L. (2016). Suffering-focused AI safety: Why “fail-safe” measures might be our top intervention. Foundational Research Institute, Report FRI-16, 1\.  
+Goff, P., Seager, W., and Allen-Hermanson, S. (2022) "Panpsychism", The Stanford Encyclopedia of Philosophy (Summer 2022 Edition), Edward N. Zalta (ed.), URL \= \<[https://plato.stanford.edu/archives/sum2022/entries/panpsychism/](https://plato.stanford.edu/archives/sum2022/entries/panpsychism/)\>.  
+Goldstein, S. & Kirk-Giannini, C.D. (2025). AI Wellbeing. _Asian Journal of Philosophy_.  
+Grace, K.; Salvatier, J.; Dafoe, A.; Zhang, B.; and Evans, O. (2018) Viewpoint: when will AI exceed human  
+performance? Evidence from AI Experts. _Journal of Artificial Intelligence Research_, pp. 729–754.  
+Grace, K.; Stein-Perlman, Z.; Weinstein-Raun, B.; and Salvatier, J. (2022) Expert Survey on Progress in AI. _AI Impacts_, Aug 2022\. URL: [https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2022_expert_survey_on_progress_in_ai](https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2022_expert_survey_on_progress_in_ai)  
+Grace, K., Stewart, H., Sandkühler, J. F., Thomas, S., Weinstein-Raun, B., & Brauner, J. (2024). Thousands of AI authors on the future of AI. arXiv preprint arXiv:2401.02843.  
+Greene, P. (2020). The termination risks of simulation science. _Erkenntnis_, 85(2), 489-509.  
+Harris, J., & Anthis, J. R. (2021). The moral consideration of artificial entities: a literature review. _Science and engineering ethics_, 27(4), 53\.  
+Hanson, R. (2016). _The Age of Em: Work, Love, and Life when Robots Rule the Earth_. OUP.  
+Hendrycks, D. (2025). _Introduction to AI safety, ethics, and society_ (p. 562). Taylor & Francis.  
+Hill, C.S. (1991). Sensations: A defense of type materialism. Cambridge.  
+Ladak, A. (2024). What would qualify an artificial intelligence for moral standing?. AI and Ethics, 4(2), 213-228.  
+Lee, G. (2019). ‘Alien Subjectivity and the Importance of Consciousness,’ in A. Pautz and D. Stoljar (eds) _Blockheads\! Essays on Ned Block’s Philosophy of Mind and Consciousness_. Cambridge MA: MIT Press, pp. 215–242.  
+Levy, N. (2014). The value of consciousness. _Journal of Consciousness Studies_, 21(1-2)127-138.  
+Long, R., Sebo, J., Butlin, P., Finlinson, K., Fish, K., Harding, J., ... & Chalmers, D. (2024). Taking AI welfare seriously. arXiv preprint arXiv:2411.00986.  
+Long, R., Sebo, J., & Sims, T. (2025). Is there a tension between AI safety and AI welfare?. _Philosophical Studies_, 1-29.  
+Kagan, S. (2019). How to count animals, more or less. OUP.  
+Maas, M. M. (2023). Concepts in Advanced AI Governance: A Literature Review of Key Terms and Definitions. AI Foundations Report, 3\.  
+McLaughlin, B. (2019). Could an Android Be Sentient?. In Blockheads\!: Essays on Ned Block's Philosophy of Mind and Consciousness.  
+Metaculus. (2025) Date of Artificial General Intelligence. Available at: https://www.metaculus.com/questions/5121/date-of-artificial-general-intelligence/ (Accessed: 23 June 2025).  
+Moret, A. (2025). AI welfare risks. _Philosophical Studies_, 1-24.  
+Nozick, R. (1974) Anarchy, State, and Utopia. Basic Books.  
+Ord, T. (2024). Inference scaling reshapes AI governance. Retrieved June 5, 2025, from [https://www.tobyord.com/writing/inference-scaling-reshapes-ai-governance](https://www.tobyord.com/writing/inference-scaling-reshapes-ai-governance)  
+Parfit, D. (1984). _Reasons and Persons_. OUP Oxford.  
+Regan, T., (1983). _The Case for Animal Rights._ Berkeley: University of California Press.  
+Reuters. (2025). OpenAI’s weekly active users surpass 400 million. _Reuters_. [https://www.reuters.com/technology/artificial-intelligence/openais-weekly-active-users-surpass-400-million-2025-02-20/](https://www.reuters.com/technology/artificial-intelligence/openais-weekly-active-users-surpass-400-million-2025-02-20/)  
+Saad, Bradford (2023). Simulations and Catastrophic Risks. _Sentience Institute Report._  
+Saad, B., & Bradley, A. (2022). Digital suffering: why it's a problem and how to prevent it. _Inquiry_, 1-36.  
+Saad, B. and Caviola, L., 2024\. Digital Minds Takeoff Scenarios. _Effective Altruism Forum_. Available at: [https://forum.effectivealtruism.org/posts/2uGShxLsXWGExJYNL/digital-minds-takeoff-scenarios](https://forum.effectivealtruism.org/posts/2uGShxLsXWGExJYNL/digital-minds-takeoff-scenarios)  
+Sandberg, A. & Bostrom, N. (2008) Whole brain emulation: A roadmap. Technical report 2008-3, Future for Humanity Institute, Oxford.  
+Schwitzgebel, E. (2023*a*) The Coming Robot Rights Catastrophe. Blog of the American Philosophical Association. URL:[https://blog.apaonline.org/2023/01/12/the-coming-robot-rights-catastrophe/](https://blog.apaonline.org/2023/01/12/the-coming-robot-rights-catastrophe/)  
+Schwitzgebel, E. (2023*b*) The Full Rights Dilemma for A.I. Systems of Debatable Personhood. arXiv preprint, arXiv:2303.17509v1 \[cs.CY\]. Available at: [https://arxiv.org/abs/2303.17509v1](https://arxiv.org/abs/2303.17509v1)  
+Schwitzgebel, E. (2025) ‘Against Designing “Safe” and “Aligned” AI Persons (Even If They’re Happy)’ URL:[https://faculty.ucr.edu/\~eschwitz/SchwitzPapers/AgainstSafety-250530.pdf](https://faculty.ucr.edu/~eschwitz/SchwitzPapers/AgainstSafety-250530.pdf)  
+Schwitzgebel, E., & Garza, M. (2015). A defense of the rights of artificial intelligences. Midwest Studies in Philosophy, (39):98-119.  
+Schwitzgebel, E., & Garza, M. (2020) "Designing AI with Rights, Consciousness, Self-Respect, and Freedom" (2020), in S. Matthew Liao, ed., The Ethics of Artificial Intelligence. OUP.  
+Sebo, J., & Long, R. (2025). Moral consideration for AI systems by 2030\. _AI and Ethics_, 5(1), 591-606.  
+Seth, A. (2024). Conscious artificial intelligence and biological naturalism. PsyArXiv preprint.  
+Shulman, C., & Bostrom, N. (2021). Sharing the world with digital minds. In Rethinking moral status.  
+Sinnott-Armstrong, W., & Conitzer, V. (2021). How much moral status could artificial intelligence ever achieve. In Rethinking Moral Status.  
+Shulman, C. (2010) Whole Brain Emulation and the Evolution of Superorganisms. _Machine Intelligence Research Institute._ URL: [https://intelligence.org/files/WBE-Superorgs.pdf](https://intelligence.org/files/WBE-Superorgs.pdf)  
+Sterri, A. & Skjelbred, P. (2024) “Against AI Alignment”. URL:[https://akselsterri.no/wp-content/uploads/2020/04/against-ai-alignment-.docx.pdf](https://akselsterri.no/wp-content/uploads/2020/04/against-ai-alignment-.docx.pdf)  
+Thomas, T. (2024). Simulation expectation. _Erkenntnis_, 1-18.  
+Trammell, P., & Korinek, A. (2023). Economic growth under transformative AI (No. w31815). National Bureau of Economic Research.  
+Tomasik, B. (2017). Artificial Intelligence and Its Implications for Future Suffering. Foundational Research Institute: Basel, Switzerland.  
+Véliz, C. (2021). Moral zombies: why algorithms are not moral agents. _AI & society_, 36(2), 487-497.  
+Sinnott-Armstrong, W., & Conitzer, V. (2021). How much moral status could artificial intelligence ever achieve? In S. Clarke, H. Zohn, & J. Savulescu (Eds.), _Rethinking moral status_ (pp. 269–281). Oxford University Press.  
 Zhang, B., Dreksler, N., Anderljung, M., Kahn, L., Giattino, C., Dafoe, A., & Horowitz, M. C. (2022). Forecasting AI progress: Evidence from a survey of machine learning researchers. arXiv.
 
 [^1]: Authors made equal contributions to designing the survey and writing the report. LC coordinated recruitment and analysis.
 
-[^2]: For the sections on speed, social function, location, net welfare, pre-deployment, super-beneficiaries, experience-independent welfare, claims, false claims/denials, welfare capacity estimation, protections and rights, and political attention, participants were instructed to assume the first digital mind is a machine-learning-based AI system created no later than 2040\.
+[^2]: Participants were instructed to assume the first digital mind is a machine-learning-based AI system created no later than 2040\.
 
 [^3]: For a thorough literature review of work concerning the extension of moral consideration to artificial entities, see Harris & Anthis (2021).
 

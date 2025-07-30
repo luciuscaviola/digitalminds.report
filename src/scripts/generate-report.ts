@@ -54,7 +54,7 @@ const footnoteExtension: ShowdownExtension[] = [
 
 function getFootnoteLink(a: string) {
   const footnoteText = stripMarkdownAndEscape(footnotes[a]);
-  return `<sup id="fnref-${a}" class="footnote-ref"><a href="#fn-${a}" title="${footnoteText}">${a}</a></sup>`;
+  return `<sup id="fnref-${a}" class="footnote-ref tooltip"><a href="#fn-${a}">${a}</a><span class="tooltiptext">${footnoteText}</span></sup>`;
 }
 
 const imageExtension: ShowdownExtension = {

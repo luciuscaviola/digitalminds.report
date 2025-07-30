@@ -155,6 +155,13 @@ const html = `<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>${config.header.title}</title>
+  <meta name="description" content="${config.head.description}">
+  <meta property="og:title" content="${config.head.title}">
+  <meta property="og:description" content="${config.head.description}">
+  <meta property="og:image" content="${config.head.image}">
+  <meta property="og:url" content="${config.head.url}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="${config.head.twitterHandle}">
   <link rel="stylesheet" href="styles/main.css?v=${Date.now()}">
 </head>
 <body>

@@ -1,4 +1,12 @@
 export const config = {
+  head: {
+    title: "Expert Forecasts about Digital Minds",
+    description:
+      "Experts assign ≥50% probability to conscious computers by 2050 and expect their welfare capacity to surpass humanity’s within a decade.",
+    url: "https://digitalminds.report",
+    image: "https://digitalminds.report/images/timing.svg",
+    twitterHandle: "@LuciusCaviola",
+  },
   header: {
     title: "Futures with Digital Minds: Expert Forecasts in 2025",
     label: "Expert Forecasts in 2025",

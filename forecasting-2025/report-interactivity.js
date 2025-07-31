@@ -4,7 +4,7 @@ const THROTTLE_DELAY = 100;
 document.addEventListener("DOMContentLoaded", function () {
   const navLinks = document.querySelectorAll(".nav-link");
   const mainFindingsLinks = document.querySelectorAll(".main-findings a");
-  const sections = Array.from(navLinks).map((link) => document.querySelector(link.getAttribute("href")));
+  const sectionIds = Array.from(navLinks).map((link) => link.getAttribute("href"));
   const navigation = document.querySelector(".toc");
   const menuToggle = document.querySelector(".menu-toggle");
   const overlay = document.querySelector(".overlay");
@@ -58,6 +58,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   updateSlider();
 
+  /** Back to Top Button */
+  const backToTopButton = document.createElement("a");
+  backToTopButton.href = sectionIds[0];
+  backToTopButton.classList.add("back-to-top-button");
+  backToTopButton.innerHTML = "&#9650;"; // UTF-8 arrow in circle
+  document.body.appendChild(backToTopButton);
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > getOffsetTopRelativeToBody(document.querySelector(sectionIds[0])))
+      backToTopButton.classList.add("visible");
+    else backToTopButton.classList.remove("visible");
+  });
+
+  backToTopButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    scrollToId(sectionIds[0]);
+  });
+
   /** Utility methods */
 
   function toggleMenu() {
@@ -78,9 +96,12 @@ document.addEventListener("DOMContentLoaded", function () {
   function handleNavClick(e) {
     e.preventDefault();
     closeMenu();
+    scrollToId(this.getAttribute("href"));
+  }
 
-    const targetId = this.getAttribute("href");
-    const targetPosition = getOffsetTopRelativeToBody(document.querySelector(targetId)) - 30;
+  function scrollToId(targetId) {
+    const targetElement = document.querySelector(targetId);
+    const targetPosition = getOffsetTopRelativeToBody(targetElement) - 30;
 
     if (prefersReducedMotion()) {
       window.scrollTo(0, targetPosition);
@@ -152,8 +173,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let activeIndex = -1;
 
-    sections.forEach((section, index) => {
-      if (scrollPosition >= getOffsetTopRelativeToBody(section) - 60) {
+    sectionIds.forEach((sectionId, index) => {
+      if (scrollPosition >= getOffsetTopRelativeToBody(document.querySelector(sectionId)) - 60) {
         // Check if the section is at the top of the viewport
         activeIndex = index;
       }

@@ -501,6 +501,40 @@ hr {
   margin-bottom: 0.5em;
 }
 
+.back-to-top-button {
+  position: fixed;
+  bottom: var(--content-padding);
+  right: var(--content-padding);
+  font-size: 1em;
+  width: 3em;
+  height: 3em;
+  background-color: #fff;
+  color: var(--link-color);
+  border-radius: 50%;
+  text-align: center;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(100px);
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+}
+.back-to-top-button:hover {
+  color: var(--accent-secondary);
+  text-decoration: none;
+}
+.back-to-top-button.visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
 /* MOBILE & INTERACTIVITY */
 
 .menu-toggle {

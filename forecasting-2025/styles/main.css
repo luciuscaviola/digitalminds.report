@@ -116,10 +116,10 @@ a:hover {
   margin: 0.2em 0;
 }
 
-.report-header .report-subtitle {
-  font-size: 1.4em;
+.report-header .report-lead {
+  font-size: 1.25em;
   color: var(--header-text-subtle-color);
-  max-width: 38em;
+  max-width: 42em;
   margin: 0 auto;
   opacity: 0.9;
 }

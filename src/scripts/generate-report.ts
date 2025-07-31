@@ -114,7 +114,7 @@ const headerHtml = `
   <header class="report-header">
     <div class="report-label">${config.header.label}</div>
     <h1 class="report-title">${config.header.heading}</h1>
-    <p class="report-subtitle">${config.header.subtitle}</p>
+    <p class="report-lead">${config.header.subtitle}</p>
   </header>
 `;
 

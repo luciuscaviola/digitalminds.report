@@ -1,5 +1,3 @@
-#
-
 # Futures with Digital Minds: Expert Forecasts in 2025
 
 Lucius Caviolaa,b & Bradford Saadb[^1]  
@@ -10,26 +8,26 @@ b University of Cambridge
 
 This survey gathered insights from 67 participants with relevant expertise to explore the future of digital minds—defined here as computer systems capable of subjective experience. The main findings are summarized below.
 
-- **Possibility:** Digital minds were generally judged to be possible in principle, with a median probability estimate of 90%.
-- **Creation:** The probability that digital mind will at some point be created was judged to be 73%. Only 12% of participants thought it was less than 50% probable.
+- [**Possibility:** Digital minds were generally judged to be possible in principle, with a median probability estimate of 90%.](#possibility)
+- [**Creation:** The probability that digital mind will at some point be created was judged to be 73%. Only 12% of participants thought it was less than 50% probable.](#creation)
 - **Timing:** The median estimated probabilities of digital minds being created by a given year were 4.5% by 2025, 20% by 2030, 40% by 2040, 50% by 2050, and 65% by 2100\. Reasons influencing these timelines included technological trends (e.g., AI scaling), regulatory developments, and the risk of preemptive catastrophe.
 - **Timing relative to AGI:** 89% judged digital minds unlikely to arrive before AGI. However, these estimates may partly reflect confidence in short AGI timelines and greater uncertainty about digital mind timelines, rather than strong confidence that digital minds must necessarily follow AGI.
-- **Speed:** Many expected rapid growth in digital minds’ collective welfare capacity after the first is created, with median estimates suggesting their collective welfare capacity could equal that of one billion humans within five years.[^2]
+- **Speed[^2]:** Many expected rapid growth in digital minds’ collective welfare capacity after the first is created, with median estimates suggesting their collective welfare capacity could equal that of one billion humans within five years.
 - **Types:** Brain simulations were viewed as most likely to support consciousness in principle, but machine learning–based AI systems were judged most likely to be the first digital minds.
-- **Social function:** Participants disagreed on how many digital minds would be designed specifically for social interaction with humans. Most participants expected only a small minority (median 10%), while about one-third anticipated that the majority would serve such social roles.[^2]
+- **Social function:** Participants disagreed on how many digital minds would be designed specifically for social interaction with humans. Most participants expected only a small minority (median 10%), while about one-third anticipated that the majority would serve such social roles.
 - **Location:** Digital mind production in the first decade is expected to be concentrated in a few powerful countries, especially the USA and China, though some mentioned production in oceans, space, or outsourced locations.
 - **Producers:** Companies were widely expected to lead digital mind development in the first decade, outpacing governments, universities, and others—mirroring current AI research and commercialization trends.
 - **Deliberate creation:** Opinions were split on whether digital minds would be created deliberately or emerge as byproducts of other developments.
-- **Net welfare:** There was no consensus on whether digital mind welfare would be net positive, neutral, or negative, though the overall leaning was slightly positive. Reasons for positive welfare included deliberate design for well-being and self-modification capabilities. Reasons for negative welfare included neglect of welfare in design, mistreatment, and suffering during training.[^2]
-- **Pre-deployment:** Most thought only a small share of digital mind welfare would occur pre-deployment, though some flagged intense training-related suffering as potentially dominant among valenced experiences.[^2]
-- **Super-beneficiaries:** Most were skeptical that super-beneficiary digital minds (with \>1,000× human welfare capacity) would contribute much to total welfare within ten years, though some saw them as potentially important.[^2]
-- **Experience-independent welfare:** Most doubted that computer systems could have welfare without subjective experience. However, arguments for such possibilities may be underappreciated, as the existing body of literature on this question was not well-represented in responses.[^2]
-- **Claims:** Most expected that a sizable number of digital minds will consistently and proactively claim to have subjective experience or be deserving of legal protections or further civil rights.[^2]
-- **Inaccurate self-attribution or self-denial:** Only a minority of AI systems without subjective experience were expected to falsely claim to have it. Similarly, only a minority of digital minds were expected to falsely deny possessing subjective experience. However, given potentially large populations, even small error rates could result in large absolute numbers of false claims in both directions.[^2]
-- **Public belief:** A substantial portion of the public was expected to believe in the existence of digital minds within ten years of their creation. However, responses reflected significant uncertainty and anticipated societal division, with beliefs likely varying across individuals and groups.[^2]
-- **Welfare capacity estimation:** Participants broadly expected the public to significantly underestimate the welfare capacity of digital minds, raising concerns that their moral significance may be underappreciated.[^2]
-- **Protections and rights:** Public support for protections was expected to vary by level: moderate support for basic harm protections may emerge within a decade, while support for full civil rights would remain limited.[^2]
-- **Political attention:** Participants were divided on whether digital mind rights would become a major political issue within a decade of the first digital mind.[^2]
+- **Net welfare:** There was no consensus on whether digital mind welfare would be net positive, neutral, or negative, though the overall leaning was slightly positive. Reasons for positive welfare included deliberate design for well-being and self-modification capabilities. Reasons for negative welfare included neglect of welfare in design, mistreatment, and suffering during training.
+- **Pre-deployment:** Most thought only a small share of digital mind welfare would occur pre-deployment, though some flagged intense training-related suffering as potentially dominant among valenced experiences.
+- **Super-beneficiaries**: Most were skeptical that super-beneficiary digital minds (with \>1,000× human welfare capacity) would contribute much to total welfare within ten years, though some saw them as potentially important.
+- **Experience-independent welfare:** Most doubted that computer systems could have welfare without subjective experience. However, arguments for such possibilities may be underappreciated, as the existing body of literature on this question was not well-represented in responses.
+- **Claims:** Most expected that a sizable number of digital minds will consistently and proactively claim to have subjective experience or be deserving of legal protections or further civil rights.
+- **Inaccurate self-attribution or self-denial:** Only a minority of AI systems without subjective experience were expected to falsely claim to have it. Similarly, only a minority of digital minds were expected to falsely deny possessing subjective experience. However, given potentially large populations, even small error rates could result in large absolute numbers of false claims in both directions.
+- **Public belief:** A substantial portion of the public was expected to believe in the existence of digital minds within ten years of their creation. However, responses reflected significant uncertainty and anticipated societal division, with beliefs likely varying across individuals and groups.
+- **Welfare capacity estimation:** Participants broadly expected the public to significantly underestimate the welfare capacity of digital minds, raising concerns that their moral significance may be underappreciated.
+- **Protections and rights:** Public support for protections was expected to vary by level: moderate support for basic harm protections may emerge within a decade, while support for full civil rights would remain limited.
+- **Political attention:** Participants were divided on whether digital mind rights would become a major political issue within a decade of the first digital mind
 - **Moratorium:** Views were mixed—leaning slightly positive—on whether a moratorium on creating digital minds until 2040 would be good or bad. Arguments for a moratorium included buying time to prepare and indirect AI safety benefits. Arguments against included delayed integration of safety measures and risks of later creation in higher-stakes contexts.
 - **Interactions with AI safety:** Participants were uncertain whether AI safety and digital mind welfare efforts would align or conflict. Mentioned potential synergies included alignment reducing the need for coercive control and shared technical tools (e.g., interpretability methods). Potential conflicts included safety measures such as monitoring and shutdown protocols that could harm digital minds, welfare protections limiting the ability to control AI behavior, and competition for scarce funding, talent, and regulatory attention.
 
@@ -88,7 +86,7 @@ This report presents our findings in a logical sequence, beginning with expert p
 
 ## Starting Point
 
-### Possibility
+### Possibility {#possibility}
 
 The first question asked participants how likely it is that digital minds—computer systems capable of subjective experience (phenomenal consciousness)—are possible in principle. Participants entered a probability number between 0% and 100%.
 
@@ -137,7 +135,7 @@ Absence of countervailing considerations
 - **Modal ambiguity:** The question is ambiguous between different kinds of possibility (e.g. logical possibility vs. possible according to the laws of nature in our world).
 - **Question defectiveness**: There is no fact of the matter about whether digital minds are possible or our way of conceptualizing this issue is defective.
 
-### Creation
+### Creation {#creation}
 
 The second question asked participants how likely it is that digital minds will ever be created. Whereas the first question concerned possibility in principle, here we were interested in participants’ empirical predictions about the creation of digital minds in practice.
 
@@ -1302,7 +1300,7 @@ Zhang, B., Dreksler, N., Anderljung, M., Kahn, L., Giattino, C., Dafoe, A., & Ho
 
 [^1]: Authors made equal contributions to designing the survey and writing the report. LC coordinated recruitment and analysis.
 
-[^2]: Participants were instructed to assume the first digital mind is a machine-learning-based AI system created no later than 2040\.
+[^2]: For the sections on speed, social function, location, net welfare, pre-deployment, super-beneficiaries, experience-independent welfare, claims, false claims/denials, welfare capacity estimation, protections and rights, and political attention, participants were instructed to assume the first digital mind is a machine-learning-based AI system created no later than 2040\.
 
 [^3]: For a thorough literature review of work concerning the extension of moral consideration to artificial entities, see Harris & Anthis (2021).
 

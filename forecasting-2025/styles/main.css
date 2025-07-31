@@ -243,17 +243,25 @@ ul.main-findings {
   padding: 0;
 }
 
-ul.main-findings li {
+ul.main-findings li:not(:has(> a)),
+ul.main-findings li > a {
+  display: block;
   background-color: #fff;
   border-radius: 8px;
   padding: calc(var(--content-padding) / 2);
   margin-bottom: 1rem;
+
+  color: var(--primary-color);
   border: 1px solid var(--separator-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-
-ul.main-findings li::before {
-  content: none;
+ul.main-findings li > a:hover {
+  color: var(--link-color);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+}
+ul.main-findings li > a:hover strong {
+  color: var(--link-color);
 }
 
 ul.main-findings li strong {

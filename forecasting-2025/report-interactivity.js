@@ -3,17 +3,20 @@ const THROTTLE_DELAY = 100;
 
 document.addEventListener("DOMContentLoaded", function () {
   const navLinks = document.querySelectorAll(".nav-link");
+  const mainFindingsLinks = document.querySelectorAll(".main-findings a");
   const sections = Array.from(navLinks).map((link) => document.querySelector(link.getAttribute("href")));
   const navigation = document.querySelector(".toc");
   const menuToggle = document.querySelector(".menu-toggle");
   const overlay = document.querySelector(".overlay");
-  const mainContentWrapper = document.querySelector(".main-content-wrapper");
   const body = document.body;
 
   menuToggle.addEventListener("click", toggleMenu);
   overlay.addEventListener("click", closeMenu);
 
   navLinks.forEach((link) => {
+    link.addEventListener("click", handleNavClick);
+  });
+  mainFindingsLinks.forEach((link) => {
     link.addEventListener("click", handleNavClick);
   });
 
@@ -77,18 +80,36 @@ document.addEventListener("DOMContentLoaded", function () {
     closeMenu();
 
     const targetId = this.getAttribute("href");
-    const targetElement = document.querySelector(targetId);
+    const targetPosition = getOffsetTopRelativeToBody(document.querySelector(targetId)) - 30;
 
-    if (targetElement) {
-      const targetPosition = mainContentWrapper.offsetTop + targetElement.offsetTop - 30;
-
-      if (prefersReducedMotion()) {
-        window.scrollTo(0, targetPosition);
-        history.pushState(null, null, targetId);
-      } else {
-        smoothScrollTo(targetPosition, ANIMATION_DURATION, targetId);
-      }
+    if (prefersReducedMotion()) {
+      window.scrollTo(0, targetPosition);
+      history.pushState(null, null, targetId);
+    } else {
+      smoothScrollTo(targetPosition, ANIMATION_DURATION, targetId);
     }
+  }
+
+  /**
+   * Calculates the cumulative top offset of an element relative to the document body.
+   * @param {HTMLElement} element - The DOM element to get the offset for.
+   * @returns {number} The top offset in pixels (or 0 if element is invalid).
+   */
+  function getOffsetTopRelativeToBody(element) {
+    if (!element || !(element instanceof HTMLElement)) {
+      console.warn("Invalid element provided.");
+      return 0;
+    }
+
+    let top = 0;
+    let currentElement = element;
+
+    while (currentElement) {
+      top += currentElement.offsetTop;
+      currentElement = currentElement.offsetParent;
+    }
+
+    return top;
   }
 
   function prefersReducedMotion() {
@@ -132,11 +153,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let activeIndex = -1;
 
     sections.forEach((section, index) => {
-      if (section) {
-        if (scrollPosition >= section.offsetTop - 1) {
-          // Check if the section is at the top of the viewport
-          activeIndex = index;
-        }
+      if (scrollPosition >= getOffsetTopRelativeToBody(section) - 60) {
+        // Check if the section is at the top of the viewport
+        activeIndex = index;
       }
     });
 

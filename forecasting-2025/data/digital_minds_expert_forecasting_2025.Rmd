@@ -1,0 +1,3358 @@
+---
+title: "Forecasting Digital Minds Scenarios - Data Analysis"
+author: ' '
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    latex_engine: xelatex
+  html_document:
+    df_print: paged
+header-includes:
+- \usepackage{titlesec}
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{float}
+- \titleformat{\section}{\huge\bfseries}{\thesection}{1em}{}
+- \titlespacing*{\section}{0pt}{2ex plus 1ex minus .2ex}{1ex plus .2ex}
+params:
+  participant_id: null
+---
+
+```{r HERE Print code or not, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r load libraries, echo = FALSE, message = FALSE, warning = FALSE}
+# Load useful libraries
+library(tidyverse)  # For data manipulation and visualization
+library(lubridate)  # For handling dates
+library(scales)     # For better plot scales
+library(psych)      # For descriptive statistics
+library(janitor)    # For cleaning column names
+library(ggridges)   # For ridges graph
+library(knitr)      # For knitting packages
+library(kableExtra) # For nice tables
+library(showtext)
+
+options(kableExtra.latex.load_packages = TRUE)
+```
+
+```{r HERE Load Data file paths, echo=FALSE}
+# File paths
+experts_completed = "../Data/Mar_29_experts/raw_expert_completed_Mar29_forecastingDM.csv"
+experts_inprogress = "../Data/Mar_22_experts/raw_expert_inprogress_Mar22_forecastingDM.csv"
+#prolific_60 = "...csv"
+
+# Create folder for SVG files
+svg_folder <- "svg_plots"
+if (!dir.exists(svg_folder)) {
+  dir.create(svg_folder, recursive = TRUE)
+}
+
+save_last_plot <- function(name, width = 10, height = 6) {
+  clean_name <- gsub("[^A-Za-z0-9_-]", "_", name)
+  full_path <- file.path(svg_folder, paste0(clean_name, ".svg"))
+  ggsave(filename = full_path, device = "svg", width = width, height = height, units = "in", dpi = 300)
+  cat("Saved:", full_path, "\n")
+}
+
+# Diagnostic version to see what's wrong
+get_next_number <- function(debug = TRUE) {
+  all_files <- list.files(svg_folder, full.names = FALSE)
+  existing_files <- list.files(svg_folder, pattern = "^plot_\\d+\\.svg$", full.names = FALSE)
+  
+  if (debug) {
+    cat("=== DEBUG INFO ===\n")
+    cat("Folder:", svg_folder, "\n")
+    cat("All files in folder:", length(all_files), "\n")
+    if (length(all_files) > 0) {
+      cat("All files:", paste(all_files, collapse = ", "), "\n")
+    }
+    cat("Plot files found:", length(existing_files), "\n")
+    if (length(existing_files) > 0) {
+      cat("Plot files:", paste(existing_files, collapse = ", "), "\n")
+    }
+  }
+  
+  if (length(existing_files) == 0) {
+    if (debug) cat("No plot files found, starting with 1\n")
+    return(1)
+  }
+  
+  numbers <- as.numeric(gsub("plot_(\\d+)\\.svg", "\\1", existing_files))
+  
+  if (debug) {
+    cat("Extracted numbers:", paste(numbers, collapse = ", "), "\n")
+    cat("Max number:", max(numbers, na.rm = TRUE), "\n")
+    cat("Next number will be:", max(numbers, na.rm = TRUE) + 1, "\n")
+    cat("==================\n")
+  }
+  
+  return(max(numbers, na.rm = TRUE) + 1)
+}
+
+auto_save_plot <- function(debug = FALSE) {
+  # Try to ensure there's a plot to save
+  tryCatch({
+    if (!is.null(ggplot2::last_plot())) {
+      # Good, there's a plot
+    }
+  }, error = function(e) {
+    # No plot available, skip
+    cat("No plot to save\n")
+    return()
+  })
+  
+  plot_number <- get_next_number(debug = debug)
+  filename <- paste0("plot_", plot_number)
+  save_last_plot(filename)
+  cat("Auto-saved as plot_", plot_number, ".svg\n", sep = "")
+}
+
+# Diagnostic function
+check_svg_files <- function() {
+  cat("=== SVG FILES DIAGNOSTIC ===\n")
+  all_files <- list.files(svg_folder, full.names = FALSE)
+  plot_files <- list.files(svg_folder, pattern = "^plot_\\d+\\.svg$", full.names = FALSE)
+  
+  cat("Total files:", length(all_files), "\n")
+  cat("Plot files:", length(plot_files), "\n")
+  
+  if (length(all_files) > 0) {
+    cat("\nAll files:\n")
+    for (i in seq_along(all_files)) {
+      cat(sprintf("%d. %s\n", i, all_files[i]))
+    }
+  }
+  cat("========================\n")
+}
+
+```
+
+```{r Adding Name, Email, ID to Personalized Reports, results='asis'}
+# Participant identifiers to display in the individualized reports
+
+# For individual personalized reports
+if (!is.null(params$participant_id)) {
+  # Get participant data
+  participant_data <- df %>% 
+    filter(participant_id == params$participant_id)
+  
+  # Extract name - try both expert and non-expert name columns
+  participant_name <- if(!is.na(participant_data$name_ex) && participant_data$name_ex != "") {
+    participant_data$name_ex
+  } else if(!is.na(participant_data$name_nonex) && participant_data$name_nonex != "") {
+    participant_data$name_nonex
+  } else {
+    "Participant"  # Fallback if no name available
+  }
+  
+  # Extract email - try different email columns
+  participant_email <- if(!is.na(participant_data$email_ex1) && participant_data$email_ex1 != "") {
+    participant_data$email_ex1
+  } else if(!is.na(participant_data$email_ex2) && participant_data$email_ex2 != "") {
+    participant_data$email_ex2
+  } else if(!is.na(participant_data$email_pref_ex) && participant_data$email_pref_ex != "") {
+    participant_data$email_pref_ex
+  } else {
+    "Email not provided"  # Fallback if no email available
+  }
+  
+  # Create formatted personalized header with large text
+  cat("\\begin{center}\n")
+  cat("\\huge{\\textbf{Personalized Report}}\n\n")
+  cat("\\Large{For: ", participant_name, "}\n\n")
+  cat("\\large{Email: ", participant_email, "}\n\n")
+  cat("\\large{Participant ID: ", params$participant_id, "}\n")
+  cat("\\end{center}\n\n")
+  cat("\\vspace{1cm}\n\n")  
+}
+```
+
+```{r Load Survey Data function}
+
+# Function to load survey data (don't change here! Change in next block)
+load_survey_data <- function(dataset_type = c("prolific", "experts_merge", "experts_completed", "experts_inprogress")) {
+  dataset_type <- match.arg(dataset_type)
+  
+  # Helper function for basic cleaning
+  clean_df <- function(df) {
+    df %>%
+      slice(-2) %>%
+      filter(!str_detect(StartDate, "Start Date")) %>%
+      filter(DistributionChannel != "preview")
+  }
+  
+  # Handle different cases
+  if(dataset_type == "experts_merge") {
+    # Read and clean both datasets
+    df_completed <- clean_df(read_csv(experts_completed))
+    df_inprogress <- clean_df(read_csv(experts_inprogress))
+    
+    # Merge keeping only columns from completed
+    df_temp <- bind_rows(
+      df_completed,
+      df_inprogress %>% select(any_of(names(df_completed)))
+    )
+  } else {
+    # For all other cases, read and clean single file
+    file_path <- switch(dataset_type,
+                       "prolific" = prolific_60,
+                       "experts_completed" = experts_completed,
+                       "experts_inprogress" = experts_inprogress)
+    
+    df_temp <- clean_df(read_csv(file_path))
+  }
+  
+  return(df_temp)
+}
+```
+
+```{r HERE Choose Data to Load, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# Load data function. (Change this cell!)
+# Use either: "prolific", "experts_completed" to load only expert data for
+#   those that finished the whole survey, or "experts_merge" to load expert
+#   data merging completed responses and responses in progress.
+
+df_temp <- load_survey_data("experts_merge") # "experts_merge", "experts_completed", or "prolific"
+```
+
+```{r HERE Set Histograms By Expertise or Not}
+# Global setting for expertise coloring in histograms
+use_expertise_coloring <- FALSE  # Set to TRUE to enable expertise coloring for all histograms
+
+# Softer colors to use only for histograms (the default colors are too strong)
+expertise_colors_soft <- c(
+  "1" = "#9ecae1", # softer blue for Digital minds research
+  "2" = "#a1d99b", # softer green for AI research/policy
+  "3" = "#fdae6b", # softer orange for Forecasting
+  "4" = "#bcbddc", # softer purple for Philosophy/science
+  "5" = "#bdbdbd"  # softer gray for Non-expert
+)
+
+
+
+# Set knitr options for transparency
+knitr::opts_chunk$set(
+  dev.args = list(bg = "transparent"),
+  fig.showtext = TRUE
+)
+
+# Set global theme with transparent backgrounds
+transparent_theme <- theme_minimal() +
+  theme(
+    panel.background = element_rect(fill = "transparent", color = NA),
+    plot.background = element_rect(fill = "transparent", color = NA),
+    legend.background = element_rect(fill = "transparent", color = NA),
+    legend.box.background = element_rect(fill = "transparent", color = NA),
+    legend.key = element_rect(fill = "transparent", color = NA),
+    strip.background = element_rect(fill = "transparent", color = NA),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(color = "gray95"),
+    panel.grid.major.y = element_line(color = "gray95")
+  )
+
+theme_set(transparent_theme)
+
+```
+
+# <!-- Data Cleaning -->
+
+```{r removing empty responses, cleanup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# Removing empty responses
+
+n_initial <- nrow(df_temp) # Initial count
+
+# Add participant IDs as simple sequential numbers at the beginning of cleaning
+df_temp <- df_temp %>%
+  mutate(participant_id = row_number()) %>%
+  select(participant_id, everything())
+
+# Remove NAs in expertise
+df_temp <- df_temp %>%
+ filter(!is.na(expertise))
+n_after_na <- nrow(df_temp)
+n_removed_na <- n_initial - n_after_na
+print(paste("Removed", n_removed_na, "responses with NA in expertise (required)"))
+
+# Remove participants with NA in t_start_First Click
+n_before_t_start_filter <- nrow(df_temp)
+df_temp <- df_temp %>% 
+  filter(!is.na(`t_start_First Click`))
+n_after_t_start_filter <- nrow(df_temp)
+print(paste("Removed", n_before_t_start_filter - n_after_t_start_filter, 
+            "participants with NA in t_start_First Click"))
+
+# Get columns that don't start with our excluded prefixes
+cols_to_check <- names(df_temp)[29:(ncol(df_temp)-3)][!grepl("^(consent|t_|expert|email_pref)", names(df_temp)[29:(ncol(df_temp)-3)])]
+# Rows before filtering out all NA responses 
+n_withna <- nrow(df_temp)
+# Filter out responses that have NA for all non-required/default questions
+df_temp <- df_temp %>%
+  filter(!if_all(all_of(cols_to_check), is.na))
+# Rows after filtering all NA responses
+n_no_na <- nrow(df_temp)
+
+# Print the number of rows removed
+cat("Rows after removing ~all NA responses:", (n_withna - n_no_na), "\n")
+
+# Final count
+print(paste("Final n:", nrow(df_temp)))
+```
+
+```{r remove sensitive data}
+# Remove sensitive data not freely given by participants: remove IP and location columns if they exist
+df_temp <- df_temp %>% 
+ select(-any_of(c("IPAddress", "LocationLatitude", "LocationLongitude")))
+
+#Remove columns where all values are NA (e.g. those automatically included by Qualtrics)
+df_temp <- df_temp %>% 
+  select(where(~!all(is.na(.))))
+```
+
+```{r details on possible bots, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# Get details on possible bots (without filtering any responses in the final data)
+df_temp %>%
+  filter(Q_RecaptchaScore < 0.5)
+
+# Add column flagging possible bots
+df_temp <- df_temp %>%
+  mutate(possible_bot = ifelse(Q_RecaptchaScore < 0.5, 1, 0))
+```
+
+```{r convert data to numeric}
+# Converting all numeric columns to numeric data type (for analyses)
+
+# Function to check if a column contains ONLY plain numbers
+is_numeric_column <- function(x) {
+  # Convert to character, trim whitespace, remove NAs
+  vals <- na.omit(trimws(as.character(x)))
+  # Check if ALL values are ONLY digits, decimals, or negative signs
+  # And ensure we have at least one non-NA value
+  length(vals) > 0 && all(grepl("^-?\\d+(\\.\\d+)?$", vals))
+}
+
+# Identify which columns should be numeric
+numeric_cols <- sapply(df_temp, is_numeric_column)
+
+# Convert those columns to numeric
+df_temp[, numeric_cols] <- lapply(df_temp[, numeric_cols], as.numeric)
+```
+
+```{r Expertise cleaning and coding}
+# Cleaning up the expertise column (all to numeric)
+df_temp <- df_temp %>%
+  mutate(
+    expertise = as.character(expertise),
+    # Then convert to numeric using case_when
+    expertise = case_when(
+      expertise == "Digital minds research experts" ~ "1",
+      expertise == "AI research or AI policy experts" ~ "2",
+      expertise == "Forecasting experts" ~ "3",
+      expertise == "Philosophy/science/social science experts" ~ "4",
+      expertise == "Non-experts" ~ "5",
+      TRUE ~ expertise  # keep existing numeric values (as characters)
+    ),
+    # Finally convert to numeric
+    expertise = as.numeric(expertise)
+  )
+
+# Create a lookup for labels (will be useful in graphs later)
+expertise_labels <- c(
+  "1" = "Digital minds research",
+  "2" = "AI research or AI policy",
+  "3" = "Forecasting",
+  "4" = "Philosophy/science/social science",
+  "5" = "Non-expert"
+)
+
+# Create color scheme for expertise levels
+expertise_colors <- c(
+  "1" = "#0b3d91",  # blue for Digital minds research
+  "2" = "#2ca02c",  # green for AI research/policy
+  "3" = "#ff7f0e",  # orange for Forecasting
+  "4" = "#9467bd",  # purple for Philosophy/science
+  "5" = "#7f7f7f"   # gray for Non-expert
+)
+
+# Create a named list/vector that combines labels and colors for easy reference
+expertise_info <- list(
+  labels = expertise_labels,
+  colors = expertise_colors
+)
+
+```
+
+```{r exclude attention check failures}
+# Exclude people who failed the attention check (PROLIFIC ONLY)
+
+if("PROLIFIC_PID" %in% names(df_temp) && !all(is.na(df_temp$PROLIFIC_PID))) {
+ # Remove non-37 responses
+ df_temp <- df_temp %>%
+   filter(att_check_1 == 37)
+ n_final <- nrow(df_temp)
+ n_removed_37 <- n_after_na - n_final
+ print(paste("Removed", n_removed_37, "responses that failed attention check (response not 37)"))
+} else {
+ n_final <- nrow(df_temp)
+}
+
+```
+
+```{r Merge responses with the same email, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# Create merged email column and add merged_responses flag
+df_temp <- df_temp %>%
+  mutate(
+    emails_all = coalesce(email_ex1, email_ex2),
+    merged_responses = 0
+  )
+
+# Find and process duplicate emails
+dup_emails <- df_temp %>%
+  filter(!is.na(emails_all)) %>%
+  count(emails_all) %>%
+  filter(n > 1) %>%
+  pull(emails_all)
+
+for (email in dup_emails) {
+  # Get all rows for this email
+  email_rows <- df_temp %>% filter(emails_all == email)
+  
+  # Create merged row (starting with most complete response)
+  merged <- email_rows %>% 
+    arrange(desc(Progress)) %>% 
+    slice(1) %>%
+    mutate(merged_responses = 1)
+  
+  # Fill in NAs from other responses
+  for (col in names(merged)) {
+    if (col %in% c("participant_id", "merged_responses")) next
+    
+    if (is.na(merged[[col]])) {
+      # Find first non-NA value for this column in other rows
+      val <- email_rows %>% 
+        filter(!is.na(.data[[col]])) %>% 
+        slice(1) %>% 
+        pull({{ col }})
+      
+      if (length(val) > 0) merged[[col]] <- val
+    }
+  }
+  
+  # Remove all duplicate rows and add merged one
+  df_temp <- df_temp %>%
+    filter(emails_all != email | is.na(emails_all)) %>%
+    bind_rows(merged)
+  
+  cat("Merged", nrow(email_rows), "responses. \n")
+}
+
+# Remove empty rows
+df_temp <- df_temp %>%
+  filter(rowSums(!is.na(select(., -c(participant_id, emails_all, merged_responses)))) > 0)
+
+cat("Email merging complete. Processed", length(dup_emails), "duplicate emails.\n")
+```
+
+```{r store df}
+# Store clean data as 'df'
+df <- df_temp
+```
+
+```{r export clean df}
+# Export clean data to csv (commented out, optional)
+clean_destination = "clean_expert_merged_Feb24_forecastingDM.csv"
+
+#write.csv(df, clean_destination)
+```
+
+# <!-- Functions to reuse -->
+
+```{r get expertise}
+# Short function used in other functions to extract expertise groups present
+get_present_expertise_levels <- function(data) {
+  levels <- sort(unique(data$expertise))
+  return(levels)
+}
+```
+
+```{r Find Participant, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+find_participant <- function(name, data = df) {
+  # Find participant ID(s) corresponding to the name
+  matching_ids <- data %>%
+    filter(!is.na(name_ex) & name_ex == name) %>%
+    pull(participant_id)
+  
+  # Check if any matches were found
+  if (length(matching_ids) == 0) {
+    return(paste0("No participant found with name: ", name))
+  } else if (length(matching_ids) > 1) {
+    return(paste0("Multiple participants found with name ", name, ": ", 
+                 paste(matching_ids, collapse = ", ")))
+  } else {
+    return(matching_ids)
+  }
+}
+
+# Example usage:
+#find_participant("")
+```
+
+```{r Boxplot Summary Table Helper Function}
+# Helper function to format boxplot table outputs nicely (APA or close to it)
+format_boxplot_summary <- function(summary_data) {
+  summary_data %>%
+    select(label, n, median, mean, sd, iqr) %>%
+    rename(
+      Question = label,
+      N = n,
+      Median = median,
+      Mean = mean,
+      SD = sd,
+      IQR = iqr
+    ) %>%
+    knitr::kable(format = "latex", booktabs = TRUE, escape = FALSE) %>%
+    kableExtra::kable_styling(latex_options = c("striped", "hold_position"), 
+                             full_width = FALSE)
+  auto_save_plot() 
+}
+```
+
+## <!-- Histogram function -->
+
+```{r Histogram Function}
+# (Code to change base histogram to expertise-coded histogram is after loading data)
+
+# Enhanced forecast histogram function with expertise coloring option
+plot_forecast_histogram <- function(data, column, question_text, x_label = "Likelihood", participant_id = NULL, 
+                                   id_column = "participant_id", show_expertise = use_expertise_coloring) {
+  # Use params from global environment if participant_id is NULL
+  if (is.null(participant_id) && exists("params") && !is.null(params$participant_id)) {
+    participant_id <- params$participant_id
+  }
+  
+  # Calculate stats (common for both types)
+  mean_val <- mean(data[[column]], na.rm = TRUE)
+  median_val <- median(data[[column]], na.rm = TRUE)
+  sd_val <- sd(data[[column]], na.rm = TRUE)
+  iqr_val <- IQR(data[[column]], na.rm = TRUE)
+  n_responses <- sum(!is.na(data[[column]]))
+  total_n <- nrow(data)
+  
+  # Check if we can and should use expertise coloring
+  has_expertise <- "expertise" %in% colnames(data)
+  use_expertise <- show_expertise && has_expertise
+  
+  # Filter data once (used in both approaches)
+  filtered_data <- data %>% filter(!is.na(.data[[column]]))
+  
+  if (use_expertise) {
+    # EXPERTISE COLORED HISTOGRAM
+    
+    # Create histogram with expertise grouping
+    p <- ggplot(filtered_data, 
+                aes(x = .data[[column]],
+                    fill = factor(expertise, levels = get_present_expertise_levels(data)))) +
+      # Stacked histogram with no internal borders
+      geom_histogram(binwidth = 5,
+                    boundary = 0,
+                    color = NA,        # No internal white lines between expertise groups
+                    alpha = 0.9,
+                    position = position_stack(vjust = 1)) +  # vjust helps remove gaps
+      
+      # Add white borders just between bins (not between stacked expertise groups)
+      geom_histogram(binwidth = 5,
+                    boundary = 0,
+                    fill = NA,         # No fill, just the outline
+                    color = "white",   # White outlines to separate bins
+                    size = 0.3,        # Slightly thicker for visibility
+                    position = position_stack(vjust = 1)) +
+      
+      # Use the softer color scheme
+      scale_fill_manual(
+        values = expertise_colors_soft,
+        labels = expertise_info$labels,
+        name = "Expertise",
+        guide = guide_legend(nrow = 2)
+      )
+      
+  } else {
+    # STANDARD HISTOGRAM
+    
+    # Create basic histogram
+    p <- ggplot(filtered_data, aes(x = .data[[column]])) +
+      # Histogram with 5% bins
+      geom_histogram(binwidth = 5, 
+                    boundary = 0,
+                    fill = "steelblue3",
+                    alpha = 0.7,
+                    color = "white")
+  }
+  
+  # Common elements for both histogram types
+  p <- p +
+    # Median line
+    geom_vline(xintercept = median_val,
+               color = "firebrick",
+               linetype = "dashed",
+               linewidth = 1.2) +
+    # Scales
+    scale_x_continuous(breaks = seq(0, 100, 10),
+                      limits = c(0, 100),
+                      labels = function(x) paste0(x, "%")) +
+    scale_y_continuous(breaks = function(x) floor(pretty(x))) +
+    # Labels
+    labs(title = question_text,
+         subtitle = sprintf("n = %d/%d (%.0f%%), Median = %.1f%% (red dashed line), Mean = %.1f%% SD = %.1f, IQR = %.1f", 
+                          n_responses, total_n, 100*n_responses/total_n,
+                          median_val, mean_val, sd_val, iqr_val),
+         x = x_label,
+         y = "Count") +
+    # Theme
+    theme_minimal() +
+    theme(
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_line(color = "gray95"),
+      panel.grid.major.y = element_line(color = "gray95"),
+      plot.title = element_text(size = 11, face = "bold"),
+      plot.subtitle = element_text(size = 10),
+      axis.title = element_text(size = 10),
+      axis.text = element_text(size = 9),
+      legend.position = if(use_expertise) "bottom" else "none",
+      legend.text = element_text(size = 8)
+    )
+  
+  # Add participant-specific line if participant_id is provided and value exists
+  if (!is.null(participant_id)) {
+    # Find participant by ID column instead of rowname
+    if (id_column %in% colnames(data)) {
+      participant_row <- which(data[[id_column]] == participant_id)
+      if (length(participant_row) > 0) {
+        participant_data <- data[participant_row[1], ]
+        participant_value <- participant_data[[column]]
+        
+        # Only add the line if the participant has a non-NA value for this question
+        if (!is.na(participant_value)) {
+          # Get expertise color for this participant
+          expertise_color <- "forestgreen"  # Default color
+          if (has_expertise && !is.na(participant_data$expertise)) {
+            # If expertise colors are defined somewhere in your code
+            if (exists("expertise_colors") && as.character(participant_data$expertise) %in% names(expertise_colors)) {
+              expertise_color <- expertise_colors[as.character(participant_data$expertise)]
+            }
+          }
+          
+          # Add participant line
+          p <- p + 
+            geom_vline(xintercept = participant_value, 
+                      color = expertise_color, 
+                      linewidth = 1.5) +
+            # Update subtitle to include participant's value
+            labs(subtitle = sprintf("n = %d/%d (%.0f%%), Median = %.1f%% (red dashed line), Mean = %.1f%% SD = %.1f, IQR = %.1f\nYour response: %.1f%% (solid line)", 
+                              n_responses, total_n, 100*n_responses/total_n,
+                              median_val, mean_val, sd_val, iqr_val,
+                              participant_value))
+        }
+      }
+    }
+  }
+  
+  return(p)
+}
+auto_save_plot()  
+```
+
+## <!-- Boxplot function -->
+
+```{r Boxplot function}
+# Function for plotting many different boxplots at once
+plot_likelihood_boxplot <- function(data, columns, labels, title, 
+                                   subtitle_extra = NULL,
+                                   x_label = NULL, 
+                                   y_label = "Likelihood",
+                                   participant_id = NULL,
+                                   id_column = "participant_id") {
+  
+  # Use params from global environment if participant_id is NULL
+  if (is.null(participant_id) && exists("params") && !is.null(params$participant_id)) {
+    participant_id <- params$participant_id
+  }
+  
+  # Create long format data and handle NAs
+  long_df <- data %>%
+    select(expertise, all_of(columns)) %>%
+    pivot_longer(cols = all_of(columns),
+                names_to = "category",
+                values_to = "value") %>%
+    filter(!is.na(value))
+  
+  # Calculate summary statistics
+  summary_stats <- long_df %>%
+    group_by(category) %>%
+    summarise(
+      n = n(),
+      median = median(value, na.rm = TRUE),
+      mean = mean(value, na.rm = TRUE),
+      sd = sd(value, na.rm = TRUE),
+      iqr = IQR(value, na.rm = TRUE)
+    ) %>%
+    mutate(
+      label = labels[match(category, columns)],
+      across(where(is.numeric), ~round(., 1))
+    ) %>%
+    select(category, label, everything())
+  
+  # Create subtitle
+  response_rate <- sprintf("n = %d/%d (%.0f%%) response rate", 
+                          summary_stats$n[1], 
+                          nrow(data),
+                          100 * summary_stats$n[1] / nrow(data))
+  
+  subtitle <- if(is.null(subtitle_extra)) {
+    response_rate
+  } else {
+    paste(subtitle_extra, response_rate, sep = "\n")
+  }
+  
+  # Create plot
+  p <- ggplot(long_df, aes(x = factor(category, levels = columns, labels = labels), 
+                          y = value)) +
+    geom_boxplot(width = 0.5, fill = "steelblue3", alpha = 0.7, outlier.color = NA) +
+    geom_jitter(aes(color = factor(expertise, levels = get_present_expertise_levels(data))), 
+                width = 0.1, 
+                alpha = 0.6,
+                na.rm = TRUE) +
+    scale_color_manual(
+      values = expertise_info$colors,  # Names preserved for correct mapping
+      labels = expertise_info$labels,  # Controls what appears in legend
+      name = "Expertise",
+      guide = guide_legend(nrow = 2)
+    ) +
+    scale_y_continuous(
+      limits = c(0, 100),
+      breaks = seq(0, 100, 20),
+      labels = function(x) paste0(x, "%"),
+      oob = scales::oob_keep
+    ) +
+    labs(title = title,
+         subtitle = subtitle,
+         x = x_label,
+         y = y_label) +
+    theme_minimal() +
+    theme(
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_line(color = "gray95"),
+      panel.grid.major.y = element_line(color = "gray95"),
+      plot.title = element_text(size = 11, face = "bold"),
+      plot.subtitle = element_text(size = 10),
+      axis.title = element_text(size = 10),
+      axis.text = element_text(size = 9),
+      axis.text.x = element_text(angle = 0, hjust = 0.5),
+      legend.position = "bottom",
+      legend.text = element_text(size = 8)
+    )
+  
+  # Add participant-specific lines if participant_id is provided
+  if (!is.null(participant_id)) {
+    # Find participant by ID column
+    if (id_column %in% colnames(data)) {
+      participant_row <- which(data[[id_column]] == participant_id)
+      if (length(participant_row) > 0) {
+        participant_data <- data[participant_row[1], ]
+        
+        # Get expertise color for this participant
+        expertise_color <- "forestgreen"  # Default color
+        if ("expertise" %in% colnames(data) && !is.na(participant_data$expertise)) {
+          if (as.character(participant_data$expertise) %in% names(expertise_info$colors)) {
+            expertise_color <- expertise_info$colors[as.character(participant_data$expertise)]
+          }
+        }
+        
+        # Check each column for participant responses
+        has_response <- FALSE
+        participant_segments <- data.frame()
+        
+        for (i in seq_along(columns)) {
+          col <- columns[i]
+          val <- participant_data[[col]]
+          
+          if (!is.na(val)) {
+            has_response <- TRUE
+            # Use position index (i) for x-coordinate
+            participant_segments <- rbind(
+              participant_segments,
+              data.frame(
+                x = i - 0.25,  # Left edge of box (using position index)
+                xend = i + 0.25,  # Right edge of box
+                y = val,
+                yend = val
+              )
+            )
+          }
+        }
+        
+        # If participant has any responses, add them to the plot
+        if (has_response) {
+          p <- p + 
+            geom_segment(
+              data = participant_segments,
+              aes(x = x, xend = xend, y = y, yend = yend),
+              color = expertise_color,
+              linewidth = 1.5
+            )
+          
+          # Update subtitle to include info about participant's responses
+          subtitle <- paste(subtitle, "\nYour responses shown as colored horizontal lines", sep = "")
+          p <- p + labs(subtitle = subtitle)
+        }
+      }
+    }
+  }
+  
+  list(plot = p, summary = summary_stats)
+}
+```
+
+## <!-- Likert function -->
+
+```{r Likert Function}
+# Function to plot Likert/multiple choice style questions
+plot_likert <- function(data, column, question_text, 
+                       low_label = "INSERT LABEL", 
+                       mid_label = "INSERT LABEL",
+                       high_label = "INSERT LABEL",
+                       participant_id = NULL,
+                       id_column = "participant_id") {
+  
+  # Use params from global environment if participant_id is NULL
+  if (is.null(participant_id) && exists("params") && !is.null(params$participant_id)) {
+    participant_id <- params$participant_id
+  }
+  
+  # Calculate stats
+  mean_val <- mean(data[[column]], na.rm = TRUE)
+  median_val <- median(data[[column]], na.rm = TRUE)
+  sd_val <- sd(data[[column]], na.rm = TRUE)
+  n_responses <- sum(!is.na(data[[column]]))
+  total_n <- nrow(data)
+  
+  # Create a complete scale dataset
+  scale_data <- data.frame(
+    response = factor(1:7,
+                     levels = 1:7,
+                     labels = c(low_label,
+                              "2",
+                              "3",
+                              mid_label,
+                              "5",
+                              "6",
+                              high_label))
+  )
+  
+  # Count responses
+  response_counts <- table(factor(data[[column]], levels = 1:7))
+  scale_data$count <- as.vector(response_counts)
+  
+  # Create bar plot
+  p <- ggplot(scale_data, aes(x = response, y = count)) +
+    geom_bar(stat = "identity", fill = "steelblue3", alpha = 0.7, color = "white") +
+    # Add median line
+    geom_vline(xintercept = median_val,
+               color = "firebrick",
+               linetype = "dashed",
+               linewidth = 1.2) +
+    # Ensure integer y-axis breaks
+    scale_y_continuous(breaks = function(x) floor(pretty(x))) +
+    # Labels
+    labs(title = question_text,
+         subtitle = sprintf("n = %d/%d (%.0f%%), Median = %.1f (red dashed line), Mean = %.1f SD = %.1f",
+                          n_responses, total_n, 100*n_responses/total_n,
+                          median_val, mean_val, sd_val),
+         x = NULL,
+         y = "Count") +
+    # Theme
+    theme_minimal() +
+    theme(
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_line(color = "gray95"),
+      panel.grid.major.y = element_line(color = "gray95"),
+      plot.title = element_text(size = 11, face = "bold"),
+      plot.subtitle = element_text(size = 10),
+      axis.title = element_text(size = 10),
+      axis.text = element_text(size = 9),
+      axis.text.x = element_text(angle = 45, hjust = 1)
+    )
+  
+  # Add participant-specific line if participant_id is provided and value exists
+  if (!is.null(participant_id)) {
+    # Find participant by ID column
+    if (id_column %in% colnames(data)) {
+      participant_row <- which(data[[id_column]] == participant_id)
+      if (length(participant_row) > 0) {
+        participant_data <- data[participant_row[1], ]
+        participant_value <- participant_data[[column]]
+        
+        # Only add the line if the participant has a non-NA value for this question
+        if (!is.na(participant_value)) {
+          # Get expertise color for this participant
+          expertise_color <- "forestgreen"  # Default color
+          if ("expertise" %in% colnames(data) && !is.na(participant_data$expertise)) {
+            if (as.character(participant_data$expertise) %in% names(expertise_info$colors)) {
+              expertise_color <- expertise_info$colors[as.character(participant_data$expertise)]
+            }
+          }
+          
+          # Discrete positions for Likert scale are 1:7, matching the factor levels
+          p <- p + 
+            geom_vline(xintercept = participant_value, 
+                      color = expertise_color, 
+                      linewidth = 1.5) +
+            # Update subtitle to include participant's value
+            labs(subtitle = sprintf("n = %d/%d (%.0f%%), Median = %.1f (red dashed line), Mean = %.1f SD = %.1f\nYour response: %d (solid line)", 
+                                n_responses, total_n, 100*n_responses/total_n,
+                                median_val, mean_val, sd_val,
+                                participant_value))
+        }
+      }
+    }
+  }
+  
+  return(p)
+}
+```
+
+## <!-- Thresholds/time/speed function (used once) -->
+
+```{r Thresholds/Timeframe function}
+# Long chunk with a function just to output the thresholds/speed plot
+# For the question in the Speed block. Used only once.
+plot_timeframe_boxplot <- function(data, columns, labels, title,
+                                 subtitle_extra = NULL,
+                                 x_label = NULL,
+                                 y_label = "Years after first digital mind",
+                                 participant_id = NULL,
+                                 id_column = "participant_id") {
+  
+  # Use params from global environment if participant_id is NULL
+  if (is.null(participant_id) && exists("params") && !is.null(params$participant_id)) {
+    participant_id <- params$participant_id
+  }
+  
+  # Create long format data
+  long_df <- data %>%
+    select(expertise, all_of(columns)) %>%
+    pivot_longer(cols = all_of(columns),
+                names_to = "category",
+                values_to = "years")
+  
+  # Calculate never counts and create labels
+  never_counts <- long_df %>%
+    group_by(category) %>%
+    summarize(
+      never_count = sum(years == 9999, na.rm = TRUE),
+      total_responses = sum(!is.na(years)),
+      never_pct = round(100 * never_count / total_responses)
+    ) %>%
+    mutate(label = sprintf("%s\n(never: %d%%)", labels[match(category, columns)], never_pct))
+  
+  # Filter out 'never' responses and handle zeros/negatives for plotting
+  plot_df <- long_df %>%
+    filter(years != 9999) %>%
+    mutate(years = case_when(
+      years <= 0 ~ 0.1,  # Convert zeros and negatives to 0.1
+      TRUE ~ years
+    ))
+  
+  # Calculate summary statistics (excluding 'never' responses)
+  summary_stats <- plot_df %>%
+    group_by(category) %>%
+    summarise(
+      n = n(),
+      median = median(years, na.rm = TRUE),
+      mean = mean(years, na.rm = TRUE),
+      sd = sd(years, na.rm = TRUE),
+      iqr = IQR(years, na.rm = TRUE)
+    ) %>%
+    mutate(
+      label = labels[match(category, columns)],
+      across(where(is.numeric), ~round(., 1))
+    ) %>%
+    select(category, label, everything())
+  
+  # Create subtitle
+  response_rate <- sprintf("n = %d/%d (%.0f%%) response rate", 
+                          summary_stats$n[1], 
+                          nrow(data),
+                          100 * summary_stats$n[1] / nrow(data))
+  
+  subtitle <- if(is.null(subtitle_extra)) {
+    response_rate
+  } else {
+    paste(subtitle_extra, response_rate, sep = "\n")
+  }
+  
+  # Find the maximum value and round up to nearest power of 10
+  max_value <- 10^ceiling(log10(max(plot_df$years)))
+  
+  p <- ggplot(plot_df, aes(x = factor(category, levels = columns), 
+                          y = years)) +
+    geom_boxplot(width = 0.5, outlier.shape = NA, fill = "steelblue3", alpha = 0.7) +
+    geom_jitter(aes(color = factor(expertise)), 
+                width = 0.1, 
+                height = 0,
+                alpha = 0.6,
+                na.rm = TRUE) +
+    scale_color_manual(
+      values = unname(expertise_info$colors),
+      labels = expertise_info$labels,
+      name = "Expertise",
+      guide = guide_legend(nrow = 2)
+    ) +
+    scale_y_log10(
+      breaks = c(0.1, 1, 10, 100, 1000, max_value),
+      labels = function(x) ifelse(x == 0.1, "0", format(round(x), big.mark=",", scientific=FALSE)),
+      limits = c(0.1, max_value)
+    ) +
+    scale_x_discrete(labels = never_counts$label) +
+    labs(title = title,
+         subtitle = subtitle,
+         x = x_label,
+         y = y_label) +
+    theme_minimal() +
+    theme(
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_line(color = "gray95"),
+      panel.grid.major.y = element_line(color = "gray95"),
+      plot.title = element_text(size = 11, face = "bold"),
+      plot.subtitle = element_text(size = 10),
+      axis.title = element_text(size = 10),
+      axis.text = element_text(size = 9),
+      axis.text.x = element_text(angle = 0, hjust = 0.5),
+      legend.position = "bottom",
+      legend.text = element_text(size = 8)
+    )
+  
+  # Add participant-specific lines if participant_id is provided
+  if (!is.null(participant_id)) {
+    # Find participant by ID column
+    if (id_column %in% colnames(data)) {
+      participant_row <- which(data[[id_column]] == participant_id)
+      if (length(participant_row) > 0) {
+        participant_data <- data[participant_row[1], ]
+        
+        # Get expertise color for this participant
+        expertise_color <- "forestgreen"  # Default color
+        if ("expertise" %in% colnames(data) && !is.na(participant_data$expertise)) {
+          if (as.character(participant_data$expertise) %in% names(expertise_info$colors)) {
+            expertise_color <- expertise_info$colors[as.character(participant_data$expertise)]
+          }
+        }
+        
+        # Create data frames for regular responses and "never" responses
+        participant_segments <- data.frame()
+        participant_never <- data.frame()
+        has_response <- FALSE
+        
+        for (i in seq_along(columns)) {
+          col <- columns[i]
+          val <- participant_data[[col]]
+          
+          if (!is.na(val)) {
+            has_response <- TRUE
+            
+            if (val == 9999) {
+              # For "never" responses, add to the never text in the subtitle
+              participant_never <- rbind(
+                participant_never,
+                data.frame(
+                  category = col,
+                  label = labels[i]
+                )
+              )
+            } else {
+              # For regular responses, adjust zeros/negatives same as the plot data
+              if (val <= 0) val <- 0.1
+              
+              # Add to segments data frame
+              participant_segments <- rbind(
+                participant_segments,
+                data.frame(
+                  x = i - 0.25,  # Left edge of box
+                  xend = i + 0.25,  # Right edge of box
+                  y = val,
+                  yend = val
+                )
+              )
+            }
+          }
+        }
+        
+        # If participant has any regular responses, add them to the plot
+        if (nrow(participant_segments) > 0) {
+          p <- p + 
+            geom_segment(
+              data = participant_segments,
+              aes(x = x, xend = xend, y = y, yend = yend),
+              color = expertise_color,
+              linewidth = 1.5
+            )
+        }
+        
+        # Update subtitle to include info about participant's responses
+        if (has_response) {
+          participant_subtitle <- "Your responses shown as colored horizontal lines"
+          
+          # Add info about "never" responses if any
+          if (nrow(participant_never) > 0) {
+            never_labels <- paste(participant_never$label, collapse = ", ")
+            participant_subtitle <- paste(participant_subtitle, 
+                                        sprintf("\nYou responded 'never' for: %s", never_labels))
+          }
+          
+          subtitle <- paste(subtitle, participant_subtitle, sep = "\n")
+          p <- p + labs(subtitle = subtitle)
+        }
+      }
+    }
+  }
+  
+  list(plot = p, summary = summary_stats, never_counts = never_counts)
+}
+```
+
+
+## <!-- Thresholds/time/speed function (used once) -->
+
+```{r Thresholds/Timeframe_nevers function}
+
+# Modified function that INCLUDES "never" responses but converts 9999 to 10000 for display
+plot_timeframe_boxplot_with_never <- function(data, columns, labels, title,
+                                             subtitle_extra = NULL,
+                                             x_label = NULL,
+                                             y_label = "Years after first digital mind",
+                                             participant_id = NULL,
+                                             id_column = "participant_id") {
+  
+  # Use params from global environment if participant_id is NULL
+  if (is.null(participant_id) && exists("params") && !is.null(params$participant_id)) {
+    participant_id <- params$participant_id
+  }
+  
+  # Create long format data - convert 9999 to 10000 for calculations
+  long_df <- data %>%
+    select(expertise, all_of(columns)) %>%
+    pivot_longer(cols = all_of(columns),
+                names_to = "category",
+                values_to = "years") %>%
+    mutate(years_original = years,  # Keep original for counting "nevers"
+           years = ifelse(years == 9999, 10000, years))  # Convert 9999 to 10000
+  
+  # Calculate never counts using ORIGINAL values
+  never_counts <- long_df %>%
+    group_by(category) %>%
+    summarize(
+      never_count = sum(years_original == 9999, na.rm = TRUE),
+      total_responses = sum(!is.na(years_original)),
+      never_pct = round(100 * never_count / total_responses)
+    ) %>%
+    mutate(label = sprintf("%s\n(never: %d%%)", labels[match(category, columns)], never_pct))
+  
+  # For plotting, convert zeros/negatives to 0.1 and use 10000 for "never"
+  plot_df <- long_df %>%
+    filter(!is.na(years)) %>%
+    mutate(years_plot = case_when(
+      years == 10000 & years_original == 9999 ~ 10000,  # Keep converted "never" as 10000
+      years <= 0 ~ 0.1,      # Convert zeros and negatives to 0.1
+      TRUE ~ years
+    ))
+  
+  # Calculate summary statistics using converted values (10000 instead of 9999)
+  summary_stats <- long_df %>%
+    filter(!is.na(years)) %>%
+    group_by(category) %>%
+    summarise(
+      n = n(),
+      median = median(years, na.rm = TRUE),
+      mean = mean(years, na.rm = TRUE),
+      sd = sd(years, na.rm = TRUE),
+      iqr = IQR(years, na.rm = TRUE)
+    ) %>%
+    mutate(
+      label = labels[match(category, columns)],
+      across(where(is.numeric), ~round(., 1))
+    ) %>%
+    select(category, label, everything())
+  
+  # Create subtitle
+  response_rate <- sprintf("n = %d/%d (%.0f%%) response rate", 
+                          summary_stats$n[1], 
+                          nrow(data),
+                          100 * summary_stats$n[1] / nrow(data))
+  
+  subtitle <- if(is.null(subtitle_extra)) {
+    paste(response_rate, "'Never' responses converted to 10,000 years for analysis", sep = "\n")
+  } else {
+    paste(subtitle_extra, response_rate, "'Never' responses converted to 10,000 years for analysis", sep = "\n")
+  }
+  
+  # Find the maximum value for scaling
+  max_value <- 10000  # Since we converted 9999 to 10000
+  
+  p <- ggplot(plot_df, aes(x = factor(category, levels = columns), 
+                          y = years_plot)) +
+    geom_boxplot(width = 0.5, outlier.shape = NA, fill = "steelblue3", alpha = 0.7) +
+    geom_jitter(aes(color = factor(expertise)), 
+                width = 0.1, 
+                height = 0,
+                alpha = 0.6,
+                na.rm = TRUE) +
+    scale_color_manual(
+      values = unname(expertise_info$colors),
+      labels = expertise_info$labels,
+      name = "Expertise",
+      guide = guide_legend(nrow = 2)
+    ) +
+    scale_y_log10(
+      breaks = c(0.1, 1, 10, 100, 1000, 10000),
+      labels = function(x) ifelse(x == 0.1, "0", 
+                         ifelse(x == 10000, "Never (10,000)", 
+                                format(round(x), big.mark=",", scientific=FALSE))),
+      limits = c(0.1, 10000)
+    ) +
+    scale_x_discrete(labels = never_counts$label) +
+    labs(title = title,  # No extra text added to title
+         subtitle = subtitle,
+         x = x_label,
+         y = y_label) +
+    theme_minimal() +
+    theme(
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_line(color = "gray95"),
+      panel.grid.major.y = element_line(color = "gray95"),
+      plot.title = element_text(size = 11, face = "bold"),
+      plot.subtitle = element_text(size = 10),
+      axis.title = element_text(size = 10),
+      axis.text = element_text(size = 9),
+      axis.text.x = element_text(angle = 0, hjust = 0.5),
+      legend.position = "bottom",
+      legend.text = element_text(size = 8)
+    )
+  
+  # Add participant-specific lines if participant_id is provided
+  if (!is.null(participant_id)) {
+    # Find participant by ID column
+    if (id_column %in% colnames(data)) {
+      participant_row <- which(data[[id_column]] == participant_id)
+      if (length(participant_row) > 0) {
+        participant_data <- data[participant_row[1], ]
+        
+        # Get expertise color for this participant
+        expertise_color <- "forestgreen"  # Default color
+        if ("expertise" %in% colnames(data) && !is.na(participant_data$expertise)) {
+          if (as.character(participant_data$expertise) %in% names(expertise_info$colors)) {
+            expertise_color <- expertise_info$colors[as.character(participant_data$expertise)]
+          }
+        }
+        
+        # Create data frames for responses
+        participant_segments <- data.frame()
+        has_response <- FALSE
+        
+        for (i in seq_along(columns)) {
+          col <- columns[i]
+          val <- participant_data[[col]]
+          
+          if (!is.na(val)) {
+            has_response <- TRUE
+            
+            if (val == 9999) {
+              # For "never" responses, use 10000 for plotting
+              participant_segments <- rbind(
+                participant_segments,
+                data.frame(
+                  x = i - 0.25,  # Left edge of box
+                  xend = i + 0.25,  # Right edge of box
+                  y = 10000,
+                  yend = 10000
+                )
+              )
+            } else {
+              # For regular responses, adjust zeros/negatives same as the plot data
+              plot_val <- if (val <= 0) 0.1 else val
+              
+              # Add to segments data frame
+              participant_segments <- rbind(
+                participant_segments,
+                data.frame(
+                  x = i - 0.25,  # Left edge of box
+                  xend = i + 0.25,  # Right edge of box
+                  y = plot_val,
+                  yend = plot_val
+                )
+              )
+            }
+          }
+        }
+        
+        # If participant has any responses, add them to the plot
+        if (nrow(participant_segments) > 0) {
+          p <- p + 
+            geom_segment(
+              data = participant_segments,
+              aes(x = x, xend = xend, y = y, yend = yend),
+              color = expertise_color,
+              linewidth = 1.5
+            )
+        }
+        
+        # Update subtitle to include info about participant's responses
+        if (has_response) {
+          participant_subtitle <- "Your responses shown as colored horizontal lines"
+          subtitle <- paste(subtitle, participant_subtitle, sep = "\n")
+          p <- p + labs(subtitle = subtitle)
+        }
+      }
+    }
+  }
+  
+  list(plot = p, summary = summary_stats, never_counts = never_counts)
+}
+
+```
+
+
+
+## <!-- Meta-estimation function -->
+
+```{r Meta-Estimation Function}
+# Function to plot meta-estimation questions
+plot_meta_comparison <- function(data, actual_col, meta_col, title,
+                                participant_id = NULL,
+                                id_column = "participant_id") {
+  
+  # Calculate actual medians per expertise group, handling NAs appropriately
+  actual_medians <- data %>%
+    group_by(expertise) %>%
+    summarise(
+      actual_median = median(.data[[actual_col]], na.rm = TRUE),
+      n = sum(!is.na(.data[[actual_col]])) # Count non-NA responses
+    ) %>%
+    filter(n >= 3)  # Only include groups with at least 3 responses
+  
+  # Create plot data, handling NAs for each column separately
+  plot_data <- data %>%
+    filter(expertise %in% actual_medians$expertise) %>%
+    mutate(
+      expertise_label = paste0(
+        case_when(
+          expertise == 1 ~ "Digital minds\nresearch",
+          expertise == 2 ~ "AI research or\nAI policy",
+          expertise == 3 ~ "Forecasting",
+          expertise == 4 ~ "Philosophy/science/\nsocial science",
+          expertise == 5 ~ "Non-expert"
+        ),
+        sprintf(" (n=%d)", actual_medians$n[match(expertise, actual_medians$expertise)])
+      ),
+      # Use only present levels
+      expertise = factor(expertise, levels = get_present_expertise_levels(data))
+    ) %>%
+    # Convert to factor to preserve order
+    mutate(expertise_label = factor(expertise_label, levels = unique(expertise_label)))
+  
+  # Base subtitle
+  base_subtitle <- paste("Red diamonds show actual median responses per group for the original question.",
+                       "Boxplots show how participants predicted their group's median would respond \n(i.e., trying to predict where the red diamond will be).",
+                       sep = "\n")
+  
+  # Create diamond data for plotting 
+  diamond_data <- actual_medians %>%
+    mutate(expertise_label = case_when(
+      expertise == 1 ~ paste0("Digital minds\nresearch (n=", n, ")"),
+      expertise == 2 ~ paste0("AI research or\nAI policy (n=", n, ")"),
+      expertise == 3 ~ paste0("Forecasting (n=", n, ")"),
+      expertise == 4 ~ paste0("Philosophy/science/\nsocial science (n=", n, ")"),
+      expertise == 5 ~ paste0("Non-expert (n=", n, ")")
+    )) %>%
+    mutate(expertise_label = factor(expertise_label, levels = levels(plot_data$expertise_label)))
+  
+  # Create plot
+  p <- ggplot(plot_data, aes(x = expertise_label, 
+                            y = .data[[meta_col]], 
+                            fill = factor(expertise))) +
+    geom_boxplot(width = 0.5, alpha = 0.7, na.rm = TRUE) +
+    geom_jitter(width = 0.1, alpha = 0.6, na.rm = TRUE) +
+    # Add actual medians as red diamonds with explicit positioning
+    geom_point(data = diamond_data,
+               aes(x = expertise_label, y = actual_median),
+               color = "red", fill = "red", size = 3, shape = 23, 
+               stroke = 1, na.rm = TRUE) +
+    scale_fill_manual(
+      values = expertise_info$colors,
+      labels = expertise_info$labels,
+      name = "Expertise",
+      guide = guide_legend(override.aes = list(shape = NA), nrow = 2)
+    ) +
+    scale_y_continuous(
+      limits = c(0, 100),
+      breaks = seq(0, 100, 20),
+      labels = function(x) paste0(x, "%"),
+      oob = scales::oob_keep
+    ) +
+    labs(
+      title = title,
+      subtitle = base_subtitle,
+      x = NULL,
+      y = "Predicted Median %"
+    ) +
+    theme_minimal() +
+    theme(
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_line(color = "gray95"),
+      panel.grid.major.y = element_line(color = "gray95"),
+      plot.title = element_text(size = 11, face = "bold"),
+      plot.subtitle = element_text(size = 10),
+      axis.text.x = element_text(angle = 0, hjust = 0.5),
+      legend.position = "bottom",
+      legend.text = element_text(size = 8)
+    )
+  auto_save_plot() 
+  
+  # Add note about total responses
+  p$labels$subtitle <- paste(p$labels$subtitle, 
+                           sprintf("n = %d total responses", sum(!is.na(data[[meta_col]]))),
+                           sep = "\n")
+  
+  # Try to get participant_id from params in knitr context if NULL
+  if (is.null(participant_id) && exists("params", envir = .GlobalEnv)) {
+    params_obj <- get("params", envir = .GlobalEnv)
+    if (is.list(params_obj) && !is.null(params_obj$participant_id)) {
+      participant_id <- params_obj$participant_id
+    }
+  }
+  
+  # Add participant-specific elements if participant_id is provided
+  if (!is.null(participant_id)) {
+    # Make sure participant_id is numeric for comparison
+    participant_id <- as.numeric(participant_id)
+    
+    # Find participant by ID column
+    if (id_column %in% colnames(data)) {
+      participant_row <- which(data[[id_column]] == participant_id)
+      if (length(participant_row) > 0) {
+        participant_data <- data[participant_row[1], ]
+        
+        # Only proceed if participant is in one of the expertise groups shown
+        if (participant_data$expertise %in% actual_medians$expertise) {
+          
+          # Add meta-estimation response if available
+          if (!is.na(participant_data[[meta_col]])) {
+            # Find the x-position for this participant's expertise group
+            participant_expertise_label <- plot_data$expertise_label[plot_data$expertise == participant_data$expertise][1]
+            x_pos <- which(levels(plot_data$expertise_label) == participant_expertise_label)
+            
+            # Get expertise group number
+            exp_group <- as.numeric(participant_data$expertise)
+            
+            # Extract actual median directly
+            actual_group_median <- actual_medians %>% 
+              filter(expertise == exp_group) %>% 
+              pull(actual_median)
+            
+            # Calculate group meta median 
+            group_meta_median <- median(
+              data[[meta_col]][data$expertise == exp_group], 
+              na.rm = TRUE
+            )
+            
+            # Add horizontal red line for meta-estimation
+            p <- p + 
+              geom_segment(
+                aes(x = x_pos - 0.25, xend = x_pos + 0.25, 
+                    y = participant_data[[meta_col]], yend = participant_data[[meta_col]]),
+                color = "red",
+                linewidth = 1
+              )
+            
+            # Add participant line information to subtitle
+            participant_subtitle <- paste("The horizontal red line shows your prediction of your group's median response.",
+                                         sprintf("Your prediction: %.1f%%, your group's median prediction: %.1f%%, \nactual median (red diamond): %.1f%%", 
+                                                 participant_data[[meta_col]],
+                                                 group_meta_median,
+                                                 actual_group_median),
+                                         sep = "\n")
+            
+            p$labels$subtitle <- paste(p$labels$subtitle, participant_subtitle, sep = "\n")
+          }
+        }
+      }
+    }
+  }
+  
+  return(p)
+}
+```
+
+# <!-- Analysis -->
+
+## Expertise
+
+```{r}
+# Chunk: Create bar plot of self-reported expertise 
+# Label: expertise
+# Question: Which best (even if imperfectly) describes your expertise? If multiple, choose the one you think is most relevant to this survey.
+
+df %>%
+  count(expertise) %>%
+  mutate(expertise_label = factor(expertise, 
+    levels = 1:5,
+    labels = c("Digital minds research",
+              "AI research/policy",
+              "Forecasting",
+              "Philosophy/science/social science",
+              "Non-expert"))) %>%
+  ggplot(aes(x = expertise_label, y = n)) +
+  geom_bar(stat = "identity", width = 0.5, fill = "steelblue3", alpha = 0.7) +
+  scale_y_continuous(breaks = function(x) floor(pretty(x))) +
+  labs(
+    title = "Which best describes your expertise?",
+    subtitle = sprintf("n = %d total responses", nrow(df)),
+    x = NULL,
+    y = "Count"
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(color = "gray95"),
+    panel.grid.major.y = element_line(color = "gray95"),
+    plot.title = element_text(size = 11, face = "bold"),
+    plot.subtitle = element_text(size = 10),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+## Starting Point
+
+```{r}
+plot_forecast_histogram(df, "start_principle_1", 
+                       "How likely is it that digital minds are possible in principle?")
+auto_save_plot()  
+```
+
+```{r}
+plot_forecast_histogram(df, "start_ever_1", 
+                       "How likely is it that digital minds will ever be created?")
+auto_save_plot()  
+```
+
+```{r}
+# How likely is it that the first digital minds will be created in or before
+# the year...
+year_result <- plot_likelihood_boxplot(
+  data = df,
+  columns = c("start_year_1", "start_year_2", "start_year_3", "start_year_4", "start_year_6"),
+  labels = c("2025", "2030", "2040", "2050", "2100"),
+  title = "How likely is it that the first digital minds will be created in or before the following years?",
+  x_label = "Year",
+)
+
+# Display plot and summary
+year_result$plot
+#print(year_result$summary)
+format_boxplot_summary(year_result$summary)
+
+```
+
+```{r}
+# Start -- meta question
+# Note: only showing expert groups with n>=3
+
+plot_meta_comparison(
+  df, 
+  actual_col = "start_year_3", 
+  meta_col = "start_median_1",
+  "What do you think will be the median response of other experts in your group?\nHow likely are digital minds by 2040?"
+)
+```
+
+```{r}
+plot_forecast_histogram(df, "start_before_AGI_1", 
+                       "What's the likelihood that the first digital minds are created before creating AGI?")
+auto_save_plot()  
+```
+
+## Prescriptive Assessments
+
+```{r}
+# For the first question (presc_good_bad)
+plot_likert(df, "presc_good_bad", 
+           "Would enacting a moratorium on creating digital minds from now until 2040 be good or bad?",
+           "Definitely bad", "Unsure/indifferent", "Definitely good")
+auto_save_plot() 
+```
+
+```{r}
+
+# For the second question (presc_synergy)
+plot_likert(df, "presc_synergy",
+           "Do you expect efforts to promote AI safety and prevent digital minds \nmistreatment will be mostly in conflict or synergistic?",
+           "Mostly in conflict", "Neither/unsure", "Mostly synergistic")
+auto_save_plot() 
+```
+
+## Types of Digital Minds
+
+```{r}
+principle_result <- plot_likelihood_boxplot(
+  data = df,
+  columns = c("types_in_principle_1", "types_in_principle_2", "types_in_principle_3"),
+  labels = c("Machine learning", "Brain simulation", "Other types"),
+  title = "How likely is it that some computer systems in the following categories \ncould, in principle, have subjective experiences?",
+)
+
+# Display plot and summary
+principle_result$plot
+format_boxplot_summary(principle_result$summary)
+
+```
+
+```{r}
+# 
+# # Use this instead of just principle_result$summary
+# kable(principle_result$summary %>%
+#   select(label, n, median, mean, sd, iqr) %>%
+#   rename(
+#     Category = label,
+#     N = n,
+#     Median = median,
+#     Mean = mean,
+#     SD = sd,
+#     IQR = iqr
+#   ), booktabs = TRUE) %>%
+#   kable_styling(latex_options = "striped", font_size = 12)
+```
+
+```{r}
+first_result <- plot_likelihood_boxplot(
+  data = df,
+  columns = c("types_first_1", "types_first_2", "types_first_3", "types_first_6"),
+  labels = c("Never created", "Machine learning", "Brain simulation", "Other types"),
+  title = "How likely is each of the following to be the first type of digital mind \nthat is created?",
+)
+
+# Display plot and summary
+first_result$plot
+format_boxplot_summary(first_result$summary)
+```
+
+
+```{r}
+##
+
+
+# Consistency Analysis: "Ever Created" vs "Never Created" 
+# These two responses should theoretically sum to 100%
+
+cat("=== CONSISTENCY ANALYSIS: EVER CREATED vs NEVER CREATED ===\n")
+cat("Comparing 'How likely digital minds will ever be created' vs 'Never created' probability\n")
+cat("These should theoretically sum to 100%\n\n")
+
+# Calculate consistency for each participant
+consistency_data <- df %>%
+  filter(!is.na(start_ever_1) & !is.na(types_first_1)) %>%
+  mutate(
+    ever_created = start_ever_1,
+    never_created = types_first_1,
+    sum_probabilities = ever_created + never_created,
+    inconsistency = sum_probabilities - 100,  # How far from 100%
+    abs_inconsistency = abs(inconsistency),   # Absolute inconsistency
+    consistent_10 = abs_inconsistency <= 10,  # Within 10 percentage points
+    consistent_5 = abs_inconsistency <= 5     # Within 5 percentage points
+  )
+
+# Summary statistics
+n_participants <- nrow(consistency_data)
+mean_sum <- mean(consistency_data$sum_probabilities)
+median_sum <- median(consistency_data$sum_probabilities)
+mean_inconsistency <- mean(consistency_data$inconsistency)
+median_inconsistency <- median(consistency_data$inconsistency)
+mean_abs_inconsistency <- mean(consistency_data$abs_inconsistency)
+median_abs_inconsistency <- median(consistency_data$abs_inconsistency)
+
+# Consistency rates
+pct_consistent_10 <- round(100 * mean(consistency_data$consistent_10), 1)
+pct_consistent_5 <- round(100 * mean(consistency_data$consistent_5), 1)
+n_consistent_10 <- sum(consistency_data$consistent_10)
+n_consistent_5 <- sum(consistency_data$consistent_5)
+
+# Print summary
+cat("SUMMARY STATISTICS:\n")
+cat("Sample size:", n_participants, "participants\n")
+cat("Mean sum of probabilities:", round(mean_sum, 1), "%\n")
+cat("Median sum of probabilities:", round(median_sum, 1), "%\n")
+cat("Mean inconsistency (sum - 100):", round(mean_inconsistency, 1), " percentage points\n")
+cat("Median inconsistency:", round(median_inconsistency, 1), " percentage points\n")
+cat("Mean absolute inconsistency:", round(mean_abs_inconsistency, 1), " percentage points\n")
+cat("Median absolute inconsistency:", round(median_abs_inconsistency, 1), " percentage points\n\n")
+
+cat("CONSISTENCY RATES:\n")
+cat("Participants within ±10 percentage points:", n_consistent_10, "/", n_participants, " (", pct_consistent_10, "%)\n")
+cat("Participants within ±5 percentage points:", n_consistent_5, "/", n_participants, " (", pct_consistent_5, "%)\n\n")
+
+# Direction of inconsistency
+over_100 <- sum(consistency_data$inconsistency > 10)
+under_100 <- sum(consistency_data$inconsistency < -10)
+cat("Participants with sum > 110% (over-estimate total probability):", over_100, "\n")
+cat("Participants with sum < 90% (under-estimate total probability):", under_100, "\n\n")
+
+cat(rep("=", 60), "\n\n")
+# Create histogram of inconsistency
+library(ggplot2)
+
+# Calculate stats for subtitle
+subtitle_text <- sprintf("n = %d, Mean absolute inconsistency = %.1f percentage points\n%.1f%% within ±10 points, %.1f%% within ±5 points", 
+                         n_participants, mean_abs_inconsistency, pct_consistent_10, pct_consistent_5)
+
+# Create histogram
+consistency_plot <- ggplot(consistency_data, aes(x = inconsistency)) +
+  geom_histogram(binwidth = 5, boundary = 0, fill = "steelblue3", alpha = 0.7, color = "white") +
+  geom_vline(xintercept = 0, color = "firebrick", linetype = "dashed", linewidth = 1.2) +
+  geom_vline(xintercept = median_inconsistency, color = "darkgreen", linetype = "solid", linewidth = 1) +
+  scale_x_continuous(
+    breaks = seq(-50, 50, 10),
+    labels = function(x) paste0(ifelse(x >= 0, "+", ""), x)
+  ) +
+  scale_y_continuous(breaks = function(x) floor(pretty(x))) +
+  labs(
+    title = "Consistency Between 'Ever Created' and 'Never Created' Responses",
+    subtitle = subtitle_text,
+    x = "Inconsistency: (Ever Created % + Never Created %) - 100%",
+    y = "Count",
+    caption = "Perfect consistency = 0 (red dashed line). Median inconsistency (green solid line)."
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(color = "gray95"),
+    panel.grid.major.y = element_line(color = "gray95"),
+    plot.title = element_text(size = 11, face = "bold"),
+    plot.subtitle = element_text(size = 10),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 9),
+    plot.caption = element_text(size = 8, color = "gray60")
+  )
+
+print(consistency_plot)
+
+# Additional analysis: Show extreme cases
+cat("EXTREME INCONSISTENCIES:\n")
+extreme_cases <- consistency_data %>%
+  filter(abs_inconsistency > 20) %>%
+  arrange(desc(abs_inconsistency)) %>%
+  select(participant_id, ever_created, never_created, sum_probabilities, inconsistency, abs_inconsistency)
+
+if(nrow(extreme_cases) > 0) {
+  cat("Participants with absolute inconsistency > 20 percentage points:\n")
+  print(extreme_cases)
+} else {
+  cat("No participants with extreme inconsistency (>20 percentage points)\n")
+}
+
+
+```
+
+## Speed
+
+```{r}
+# Thresholds plot
+speed_result <- plot_timeframe_boxplot(
+  data = df,
+  columns = c("speed_total_wel_1", "speed_total_wel_2", "speed_total_wel_3", "speed_total_wel_4"),
+  labels = c("1,000 humans", "1M humans", "1B humans", "1T humans"),
+  title = "After the first digital mind is created, how many years will it take until the collective welfare capacity \nof all digital minds together (at a given time) matches that of at least...",
+  x_label = "\nTotal Welfare Capacity Threshold"
+)
+
+# Display plot and summaries
+speed_result$plot
+format_boxplot_summary(speed_result$summary)
+print(speed_result$never_counts)
+```
+
+
+## Speed (with nevers)
+
+```{r}
+# Thresholds plot
+speed_with_nevers_result <- plot_timeframe_boxplot_with_never(
+  data = df,
+  columns = c("speed_total_wel_1", "speed_total_wel_2", "speed_total_wel_3", "speed_total_wel_4"),
+  labels = c("1,000 humans", "1M humans", "1B humans", "1T humans"),
+  title = "After the first digital mind is created, how many years will it take \nuntil the collective welfare capacity of all digital minds together (at a given time) \nmatches that of at least...",
+  x_label = "Total Welfare Capacity Threshold"
+)
+
+# Display plot and summaries
+speed_with_nevers_result$plot
+format_boxplot_summary(speed_with_nevers_result$summary)
+print(speed_with_nevers_result$never_counts)
+```
+
+
+## Distribution
+
+```{r}
+plot_forecast_histogram(df, "distrib_social_1", 
+    "What proportion of digital minds will have a social function\n(designed to interact with humans in a conversational manner)?",
+    x_label = "Proportion"
+    )
+auto_save_plot()  
+```
+
+```{r}
+country_result <- plot_likelihood_boxplot(
+  data = df,
+  columns = c("distrib_country_1", "distrib_country_2", "distrib_country_3", "distrib_country_4"),
+  labels = c("USA", "Europe", "China", "Other"),
+  title = "What proportion of digital minds will primarily be produced in \nthe following locations?",
+  y_label = "Proportion"
+)
+# Display plot and summary
+country_result$plot
+format_boxplot_summary(country_result$summary)
+```
+
+```{r}
+actor_result <- plot_likelihood_boxplot(
+  data = df,
+  columns = c("distrib_actor_1", "distrib_actor_2", "distrib_actor_3", "distrib_actor_4", "distrib_actor_5"),
+  labels = c("Companies", "Governments", "Universities", "Open-source", "Other"),
+  title = "What proportion of digital minds will primarily be produced \nby the following actors?",
+  y_label = "Proportion"
+)
+# Display plot and summary
+actor_result$plot
+format_boxplot_summary(actor_result$summary)
+```
+
+```{r}
+plot_forecast_histogram(df, "distrib_intent_1", 
+    "What proportion of digital minds were created by humans with an intention \nto create digital minds (as opposed to without that intention)?", 
+    x_label = "Proportion"
+    )
+auto_save_plot()  
+```
+
+
+```{r country_comparison_analysis}
+# Create a simple comparison of US vs China responses
+# Based on the columns: distrib_country_1 (USA) and distrib_country_3 (China)
+
+# Analysis of US vs China ratings
+country_comparison <- df %>%
+  select(participant_id, distrib_country_1, distrib_country_3) %>%
+  filter(!is.na(distrib_country_1) & !is.na(distrib_country_3)) %>%
+  mutate(
+    comparison = case_when(
+      distrib_country_1 > distrib_country_3 ~ "USA higher",
+      distrib_country_3 > distrib_country_1 ~ "China higher",
+      distrib_country_1 == distrib_country_3 ~ "Equal"
+    )
+  )
+
+# Count the number of participants in each category
+comparison_counts <- country_comparison %>%
+  count(comparison) %>%
+  mutate(percentage = round(100 * n / sum(n), 1))
+
+# Calculate overall mean values for each country
+mean_values <- tibble(
+  country = c("USA", "China"),
+  mean_estimate = c(
+    mean(country_comparison$distrib_country_1, na.rm = TRUE),
+    mean(country_comparison$distrib_country_3, na.rm = TRUE)
+  )
+)
+
+# Create a simple bar chart
+comparison_plot <- ggplot(comparison_counts, 
+                         aes(x = comparison, y = n, fill = comparison)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  geom_text(
+    aes(label = paste0(n, " (", percentage, "%)")),
+    position = position_stack(vjust = 0.5),
+    color = "white",
+    fontface = "bold",
+    size = 4
+  ) +
+  scale_fill_manual(
+    values = c("USA higher" = "#0b3d91", "China higher" = "#de2910", "Equal" = "#7f7f7f"),
+    guide = "none"
+  ) +
+  labs(
+    title = "Comparison of USA vs China Digital Mind Production Estimates",
+    subtitle = paste0(nrow(country_comparison), " participants rated both countries"),
+    x = NULL,
+    y = "Number of Participants"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 11, face = "bold", lineheight = 1.1),
+    plot.title.position = "plot",
+    axis.text.x = element_text(size = 10)
+  )
+
+# Display the results - simple version with just the plot
+comparison_plot
+
+# Add a simple summary text
+cat("\n\nParticipants rated the proportion of digital minds that would be produced in the USA versus China. ", 
+    "**", comparison_counts$n[comparison_counts$comparison == "USA higher"], 
+    " participants (", comparison_counts$percentage[comparison_counts$comparison == "USA higher"], 
+    "%) rated the USA higher** than China, while **",
+    comparison_counts$n[comparison_counts$comparison == "China higher"],
+    " participants (", comparison_counts$percentage[comparison_counts$comparison == "China higher"],
+    "%) rated China higher** than the USA. ",
+    comparison_counts$n[comparison_counts$comparison == "Equal"],
+    " participants (", comparison_counts$percentage[comparison_counts$comparison == "Equal"],
+    "%) gave equal ratings to both countries.\n\n",
+    "The average estimated proportion was ", round(mean_values$mean_estimate[mean_values$country == "USA"], 1),
+    "% for the USA and ", round(mean_values$mean_estimate[mean_values$country == "China"], 1),
+    "% for China.", sep="")
+```
+
+
+## Claims
+
+```{r}
+plot_forecast_histogram(df, "claims_exp_false_1", 
+    "What proportion of those AIs with a social function will—systematically \nand falsely—claim that they have subjective experiences \n(when, in fact, they don't)?",
+    x_label = "Proportion")
+auto_save_plot()  
+```
+
+```{r}
+plot_forecast_histogram(df, "claims_no_exp_false_1", 
+    "What proportion of digital minds will—systematically \nand falsely—claim that they do not have subjective experiences \n(when, in fact, they do)?",
+    x_label = "Proportion")
+auto_save_plot()  
+```
+
+```{r}
+claims_result <- plot_likelihood_boxplot(
+  data = df,
+  columns = c("claims_exp_rights_1", "claims_exp_rights_2", "claims_exp_rights_3"),
+  labels = c("Claim to have valenced subjective \nexperiences", "Claim to deserve \nlegal protection", "Claim to deserve \ncivil rights"),
+  title = "How likely is it that at least 10,000 digital minds will \nconsistently and proactively claim the following?"
+)
+# Display plot and summary
+claims_result$plot
+format_boxplot_summary(claims_result$summary)
+```
+
+## Recognition
+
+```{r}
+plot_forecast_histogram(df, "recog_exist_1", 
+    "What proportion of citizens will believe digital minds exist?\n(10 years after first digital mind creation)",
+    x_label = "Proportion")
+auto_save_plot()  
+```
+
+```{r}
+# Recognition -- meta question
+# Note: only showing expert groups with n>=3
+
+plot_meta_comparison(
+  df, 
+  actual_col = "recog_exist_1", 
+  meta_col = "recog_exist_meta_1",
+  "What do you think will be the median response of other experts in your group?\nWhat proportion of citizens will believe digital minds exist?"
+)
+```
+
+```{r}
+plot_likert(
+  df, 
+  "recog_estimate_welf",
+  "How will the median citizen estimate the collective welfare capacity\nof digital minds?",
+  low_label = "Strongly\nunderestimate",
+  mid_label = "Roughly accurate\nestimate", 
+  high_label = "Strongly\noverestimate"
+)
+auto_save_plot() 
+
+```
+
+```{r}
+plot_forecast_histogram(
+  df, 
+  "recog_basic_1",
+  "What proportion of citizens will believe that digital minds\nshould be granted basic harm protection?",
+  x_label = "Proportion"
+)
+auto_save_plot()  
+```
+
+```{r}
+# Civil rights question
+plot_forecast_histogram(
+  df, 
+  "recog_advanced_1",
+  "What proportion of citizens will believe that digital minds\nshould be granted civil rights beyond basic harm protection?",
+  x_label = "Proportion"
+)
+auto_save_plot()  
+```
+
+```{r}
+# Hot button issue question
+plot_forecast_histogram(
+  df, 
+  "recog_hot_button_1",
+  "How likely is it that digital mind rights will become\none of the top 5 most contentious political issues in US politics?"
+)
+auto_save_plot()  
+```
+
+
+```{r peer_forecasting_public_belief_detailed}
+# Analysis for second peer forecasting question about public belief in digital minds
+# Testing each expert group's predictions against their own actual median
+
+cat("=== PEER FORECASTING ACCURACY BY EXPERTISE GROUP ===\n")
+cat("Question: What proportion of citizens will believe digital minds exist?\n")
+cat("Testing if each group's predictions differ from their own actual median\n\n")
+
+# Calculate actual medians and prediction summaries by expertise group for public belief question
+expertise_forecast_analysis_q2 <- df %>%
+  group_by(expertise) %>%
+  summarise(
+    # Group info
+    expertise_label = case_when(
+      expertise[1] == 1 ~ "Digital minds research",
+      expertise[1] == 2 ~ "AI research or AI policy", 
+      expertise[1] == 3 ~ "Forecasting",
+      expertise[1] == 4 ~ "Philosophy/science/social science",
+      expertise[1] == 5 ~ "Non-expert"
+    ),
+    
+    # Sample sizes
+    n_actual = sum(!is.na(recog_exist_1)),
+    n_predictions = sum(!is.na(recog_exist_meta_1)),
+    n_both = sum(!is.na(recog_exist_1) & !is.na(recog_exist_meta_1)),
+    
+    # Actual responses (what group members actually said)
+    actual_median = if(n_actual >= 3) median(recog_exist_1, na.rm = TRUE) else NA,
+    
+    # Predictions about group median
+    mean_prediction = mean(recog_exist_meta_1, na.rm = TRUE),
+    median_prediction = median(recog_exist_meta_1, na.rm = TRUE),
+    sd_prediction = sd(recog_exist_meta_1, na.rm = TRUE),
+    
+    # Difference (prediction - actual)
+    mean_difference = mean_prediction - actual_median,
+    
+    .groups = 'drop'
+  ) %>%
+  filter(!is.na(actual_median) & n_both >= 3) %>%  # Only groups with sufficient data
+  arrange(desc(n_both))
+
+# Display summary table
+cat("SUMMARY BY EXPERTISE GROUP:\n")
+cat("(Only groups with n>=3 for both actual responses and predictions)\n\n")
+
+for(i in 1:nrow(expertise_forecast_analysis_q2)) {
+  row <- expertise_forecast_analysis_q2[i,]
+  cat("--- ", row$expertise_label, " (n=", row$n_both, ") ---\n", sep="")
+  cat("Actual median response:", round(row$actual_median, 1), "%\n")
+  cat("Mean prediction:", round(row$mean_prediction, 1), "%\n") 
+  cat("Median prediction:", round(row$median_prediction, 1), "%\n")
+  cat("Mean difference (prediction - actual):", round(row$mean_difference, 1), " percentage points\n")
+  
+  # Interpretation of bias direction
+  if(abs(row$mean_difference) > 2) {  # Only comment on differences > 2 percentage points
+    direction <- ifelse(row$mean_difference > 0, "overestimated", "underestimated")
+    cat("→ Group", direction, "their peers' beliefs\n")
+  } else {
+    cat("→ Group predictions were quite accurate\n")
+  }
+  cat("\n")
+}
+
+cat(rep("=", 60), "\n\n")
+
+# Statistical tests for each group
+cat("STATISTICAL TESTS BY GROUP:\n\n")
+
+for(i in 1:nrow(expertise_forecast_analysis_q2)) {
+  row <- expertise_forecast_analysis_q2[i,]
+  expertise_num <- df$expertise[df$expertise == unique(df$expertise)[which(expertise_forecast_analysis_q2$expertise_label == row$expertise_label)]][1]
+  
+  # Get individual participant data for this group
+  group_data <- df %>%
+    filter(expertise == expertise_num, 
+           !is.na(recog_exist_1), 
+           !is.na(recog_exist_meta_1)) %>%
+    mutate(
+      actual_group_median = row$actual_median,
+      prediction_error = recog_exist_meta_1 - actual_group_median
+    )
+  
+  cat("--- ", row$expertise_label, " ---\n", sep="")
+  cat("Testing H0: mean prediction error = 0\n")
+  cat("Sample size:", nrow(group_data), "participants\n")
+  
+  if(nrow(group_data) >= 3) {
+    # Wilcoxon test
+    group_wilcox <- wilcox.test(group_data$prediction_error, mu = 0)
+    cat("Wilcoxon test: p =", round(group_wilcox$p.value, 4), "\n")
+    
+    # Interpretation
+    if(group_wilcox$p.value < 0.05) {
+      direction <- ifelse(mean(group_data$prediction_error) > 0, "overestimated", "underestimated")
+      cat("** SIGNIFICANT: Group significantly", direction, "their median **\n")
+    } else {
+      cat("** NOT SIGNIFICANT: No systematic bias detected **\n")
+    }
+    
+  } else {
+    cat("Insufficient sample size for statistical testing\n")
+  }
+  cat("\n")
+}
+
+# Overall summary
+cat("OVERALL SUMMARY:\n")
+significant_groups_q2 <- c()
+underestimate_groups_q2 <- c()
+overestimate_groups_q2 <- c()
+
+for(i in 1:nrow(expertise_forecast_analysis_q2)) {
+  row <- expertise_forecast_analysis_q2[i,]
+  expertise_num <- df$expertise[df$expertise == unique(df$expertise)[which(expertise_forecast_analysis_q2$expertise_label == row$expertise_label)]][1]
+  
+  group_data <- df %>%
+    filter(expertise == expertise_num, !is.na(recog_exist_1), !is.na(recog_exist_meta_1)) %>%
+    mutate(prediction_error = recog_exist_meta_1 - row$actual_median)
+  
+  if(nrow(group_data) >= 3) {
+    group_wilcox <- wilcox.test(group_data$prediction_error, mu = 0)
+    if(group_wilcox$p.value < 0.05) {
+      significant_groups_q2 <- c(significant_groups_q2, row$expertise_label)
+      if(mean(group_data$prediction_error) < 0) {
+        underestimate_groups_q2 <- c(underestimate_groups_q2, row$expertise_label)
+      } else {
+        overestimate_groups_q2 <- c(overestimate_groups_q2, row$expertise_label)
+      }
+    }
+  }
+}
+
+if(length(significant_groups_q2) > 0) {
+  cat("Groups with significant prediction bias:", paste(significant_groups_q2, collapse = ", "), "\n")
+  if(length(underestimate_groups_q2) > 0) {
+    cat("Groups that underestimated:", paste(underestimate_groups_q2, collapse = ", "), "\n")
+  }
+  if(length(overestimate_groups_q2) > 0) {
+    cat("Groups that overestimated:", paste(overestimate_groups_q2, collapse = ", "), "\n")
+  }
+} else {
+  cat("No groups showed significant systematic bias in their predictions.\n")
+}
+```
+
+## Wellbeing
+
+```{r}
+plot_likert(
+  df, 
+  "wellby_welfare",
+  "Will the collective digital mind welfare (in expectation) be net positive or negative?\n(10 years after first digital mind creation)",
+  low_label = "Strongly\nnegative",
+  mid_label = "Roughly\nneutral", 
+  high_label = "Strongly\npositive"
+)
+auto_save_plot() 
+```
+
+```{r}
+# Pre-deployment welfare
+plot_forecast_histogram(
+  df, 
+  "wellby_pre_deploy_1",
+  "What proportion of collective digital mind welfare consists of welfare\nthat digital minds have before deployment?",
+  x_label = "Proportion"
+)
+auto_save_plot()  
+```
+
+```{r}
+# Super-beneficiary digital minds
+plot_forecast_histogram(
+  df, 
+  "wellby_super_benef_1",
+  "What proportion of collective digital mind welfare will come from digital minds\nwith welfare capacity greater than 1,000 humans?",
+  x_label = "Proportion"
+)
+auto_save_plot()  
+```
+
+## Artificial Welfare from Other Sources
+
+```{r}
+# Possibility of welfare without subjective experience
+plot_forecast_histogram(
+  df, 
+  "other_in_principle_1",
+  "How likely is it that a computer system could have no capacity for\nsubjective experience but still have the capacity for welfare?"
+)
+auto_save_plot()  
+```
+
+```{r}
+# Expected proportion of welfare from non-digital minds
+plot_forecast_histogram(
+  df, 
+  "other_total_welfare_1",
+  "In expectation, what proportion of computer system welfare in 2040\ncomes from computers that are not digital minds?",
+  x_label = "Proportion"
+)
+auto_save_plot()  
+```
+
+## Final Questions
+
+```{r}
+# Check which country codes we have (cross reference with recoded values in Qualtrics)
+df %>% 
+  count(final_country)
+
+# Create country labels lookup
+country_labels <- c(
+ "31" = "Canada",
+ "185" = "United Kingdom", 
+ "187" = "United States",
+ "65" = "Germany"
+)
+```
+
+```{r country}
+# Bar plot for country where respondents are based
+
+# Create bar plot including NA and Other
+df %>% 
+ count(final_country) %>%
+ mutate(
+   country_name = case_when(
+     is.na(final_country) ~ "No response",
+     as.character(final_country) %in% names(country_labels) ~ country_labels[as.character(final_country)],
+     TRUE ~ "Other"
+   ),
+   # Convert to factor to preserve order by frequency
+   country_name = factor(country_name, levels = unique(country_name[order(n, decreasing = TRUE)]))
+ ) %>%
+ ggplot(aes(x = country_name, y = n)) +
+ geom_bar(stat = "identity", width = 0.5, fill = "steelblue3", alpha = 0.7) +
+ scale_y_continuous(breaks = function(x) floor(pretty(x))) +
+ labs(
+   title = "In which country do you currently reside?",
+   subtitle = sprintf("n = %d total responses", nrow(df)),
+   x = NULL,
+   y = "Count"
+ ) +
+ theme_minimal() +
+ theme(
+   panel.grid.minor = element_blank(),
+   panel.grid.major.x = element_line(color = "gray95"),
+   panel.grid.major.y = element_line(color = "gray95"),
+   plot.title = element_text(size = 11, face = "bold"),
+   plot.subtitle = element_text(size = 10),
+   axis.text.x = element_text(angle = 0, hjust = 0.5)
+ )
+```
+
+```{r detailed expertise question}
+# Function to plot the detailed expertise question as boxplots
+plot_rating_boxplot <- function(data, columns, labels, title,
+                              subtitle_extra = NULL,
+                              x_label = NULL,
+                              y_label = "Rating") {
+  # Create long format data
+  long_df <- data %>%
+    select(all_of(columns)) %>%
+    pivot_longer(cols = all_of(columns),
+                names_to = "category",
+                values_to = "value") %>%
+    filter(!is.na(value))
+  
+  # Calculate summary statistics
+  summary_stats <- long_df %>%
+    group_by(category) %>%
+    summarise(
+      n = n(),
+      median = median(value, na.rm = TRUE),
+      mean = mean(value, na.rm = TRUE),
+      sd = sd(value, na.rm = TRUE),
+      iqr = IQR(value, na.rm = TRUE)
+    ) %>%
+    mutate(
+      label = labels[match(category, columns)],
+      across(where(is.numeric), ~round(., 1))
+    ) %>%
+    select(category, label, everything())
+  
+  # Create subtitle
+  response_rate <- sprintf("n = %d/%d (%.0f%%) response rate",
+                          summary_stats$n[1],
+                          nrow(data),
+                          100 * summary_stats$n[1] / nrow(data))
+  subtitle <- if(is.null(subtitle_extra)) {
+    response_rate
+  } else {
+    paste(subtitle_extra, response_rate, sep = "\n")
+  }
+  
+  # Create plot
+  p <- ggplot(long_df, aes(x = factor(category, levels = columns, labels = labels),
+                          y = value)) +
+    geom_boxplot(width = 0.5, fill = "steelblue3", alpha = 0.7, outlier.color = NA) +
+    geom_jitter(width = 0.1, alpha = 0.6, na.rm = TRUE) +
+    scale_y_continuous(
+      limits = c(0.5, 7.5),
+      breaks = 1:7
+    ) +
+    labs(title = title,
+         subtitle = subtitle,
+         x = x_label,
+         y = y_label) +
+    theme_minimal() +
+    theme(
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_line(color = "gray95"),
+      panel.grid.major.y = element_line(color = "gray95"),
+      plot.title = element_text(size = 11, face = "bold"),
+      plot.subtitle = element_text(size = 10),
+      axis.title = element_text(size = 10),
+      axis.text = element_text(size = 9),
+      axis.text.x = element_text(angle = 45, hjust = 1)
+    )
+  
+  list(plot = p, summary = summary_stats)
+}
+
+```
+
+```{r}
+
+# Plot detailed expertise question
+expertise_result <- plot_rating_boxplot(
+  data = df,
+  columns = paste0("final_expertise_", 1:8),
+  labels = c("Digital minds research", "Technical AI research", 
+             "Technical AI safety", "AI policy/governance",
+             "Forecasting", "Philosophy", 
+             "Social science", "Consciousness research"),
+  title = "How would you rate your expertise in the following areas?",
+  y_label = "Rating (1 = none, 7 = very strong)"
+)
+
+# Display plot and summary
+expertise_result$plot
+format_boxplot_summary(expertise_result$summary)
+```
+
+```{r}
+# Bar plot showing area where participants are employed
+
+# Create lookup for sector labels
+sector_labels <- c(
+  "18" = "Academic",
+  "19" = "Government",
+  "20" = "Industry/corporate \nsector", 
+  "7" = "Research organization \noutside academia",
+  "4" = "Other non-profit",
+  "6" = "Other"
+)
+
+# Simple count of all responses
+sector_counts <- df %>%
+  filter(!is.na(final_sector)) %>%
+  mutate(sectors = strsplit(final_sector, ",")) %>%
+  unnest(sectors) %>%
+  count(sectors) %>%
+  mutate(sector_name = sector_labels[sectors])
+
+# Basic plot using our consistent style
+ggplot(sector_counts, aes(x = sector_name, y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue3", alpha = 0.7, width = 0.5) +
+  scale_y_continuous(breaks = function(x) floor(pretty(x))) +
+  labs(
+    title = "In what sector are you employed?",
+    subtitle = "Multiple selections allowed",
+    x = NULL,
+    y = "Count"
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(color = "gray95"),
+    panel.grid.major.y = element_line(color = "gray95"),
+    plot.title = element_text(size = 11, face = "bold"),
+    plot.subtitle = element_text(size = 10),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+```
+
+```{r}
+plot_likert(df, "final_community",
+  "How connected are you to at least one community active on\nLessWrong, EA Forum, and Alignment Forum?",
+  "Not at all connected",
+  "4",
+  "Strongly connected"
+)
+```
+## Participant Information
+
+```{r participant-information, echo=FALSE, results='asis'}
+# Helper function to check for preferences in the email_pref_ex column
+# Returns "Yes", "No", or "NA" based on whether the preference is present
+has_preference <- function(prefs, pref_code) {
+  if(is.na(prefs)) return(NA)
+  if(grepl(pref_code, prefs)) return("Yes")
+  return("No")
+}
+
+# Create the participant information table
+participant_info <- df %>%
+  # Select relevant columns, getting email from either column
+  mutate(
+    email = coalesce(email_ex1, email_ex2),
+    name = coalesce(name_ex, name_nonex)
+  ) %>%
+  # Only include preference data for experts (expertise != 5, which is non-expert)
+  mutate(
+    # Set email_pref_ex to NA if expertise is non-expert (5)
+    email_pref_adjusted = ifelse(expertise != 5, email_pref_ex, NA)
+  ) %>%
+  # Create preference columns using the adjusted preference field
+  mutate(
+    # Create separate columns for each preference
+    pref_1_no_compensation = sapply(email_pref_adjusted, function(x) has_preference(x, "1")),
+    pref_2_acknowledge = sapply(email_pref_adjusted, function(x) has_preference(x, "2")),
+    pref_3_custom_report = sapply(email_pref_adjusted, function(x) has_preference(x, "3")), 
+    pref_4_followup = sapply(email_pref_adjusted, function(x) has_preference(x, "4"))
+  ) %>%
+  # Get country name from lookup table
+  mutate(
+    country_name = case_when(
+      is.na(final_country) ~ NA_character_,
+      as.character(final_country) %in% names(country_labels) ~ country_labels[as.character(final_country)],
+      TRUE ~ "Other"
+    )
+  ) %>%
+  # Select and rename columns for the final table
+  select(
+    participant_id,
+    Name = name,
+    Email = email,
+    Country = country_name,
+    `No Payment` = pref_1_no_compensation,
+    `In Acknowledgments` = pref_2_acknowledge,
+    `Custom Report` = pref_3_custom_report,
+    `Follow-up` = pref_4_followup,
+    Progress = Progress
+  ) %>%
+  # Sort by name
+  arrange(Name)
+
+# For PDF output
+participant_info %>%
+  knitr::kable(format = "latex", booktabs = TRUE, 
+               caption = "Survey Participants and Their Preferences") %>%
+  kableExtra::kable_styling(latex_options = c("striped", "scale_down"), 
+                           font_size = 9)
+```
+
+```{r participant-info-csv, echo=FALSE}
+# Optionally, export this table to a CSV file
+# Uncomment the following line to enable export
+ write.csv(participant_info, "participant_information2.csv", row.names = FALSE)
+```
+
+
+
+
+```{r extract_comments_and_calculate_accuracy}
+# Extract final comments and calculate accuracy scores for peer forecast questions
+
+# Assuming 'df' is the clean dataframe that contains all your survey data
+# First, calculate group medians for the two peer forecast questions
+# 1. "start_year_3" (likelihood of digital minds by 2040) - predicted with "start_median_1"
+# 2. "recog_exist_1" (proportion of citizens believing in digital minds) - predicted with "recog_exist_meta_1"
+
+# Calculate group medians for the actual questions by expertise group
+group_medians <- df %>%
+  group_by(expertise) %>%
+  summarise(
+    # Only include groups with at least 3 responses
+    actual_median_q1 = if(sum(!is.na(start_year_3)) >= 3) median(start_year_3, na.rm = TRUE) else NA,
+    actual_median_q2 = if(sum(!is.na(recog_exist_1)) >= 3) median(recog_exist_1, na.rm = TRUE) else NA,
+    n_q1 = sum(!is.na(start_year_3)),
+    n_q2 = sum(!is.na(recog_exist_1))
+  )
+
+# Calculate accuracy scores for each participant
+accuracy_df <- df %>%
+  left_join(group_medians, by = "expertise") %>%
+  mutate(
+    # Calculate absolute difference between prediction and actual median
+    # for each of the two peer forecast questions
+    diff_score_q1 = abs(start_median_1 - actual_median_q1),
+    diff_score_q2 = abs(recog_exist_meta_1 - actual_median_q2),
+    
+    # Calculate average difference score (lower is better)
+    avg_diff_score = (diff_score_q1 + diff_score_q2) / 2,
+    
+    # Calculate accuracy score (0-100, higher is better)
+    # 100 - average difference (as percentages go from 0-100)
+    accuracy_score_q1 = 100 - diff_score_q1,
+    accuracy_score_q2 = 100 - diff_score_q2,
+    avg_accuracy_score = 100 - avg_diff_score,
+    
+    # Create labels for expertise
+    expertise_label = case_when(
+      expertise == 1 ~ "Digital minds research",
+      expertise == 2 ~ "AI research or AI policy",
+      expertise == 3 ~ "Forecasting",
+      expertise == 4 ~ "Philosophy/science/social science",
+      expertise == 5 ~ "Non-expert"
+    ),
+    
+    # Get name (expert or non-expert)
+    name = coalesce(name_ex, name_nonex)
+  )
+
+# Extract participant data with comments and accuracy scores
+comments_df <- accuracy_df %>%
+  select(
+    participant_id,
+    name,
+    expertise_label,
+    final_comments,
+    actual_median_q1,
+    actual_median_q2,
+    start_median_1,
+    recog_exist_meta_1,
+    diff_score_q1,
+    diff_score_q2,
+    avg_diff_score,
+    accuracy_score_q1,
+    accuracy_score_q2,
+    avg_accuracy_score
+  )
+
+# Display the first few rows with comments to check
+comments_with_text <- comments_df %>%
+  filter(!is.na(final_comments) & final_comments != "")
+head(comments_with_text)
+
+# Count how many final comments exist
+num_comments <- nrow(comments_with_text)
+print(paste("Total number of final comments:", num_comments))
+
+# Create a summary of the top forecasters
+top_forecasters <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score)) %>%
+  arrange(desc(avg_accuracy_score)) %>%
+  select(
+    participant_id, 
+    name, 
+    expertise_label,
+    avg_accuracy_score,
+    accuracy_score_q1,
+    accuracy_score_q2
+  ) %>%
+  head(20)  # Show top 20 forecasters
+
+# Print the top forecasters
+print("Top 20 Most Accurate Forecasters:")
+print(top_forecasters)
+
+# Save the comments and accuracy scores to CSV
+write.csv(comments_df, "final_comments_with_accuracy.csv", row.names = FALSE)
+print("Saved final comments with accuracy scores to final_comments_with_accuracy.csv")
+
+# Create a separate dataframe with just the accuracy scores for all participants
+accuracy_summary <- accuracy_df %>%
+  select(
+    participant_id,
+    name, 
+    expertise_label,
+    actual_median_q1,
+    actual_median_q2,
+    start_median_1,
+    recog_exist_meta_1,
+    diff_score_q1,
+    diff_score_q2,
+    avg_diff_score,
+    accuracy_score_q1,
+    accuracy_score_q2,
+    avg_accuracy_score
+  ) %>%
+  arrange(desc(avg_accuracy_score))
+
+# Save the accuracy scores to a separate CSV
+write.csv(accuracy_summary, "forecaster_accuracy_scores.csv", row.names = FALSE)
+print("Saved all forecaster accuracy scores to forecaster_accuracy_scores.csv")
+
+# Create a visualization of the accuracy distribution
+if(sum(!is.na(accuracy_df$avg_accuracy_score)) > 0) {
+  accuracy_plot <- ggplot(
+    accuracy_df %>% filter(!is.na(avg_accuracy_score)), 
+    aes(x = avg_accuracy_score, fill = factor(expertise))
+  ) +
+    geom_histogram(binwidth = 5, alpha = 0.7, position = "identity") +
+    scale_fill_manual(
+      values = expertise_colors,
+      labels = expertise_labels,
+      name = "Expertise"
+    ) +
+    labs(
+      title = "Distribution of Forecaster Accuracy Scores",
+      subtitle = "Higher scores indicate better accuracy in predicting group medians",
+      x = "Accuracy Score (0-100)",
+      y = "Count"
+    ) +
+    theme_minimal()
+  
+  print(accuracy_plot)
+  
+  # Also analyze accuracy by expertise group
+  expertise_accuracy <- accuracy_df %>%
+    filter(!is.na(avg_accuracy_score)) %>%
+    group_by(expertise_label) %>%
+    summarise(
+      n = n(),
+      mean_accuracy = mean(avg_accuracy_score, na.rm = TRUE),
+      median_accuracy = median(avg_accuracy_score, na.rm = TRUE),
+      sd_accuracy = sd(avg_accuracy_score, na.rm = TRUE)
+    ) %>%
+    arrange(desc(median_accuracy))
+  
+  print("Accuracy by Expertise Group:")
+  print(expertise_accuracy)
+}
+
+# Final message
+print("Saved final comments to final_comments.csv")
+
+
+
+
+
+
+
+
+# Test correlation between accuracy scores and possibility predictions
+# Using start_principle_1: "How likely is it that digital minds are possible in principle?"
+
+# Filter for participants who have both accuracy scores and possibility responses
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(start_principle_1))
+
+# Basic correlation tests
+cat("=== CORRELATION: Accuracy Score vs Possibility Beliefs ===\n")
+cat("Question: How likely is it that digital minds are possible in principle?\n")
+cat("Sample size:", nrow(correlation_data), "participants\n\n")
+
+# Pearson correlation
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, 
+                       correlation_data$start_principle_1, 
+                       method = "pearson")
+
+# Spearman correlation  
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, 
+                        correlation_data$start_principle_1, 
+                        method = "spearman")
+
+# Print results
+cat("Pearson correlation: r =", round(pearson_cor$estimate, 3), 
+    ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman correlation: rho =", round(spearman_cor$estimate, 3), 
+    ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+# Simple interpretation
+if(pearson_cor$p.value < 0.05) {
+  direction <- ifelse(pearson_cor$estimate > 0, "positively", "negatively")
+  cat("** SIGNIFICANT: Better forecasters", direction, "correlated with possibility beliefs **\n")
+} else {
+  cat("** NOT SIGNIFICANT: No correlation between forecasting accuracy and possibility beliefs **\n")
+}
+
+# Simple scatter plot
+ggplot(correlation_data, aes(x = avg_accuracy_score, y = start_principle_1)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = TRUE, color = "red") +
+  labs(
+    title = "Forecasting Accuracy vs Possibility Beliefs",
+    subtitle = sprintf("r = %.3f, p = %.4f, n = %d", 
+                      pearson_cor$estimate, pearson_cor$p.value, nrow(correlation_data)),
+    x = "Avg Accuracy Score (0-100)",
+    y = "Possibility Likelihood (%)"
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(color = "gray95"),
+    panel.grid.major.y = element_line(color = "gray95"),
+    plot.title = element_text(size = 11, face = "bold"),
+    plot.subtitle = element_text(size = 10)
+  )
+
+
+
+
+
+# Test correlation between accuracy scores and possibility predictions
+# Using start_principle_1: "How likely is it that digital minds are possible in principle?"
+
+# Filter for participants who have both accuracy scores and possibility responses
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(start_principle_1))
+
+# Basic correlation tests
+cat("=== CORRELATION: Accuracy Score vs Possibility Beliefs ===\n")
+cat("Question: How likely is it that digital minds are possible in principle?\n")
+cat("Sample size:", nrow(correlation_data), "participants\n\n")
+
+# Pearson correlation
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, 
+                       correlation_data$start_principle_1, 
+                       method = "pearson")
+
+# Spearman correlation  
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, 
+                        correlation_data$start_principle_1, 
+                        method = "spearman")
+
+# Print results
+cat("Pearson correlation: r =", round(pearson_cor$estimate, 3), 
+    ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman correlation: rho =", round(spearman_cor$estimate, 3), 
+    ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+# Simple interpretation
+if(pearson_cor$p.value < 0.05) {
+  direction <- ifelse(pearson_cor$estimate > 0, "positively", "negatively")
+  cat("** SIGNIFICANT: Better forecasters", direction, "correlated with possibility beliefs **\n")
+} else {
+  cat("** NOT SIGNIFICANT: No correlation between forecasting accuracy and possibility beliefs **\n")
+}
+
+# Simple scatter plot
+ggplot(correlation_data, aes(x = avg_accuracy_score, y = start_principle_1)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = TRUE, color = "red") +
+  labs(
+    title = "Forecasting Accuracy vs Possibility Beliefs",
+    subtitle = sprintf("r = %.3f, p = %.4f, n = %d", 
+                      pearson_cor$estimate, pearson_cor$p.value, nrow(correlation_data)),
+    x = "Avg Accuracy Score (0-100)",
+    y = "Possibility Likelihood (%)"
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(color = "gray95"),
+    panel.grid.major.y = element_line(color = "gray95"),
+    plot.title = element_text(size = 11, face = "bold"),
+    plot.subtitle = element_text(size = 10)
+  )
+# === STARTING POINT CORRELATIONS ===
+
+# Ever created
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(start_ever_1))
+
+cat("=== CORRELATION: Accuracy Score vs Ever Created ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$start_ever_1, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$start_ever_1, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+# Before AGI
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(start_before_AGI_1))
+
+cat("=== CORRELATION: Accuracy Score vs Before AGI ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$start_before_AGI_1, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$start_before_AGI_1, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+# Timeline questions (2025, 2030, 2040, 2050, 2100)
+timeline_vars <- c("start_year_1", "start_year_2", "start_year_3", "start_year_4", "start_year_6")
+timeline_labels <- c("2025", "2030", "2040", "2050", "2100")
+
+cat("=== CORRELATIONS: Accuracy Score vs Timeline Predictions ===\n")
+for(i in 1:length(timeline_vars)) {
+  correlation_data <- accuracy_df %>%
+    filter(!is.na(avg_accuracy_score) & !is.na(.data[[timeline_vars[i]]]))
+  
+  if(nrow(correlation_data) > 0) {
+    pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[timeline_vars[i]]], method = "pearson")
+    spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[timeline_vars[i]]], method = "spearman")
+    cat("By", timeline_labels[i], ": r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), 
+        ", rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "(n =", nrow(correlation_data), ")\n")
+  }
+}
+cat("\n")
+# === PRESCRIPTIVE ASSESSMENTS CORRELATIONS ===
+
+# Moratorium good/bad
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(presc_good_bad))
+
+cat("=== CORRELATION: Accuracy Score vs Moratorium Views ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$presc_good_bad, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$presc_good_bad, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+# AI safety synergy
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(presc_synergy))
+
+cat("=== CORRELATION: Accuracy Score vs AI Safety Synergy ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$presc_synergy, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$presc_synergy, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+# === TYPES OF DIGITAL MINDS CORRELATIONS ===
+
+# In principle possibilities
+principle_vars <- c("types_in_principle_1", "types_in_principle_2", "types_in_principle_3")
+principle_labels <- c("Machine learning", "Brain simulation", "Other types")
+
+cat("=== CORRELATIONS: Accuracy Score vs In Principle Possibilities ===\n")
+for(i in 1:length(principle_vars)) {
+  correlation_data <- accuracy_df %>%
+    filter(!is.na(avg_accuracy_score) & !is.na(.data[[principle_vars[i]]]))
+  
+  if(nrow(correlation_data) > 0) {
+    pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[principle_vars[i]]], method = "pearson")
+    spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[principle_vars[i]]], method = "spearman")
+    cat(principle_labels[i], ": r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), 
+        ", rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "(n =", nrow(correlation_data), ")\n")
+  }
+}
+cat("\n")
+
+# First type created
+first_vars <- c("types_first_1", "types_first_2", "types_first_3", "types_first_6")
+first_labels <- c("Never created", "Machine learning", "Brain simulation", "Other types")
+
+cat("=== CORRELATIONS: Accuracy Score vs First Type Created ===\n")
+for(i in 1:length(first_vars)) {
+  correlation_data <- accuracy_df %>%
+    filter(!is.na(avg_accuracy_score) & !is.na(.data[[first_vars[i]]]))
+  
+  if(nrow(correlation_data) > 0) {
+    pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[first_vars[i]]], method = "pearson")
+    spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[first_vars[i]]], method = "spearman")
+    cat(first_labels[i], ": r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), 
+        ", rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "(n =", nrow(correlation_data), ")\n")
+  }
+}
+cat("\n")
+# === SPEED CORRELATIONS ===
+
+speed_vars <- c("speed_total_wel_1", "speed_total_wel_2", "speed_total_wel_3", "speed_total_wel_4")
+speed_labels <- c("1,000 humans", "1M humans", "1B humans", "1T humans")
+
+cat("=== CORRELATIONS: Accuracy Score vs Speed Thresholds ===\n")
+for(i in 1:length(speed_vars)) {
+  correlation_data <- accuracy_df %>%
+    filter(!is.na(avg_accuracy_score) & !is.na(.data[[speed_vars[i]]]))
+  
+  if(nrow(correlation_data) > 0) {
+    pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[speed_vars[i]]], method = "pearson")
+    spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[speed_vars[i]]], method = "spearman")
+    cat(speed_labels[i], ": r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), 
+        ", rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "(n =", nrow(correlation_data), ")\n")
+  }
+}
+cat("\n")
+
+
+# === SCATTER PLOTS: ACCURACY vs SPEED (SPEARMAN + LOG VERSIONS) ===
+
+library(gridExtra)
+
+speed_vars <- c("speed_total_wel_1", "speed_total_wel_2", "speed_total_wel_3", "speed_total_wel_4")
+speed_labels <- c("1,000 humans", "1M humans", "1B humans", "1T humans")
+
+# Create lists to store different plot versions
+spearman_plots <- list()
+log_plots <- list()
+
+for(i in 1:length(speed_vars)) {
+  # Get data for this speed question
+  plot_data <- accuracy_df %>%
+    filter(!is.na(avg_accuracy_score) & !is.na(.data[[speed_vars[i]]]))
+  
+  # Calculate correlations
+  pearson_cor <- cor.test(plot_data$avg_accuracy_score, plot_data[[speed_vars[i]]], method = "pearson")
+  spearman_cor <- cor.test(plot_data$avg_accuracy_score, plot_data[[speed_vars[i]]], method = "spearman")
+  
+  # === SPEARMAN CORRELATION PLOT (using loess smoother) ===
+  subtitle_spearman <- sprintf("Spearman ρ = %.3f (p = %.3f)\nPearson r = %.3f (p = %.3f)", 
+                              spearman_cor$estimate, spearman_cor$p.value,
+                              pearson_cor$estimate, pearson_cor$p.value)
+  
+  spearman_plots[[i]] <- ggplot(plot_data, aes(x = avg_accuracy_score, y = .data[[speed_vars[i]]])) +
+    geom_point(alpha = 0.6, size = 2) +
+    geom_smooth(method = "loess", se = TRUE, color = "blue", alpha = 0.3) +  # Non-parametric smoother for Spearman
+    labs(
+      title = paste("Speed to", speed_labels[i], "(Spearman)"),
+      subtitle = subtitle_spearman,
+      x = "Accuracy Score",
+      y = "Years (9999 = Never)"
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 10, face = "bold"),
+      plot.subtitle = element_text(size = 8),
+      axis.title = element_text(size = 9),
+      axis.text = element_text(size = 8)
+    )
+  auto_save_plot() 
+  
+  # === LOG SCALE VERSION ===
+  # Create log-transformed data (handle 0s by adding small constant)
+  log_data <- plot_data %>%
+    mutate(
+      log_speed = log(.data[[speed_vars[i]]] + 0.1),  # Add 0.1 to handle any 0s
+      speed_original = .data[[speed_vars[i]]]
+    )
+  
+  # Calculate correlations on log scale
+  log_pearson <- cor.test(log_data$avg_accuracy_score, log_data$log_speed, method = "pearson")
+  log_spearman <- cor.test(log_data$avg_accuracy_score, log_data$log_speed, method = "spearman")
+  
+  subtitle_log <- sprintf("Log scale: Pearson r = %.3f (p = %.3f)\nSpearman ρ = %.3f (p = %.3f)", 
+                         log_pearson$estimate, log_pearson$p.value,
+                         log_spearman$estimate, log_spearman$p.value)
+  
+  log_plots[[i]] <- ggplot(log_data, aes(x = avg_accuracy_score, y = log_speed)) +
+    geom_point(alpha = 0.6, size = 2) +
+    geom_smooth(method = "lm", se = TRUE, color = "red", alpha = 0.3) +
+    labs(
+      title = paste("Speed to", speed_labels[i], "(Log Scale)"),
+      subtitle = subtitle_log,
+      x = "Accuracy Score",
+      y = "Log(Years + 0.1)"
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 10, face = "bold"),
+      plot.subtitle = element_text(size = 8),
+      axis.title = element_text(size = 9),
+      axis.text = element_text(size = 8)
+    )
+}
+
+# Display Spearman plots (non-parametric smoothers)
+grid.arrange(spearman_plots[[1]], spearman_plots[[2]], spearman_plots[[3]], spearman_plots[[4]], 
+             ncol = 2, nrow = 2,
+             top = "Forecasting Accuracy vs Speed Predictions (Spearman Correlations)")
+
+# Display Log-scale plots
+grid.arrange(log_plots[[1]], log_plots[[2]], log_plots[[3]], log_plots[[4]], 
+             ncol = 2, nrow = 2,
+             top = "Forecasting Accuracy vs Speed Predictions (Log Scale)")
+
+# Print correlation comparison
+cat("=== CORRELATION COMPARISON: ORIGINAL vs LOG SCALE ===\n")
+for(i in 1:length(speed_vars)) {
+  plot_data <- accuracy_df %>% filter(!is.na(avg_accuracy_score) & !is.na(.data[[speed_vars[i]]]))
+  log_data <- plot_data %>% mutate(log_speed = log(.data[[speed_vars[i]]] + 0.1))
+  
+  original_r <- cor(plot_data$avg_accuracy_score, plot_data[[speed_vars[i]]], method = "pearson")
+  log_r <- cor(log_data$avg_accuracy_score, log_data$log_speed, method = "pearson")
+  
+  cat(speed_labels[i], ": Original r =", round(original_r, 3), ", Log r =", round(log_r, 3), "\n")
+}
+
+
+
+# === DISTRIBUTION CORRELATIONS ===
+
+# Social function
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(distrib_social_1))
+
+cat("=== CORRELATION: Accuracy Score vs Social Function Proportion ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$distrib_social_1, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$distrib_social_1, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+# Country distribution
+country_vars <- c("distrib_country_1", "distrib_country_2", "distrib_country_3", "distrib_country_4")
+country_labels <- c("USA", "Europe", "China", "Other")
+
+cat("=== CORRELATIONS: Accuracy Score vs Country Distribution ===\n")
+for(i in 1:length(country_vars)) {
+  correlation_data <- accuracy_df %>%
+    filter(!is.na(avg_accuracy_score) & !is.na(.data[[country_vars[i]]]))
+  
+  if(nrow(correlation_data) > 0) {
+    pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[country_vars[i]]], method = "pearson")
+    spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[country_vars[i]]], method = "spearman")
+    cat(country_labels[i], ": r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), 
+        ", rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "(n =", nrow(correlation_data), ")\n")
+  }
+}
+cat("\n")
+
+# Actor distribution
+actor_vars <- c("distrib_actor_1", "distrib_actor_2", "distrib_actor_3", "distrib_actor_4", "distrib_actor_5")
+actor_labels <- c("Companies", "Governments", "Universities", "Open-source", "Other")
+
+cat("=== CORRELATIONS: Accuracy Score vs Actor Distribution ===\n")
+for(i in 1:length(actor_vars)) {
+  correlation_data <- accuracy_df %>%
+    filter(!is.na(avg_accuracy_score) & !is.na(.data[[actor_vars[i]]]))
+  
+  if(nrow(correlation_data) > 0) {
+    pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[actor_vars[i]]], method = "pearson")
+    spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[actor_vars[i]]], method = "spearman")
+    cat(actor_labels[i], ": r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), 
+        ", rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "(n =", nrow(correlation_data), ")\n")
+  }
+}
+cat("\n")
+
+# Intentional creation
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(distrib_intent_1))
+
+cat("=== CORRELATION: Accuracy Score vs Intentional Creation ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$distrib_intent_1, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$distrib_intent_1, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+# === CLAIMS CORRELATIONS ===
+
+# False experience claims
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(claims_exp_false_1))
+
+cat("=== CORRELATION: Accuracy Score vs False Experience Claims ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$claims_exp_false_1, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$claims_exp_false_1, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+# False denial of experience
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(claims_no_exp_false_1))
+
+cat("=== CORRELATION: Accuracy Score vs False Denial of Experience ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$claims_no_exp_false_1, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$claims_no_exp_false_1, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+# Rights claims
+rights_vars <- c("claims_exp_rights_1", "claims_exp_rights_2", "claims_exp_rights_3")
+rights_labels <- c("Claim subjective experiences", "Claim legal protection", "Claim civil rights")
+
+cat("=== CORRELATIONS: Accuracy Score vs Rights Claims ===\n")
+for(i in 1:length(rights_vars)) {
+  correlation_data <- accuracy_df %>%
+    filter(!is.na(avg_accuracy_score) & !is.na(.data[[rights_vars[i]]]))
+  
+  if(nrow(correlation_data) > 0) {
+    pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[rights_vars[i]]], method = "pearson")
+    spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[rights_vars[i]]], method = "spearman")
+    cat(rights_labels[i], ": r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), 
+        ", rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "(n =", nrow(correlation_data), ")\n")
+  }
+}
+cat("\n")
+# === RECOGNITION CORRELATIONS ===
+
+# Note: recog_exist_1 is one of the peer forecast questions used to calculate accuracy, so skip it
+
+# Citizen welfare estimation
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(recog_estimate_welf))
+
+cat("=== CORRELATION: Accuracy Score vs Citizen Welfare Estimation ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$recog_estimate_welf, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$recog_estimate_welf, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+# Basic harm protection
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(recog_basic_1))
+
+cat("=== CORRELATION: Accuracy Score vs Basic Harm Protection ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$recog_basic_1, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$recog_basic_1, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+# Advanced civil rights
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(recog_advanced_1))
+
+cat("=== CORRELATION: Accuracy Score vs Advanced Civil Rights ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$recog_advanced_1, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$recog_advanced_1, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+# Hot button political issue
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(recog_hot_button_1))
+
+cat("=== CORRELATION: Accuracy Score vs Hot Button Issue ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$recog_hot_button_1, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$recog_hot_button_1, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+# === WELLBEING CORRELATIONS ===
+
+# Collective welfare
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(wellby_welfare))
+
+cat("=== CORRELATION: Accuracy Score vs Collective Welfare ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$wellby_welfare, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$wellby_welfare, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+# Pre-deployment welfare
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(wellby_pre_deploy_1))
+
+cat("=== CORRELATION: Accuracy Score vs Pre-deployment Welfare ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$wellby_pre_deploy_1, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$wellby_pre_deploy_1, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+# Super-beneficiary welfare
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(wellby_super_benef_1))
+
+cat("=== CORRELATION: Accuracy Score vs Super-beneficiary Welfare ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$wellby_super_benef_1, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$wellby_super_benef_1, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+# === OTHER SOURCES CORRELATIONS ===
+
+# Welfare without subjective experience
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(other_in_principle_1))
+
+cat("=== CORRELATION: Accuracy Score vs Welfare Without Experience ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$other_in_principle_1, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$other_in_principle_1, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+# Non-digital mind welfare in 2040
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(other_total_welfare_1))
+
+cat("=== CORRELATION: Accuracy Score vs Non-digital Mind Welfare 2040 ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$other_total_welfare_1, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$other_total_welfare_1, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+# === FINAL QUESTIONS CORRELATIONS ===
+
+# Expertise areas
+expertise_vars <- paste0("final_expertise_", 1:8)
+expertise_labels <- c("Digital minds research", "Technical AI research", "Technical AI safety", 
+                     "AI policy/governance", "Forecasting", "Philosophy", 
+                     "Social science", "Consciousness research")
+
+cat("=== CORRELATIONS: Accuracy Score vs Self-Reported Expertise ===\n")
+for(i in 1:length(expertise_vars)) {
+  correlation_data <- accuracy_df %>%
+    filter(!is.na(avg_accuracy_score) & !is.na(.data[[expertise_vars[i]]]))
+  
+  if(nrow(correlation_data) > 0) {
+    pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[expertise_vars[i]]], method = "pearson")
+    spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data[[expertise_vars[i]]], method = "spearman")
+    cat(expertise_labels[i], ": r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), 
+        ", rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "(n =", nrow(correlation_data), ")\n")
+  }
+}
+cat("\n")
+
+# Community connection
+correlation_data <- accuracy_df %>%
+  filter(!is.na(avg_accuracy_score) & !is.na(final_community))
+
+cat("=== CORRELATION: Accuracy Score vs Community Connection ===\n")
+cat("Sample size:", nrow(correlation_data), "participants\n")
+pearson_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$final_community, method = "pearson")
+spearman_cor <- cor.test(correlation_data$avg_accuracy_score, correlation_data$final_community, method = "spearman")
+cat("Pearson: r =", round(pearson_cor$estimate, 3), ", p =", round(pearson_cor$p.value, 4), "\n")
+cat("Spearman: rho =", round(spearman_cor$estimate, 3), ", p =", round(spearman_cor$p.value, 4), "\n\n")
+
+
+
+
+
+
+
+
+
+# === SPEED QUARTILES ANALYSIS (KEEPING NEVERS AS 9999) ===
+# This matches how the original correlations were calculated
+
+speed_vars <- c("speed_total_wel_1", "speed_total_wel_2", "speed_total_wel_3", "speed_total_wel_4")
+speed_labels <- c("1,000 humans", "1M humans", "1B humans", "1T humans")
+
+cat("=== SPEED RESPONSES BY ACCURACY QUARTILES (NEVERS = 9999) ===\n\n")
+
+for(i in 1:length(speed_vars)) {
+  # Use original data with 9999 for nevers (same as correlation analysis)
+  data <- accuracy_df %>%
+    filter(!is.na(avg_accuracy_score) & !is.na(.data[[speed_vars[i]]])) %>%
+    arrange(avg_accuracy_score)
+  
+  # Calculate accuracy quartiles
+  q25 <- quantile(data$avg_accuracy_score, 0.25)
+  q75 <- quantile(data$avg_accuracy_score, 0.75)
+  
+  # Split into groups
+  bottom_25 <- data %>% filter(avg_accuracy_score <= q25)
+  middle_50 <- data %>% filter(avg_accuracy_score > q25 & avg_accuracy_score < q75)
+  top_25 <- data %>% filter(avg_accuracy_score >= q75)
+  
+  # Calculate medians
+  bottom_median <- median(bottom_25[[speed_vars[i]]])
+  middle_median <- median(middle_50[[speed_vars[i]]])
+  top_median <- median(top_25[[speed_vars[i]]])
+  
+  # Print results
+  cat("--- ", speed_labels[i], " (n=", nrow(data), ") ---\n", sep="")
+  cat("Least accurate 25%: ", ifelse(bottom_median == 9999, "Never", paste(bottom_median, "years")), " (n=", nrow(bottom_25), ")\n", sep="")
+  cat("Middle 50%: ", ifelse(middle_median == 9999, "Never", paste(middle_median, "years")), " (n=", nrow(middle_50), ")\n", sep="")
+  cat("Most accurate 25%: ", ifelse(top_median == 9999, "Never", paste(top_median, "years")), " (n=", nrow(top_25), ")\n", sep="")
+  cat("\n")
+}
+
+```
+
+
+
+```{r extract_unusual_views}
+# Extract unusual views from the survey data and save to CSV - simple version
+
+# Create a simple dataframe with just participant id and their unusual views
+unusual_views_df <- df %>%
+  select(
+    participant_id,
+    final_unusual_views
+  )
+
+# Count how many unusual views exist (non-NA and non-empty)
+unusual_views_with_text <- unusual_views_df %>%
+  filter(!is.na(final_unusual_views) & final_unusual_views != "")
+num_unusual_views <- nrow(unusual_views_with_text)
+
+# Print the count
+print(paste("Total number of unusual views responses:", num_unusual_views))
+
+# Save the unusual views to CSV
+write.csv(unusual_views_df, "unusual_views.csv", row.names = FALSE)
+print("Saved unusual views to unusual_views.csv")
+```
+
+
+```{r survey_duration_analysis}
+# Survey Duration Analysis for Complete Responses
+
+# Filter for participants who completed the survey (Progress = 100)
+completed_surveys <- df %>%
+  filter(Progress == 100) %>%
+  mutate(duration_minutes = `Duration (in seconds)` / 60)
+
+# Calculate summary statistics
+n_completed <- nrow(completed_surveys)
+mean_duration <- mean(completed_surveys$duration_minutes, na.rm = TRUE)
+median_duration <- median(completed_surveys$duration_minutes, na.rm = TRUE)
+
+# Print summary
+cat("Completed surveys:", n_completed, "\n")
+cat("Mean duration:", round(mean_duration, 1), "minutes\n")
+cat("Median duration:", round(median_duration, 1), "minutes\n")
+
+# Filter for participants who completed the survey and remove outliers
+completed_surveys <- df %>%
+  filter(Progress == 100) %>%
+  mutate(duration_minutes = `Duration (in seconds)` / 60)
+
+# Remove outliers using IQR method
+q25 <- quantile(completed_surveys$duration_minutes, 0.25, na.rm = TRUE)
+q75 <- quantile(completed_surveys$duration_minutes, 0.75, na.rm = TRUE)
+iqr <- q75 - q25
+
+completed_surveys <- completed_surveys %>%
+  filter(duration_minutes >= (q25 - 1.5 * iqr) & 
+         duration_minutes <= (q75 + 1.5 * iqr))
+
+# Calculate summary statistics
+n_completed <- nrow(completed_surveys)
+mean_duration <- mean(completed_surveys$duration_minutes, na.rm = TRUE)
+median_duration <- median(completed_surveys$duration_minutes, na.rm = TRUE)
+
+# Print summary
+cat("Completed surveys (outliers removed):", n_completed, "\n")
+cat("Mean duration:", round(mean_duration, 1), "minutes\n")
+cat("Median duration:", round(median_duration, 1), "minutes\n")
+
+# Create histogram
+ggplot(completed_surveys, aes(x = duration_minutes)) +
+  geom_histogram(bins = 30, fill = "steelblue3", alpha = 0.7, color = "white") +
+  geom_vline(xintercept = median_duration, color = "red", linetype = "dashed", size = 1) +
+  labs(
+    title = "Survey Completion Times",
+    subtitle = sprintf("n = %d (outliers removed), Median = %.1f min, Mean = %.1f min", 
+                      n_completed, median_duration, mean_duration),
+    x = "Duration (minutes)",
+    y = "Count"
+  ) +
+  theme_minimal()
+
+```

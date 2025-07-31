@@ -42,6 +42,12 @@ body {
   -webkit-text-size-adjust: none;
 }
 
+svg text {
+  font-family: var(--primary-font);
+  font-weight: var(--font-weight);
+  fill: var(--primary-color);
+}
+
 h1,
 h2,
 h3,
@@ -270,7 +276,8 @@ ul.main-findings li strong {
   font-weight: 600;
 }
 
-.report-body img {
+.report-body img,
+.report-body svg {
   box-sizing: border-box;
   padding: 1em;
   width: 100%;
@@ -349,7 +356,8 @@ ul.main-findings li strong {
   display: none;
 }
 
-.hero-visual-slider .slide img {
+.hero-visual-slider .slide img,
+.hero-visual-slider .slide svg {
   width: 100%;
   height: auto;
   display: block;

@@ -61,7 +61,7 @@ const imageExtension: ShowdownExtension = {
   type: "output",
   regex: /<img src=".*?" alt="([a-z_]+)" \/>/g,
   replace: (match: string, alt: string) => {
-    return `<img src="images/${alt}.svg" alt="${alt}" />`;
+    return inlineSvg(`forecasting-2025/images/${alt}.svg`);
   },
 };
 
@@ -147,10 +147,8 @@ const sliderHtml = `
   <div class="hero-visual-slider">
     <div class="slides">
       ${config.heroSlides
-        .map(
-          (slide, index) =>
-            `<div class="slide" data-index="${index}"><img src="images/${slide.src}.svg" alt="${slide.alt}" /></div>`
-        )
+        .map((slide, index) => ({ index, alt: slide.alt, svg: inlineSvg(`forecasting-2025/images/${slide.src}.svg`) }))
+        .map(({ index, alt, svg }) => `<div class="slide" data-index="${index}" aria-label="${alt}">${svg}</div>`)
         .join("\n")}
     </div>
     <div class="slider-controls">
@@ -245,4 +243,17 @@ function beautifulJoin(strings: Array<string>): string {
     const last = copy.pop();
     return copy.join(", ") + " & " + last;
   }
+}
+
+function inlineSvg(imagePath: string): string {
+  if (fs.existsSync(imagePath)) {
+    const content = fs.readFileSync(imagePath, "utf8");
+    const transformedContent = content
+      .replace(/<!\[CDATA\[([\s\S]+)\]\]>/g, "$1")
+      .replaceAll('font-family: "Arial"', "")
+      .replaceAll("font-weight: bold", "font-weight: 500");
+    return transformedContent;
+  }
+  console.warn(`[Image Extension] SVG not found: ${imagePath}`);
+  return `<div class="inlined-svg-error">Image '${imagePath}.svg' not found.</div>`;
 }

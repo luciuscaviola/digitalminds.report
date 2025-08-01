@@ -14,28 +14,41 @@ This survey gathered insights from 67 participants with relevant expertise to ex
 - [**Creation:** The probability that digital minds will at some point be created was judged to be 73%. Only 12% of participants thought it was less than 50% probable.](#creation)
 - [**Timing:** The median estimated probabilities of digital minds being created by a given year were 4.5% by 2025, 20% by 2030, 40% by 2040, 50% by 2050, and 65% by 2100\. Reasons influencing these timelines included technological trends (e.g., AI scaling), regulatory developments, and the risk of preemptive catastrophe.](#timing)
 - [**Timing relative to AGI:** 89% judged digital minds unlikely to arrive before AGI. However, these estimates may partly reflect confidence in short AGI timelines and greater uncertainty about digital mind timelines, rather than strong confidence that digital minds must necessarily follow AGI.](#timing-relative-to-agi)
-- [**Speed:** Many expected rapid growth in digital minds’ collective welfare capacity after the first is created, with median estimates suggesting their collective welfare capacity could equal that of one billion humans within five years[^2]](#speed).
+- [**Speed:** Many expected rapid growth in digital minds’ collective welfare capacity after the first is created, with median estimates suggesting their collective welfare capacity could equal that of one billion humans within five years.](#speed)  
+  [^2]
 - [**Types:** Brain simulations were viewed as most likely to support the capacity for subjective experience in principle, but machine learning–based AI systems were judged most likely to be the first digital minds.](#types)
-- [**Social function:** Participants disagreed on what proportion of digital minds will be designed specifically for social interaction with humans. Most participants expected only a small minority (median 10%), while about one-third anticipated that the majority will serve such social roles.2](#social-function)
-- [**Location:** Digital mind production in the first decade is expected to be concentrated in a few powerful countries, especially the USA and China, though some mentioned production in oceans, space, or outsourced locations2.](#location)
-- [**Producers:** Companies were widely expected to lead digital mind development in the first decade, outpacing governments, universities, and others—mirroring current AI research and commercialization trends2.](#producers)
-- [**Deliberate creation:** Opinions were split on whether digital minds would be created deliberately or emerge as byproducts of other developments2.](#deliberate-creation)
-- [**Net welfare:** There was no consensus on whether digital mind welfare will be net positive, neutral, or negative, though the overall leaning was slightly positive. Reasons for positive welfare included deliberate design for well-being and self-modification capabilities. Reasons for negative welfare included neglect of welfare in design, mistreatment, and suffering during training2.](#net-welfare)
-- [**Pre-deployment:** Most thought only a small share of digital mind welfare willoccur pre-deployment, though some flagged intense training-related suffering as potentially dominant among valenced experiences2.](#pre-deployment)
-- [**Super-beneficiaries:** Most were skeptical that super-beneficiary digital minds (with \>1,000× human welfare capacity) will contribute much to total welfare within ten years, though some saw them as potentially important2.](#super-beneficiaries)
-- [**Experience-independent welfare:** Most doubted that computer systems could have welfare without subjective experience. However, arguments for such possibilities may be underappreciated, as the existing body of literature on this question was not well-represented in responses2.](#possibility-of-experience-independent-welfare)
-- [**Claims:** Most expected that a sizable number of digital minds will consistently and proactively claim to have subjective experience or be deserving of legal protections or further civil rights2.](#claims)
-- [**Inaccurate self-attribution or self-denial:** Only a minority of AI systems without subjective experience were expected to systematically and falsely claim to have it. Similarly, only a minority of digital minds were expected to systematically and falsely deny possessing subjective experiences. However, given potentially large populations, even a small percentage of such systems could result in a large number of systems that make systematically inaccurate claims about whether they have subjective experience2.](#inaccurate-self-attribution-of-subjective-experience)
-- [**Public belief:** A substantial portion of the public was expected to believe in the existence of digital minds within ten years of their creation. However, responses reflected significant uncertainty and anticipated societal division, with beliefs likely varying across individuals and groups2.](#public-belief)
-- [**Welfare capacity estimation:** Participants broadly expected the public to significantly underestimate the welfare capacity of digital minds, raising concerns that their moral significance may be underappreciated2.](#welfare-capacity-estimation)
-- [**Protections and rights:** Public support for protections was expected to vary by level: moderate support for basic harm protections may emerge within a decade, while support for full civil rights was expected remain limited2.](#harm-protection)
-- [**Political attention:** Participants were divided on whether digital mind rights will become a major political issue within a decade of the first digital mind2.](#political-attention)
+- [**Social function:** Participants disagreed on what proportion of digital minds will be designed specifically for social interaction with humans. Most participants expected only a small minority (median 10%), while about one-third anticipated that the majority will serve such social roles.](#social-function)  
+  \[^2\]
+- [**Location:** Digital mind production in the first decade is expected to be concentrated in a few powerful countries, especially the USA and China, though some mentioned production in oceans, space, or outsourced locations.](#location)  
+  \[^2\]
+- [**Producers:** Companies were widely expected to lead digital mind development in the first decade, outpacing governments, universities, and others—mirroring current AI research and commercialization trends.](#producers)  
+  \[^2\]
+- [**Deliberate creation:** Opinions were split on whether digital minds would be created deliberately or emerge as byproducts of other developments.](#deliberate-creation)  
+  \[^2\]
+- [**Net welfare:** There was no consensus on whether digital mind welfare will be net positive, neutral, or negative, though the overall leaning was slightly positive. Reasons for positive welfare included deliberate design for well-being and self-modification capabilities. Reasons for negative welfare included neglect of welfare in design, mistreatment, and suffering during training.](#net-welfare)  
+  \[^2\]
+- [**Pre-deployment:** Most thought only a small share of digital mind welfare willoccur pre-deployment, though some flagged intense training-related suffering as potentially dominant among valenced experiences.](#pre-deployment)  
+  \[^2\]
+- [**Super-beneficiaries:** Most were skeptical that super-beneficiary digital minds (with \>1,000× human welfare capacity) will contribute much to total welfare within ten years, though some saw them as potentially important.](#super-beneficiaries)  
+  \[^2\]
+- [**Experience-independent welfare:** Most doubted that computer systems could have welfare without subjective experience. However, arguments for such possibilities may be underappreciated, as the existing body of literature on this question was not well-represented in responses.](#possibility-of-experience-independent-welfare)  
+  \[^2\]
+- [**Claims:** Most expected that a sizable number of digital minds will consistently and proactively claim to have subjective experience or be deserving of legal protections or further civil rights.](#claims)  
+  \[^2\]
+- [**Inaccurate self-attribution or self-denial:** Only a minority of AI systems without subjective experience were expected to systematically and falsely claim to have it. Similarly, only a minority of digital minds were expected to systematically and falsely deny possessing subjective experiences. However, given potentially large populations, even a small percentage of such systems could result in a large number of systems that make systematically inaccurate claims about whether they have subjective experience.](#inaccurate-self-attribution-of-subjective-experience)  
+  \[^2\]
+- [**Public belief:** A substantial portion of the public was expected to believe in the existence of digital minds within ten years of their creation. However, responses reflected significant uncertainty and anticipated societal division, with beliefs likely varying across individuals and groups.](#public-belief)  
+  \[^2\]
+- [**Welfare capacity estimation:** Participants broadly expected the public to significantly underestimate the welfare capacity of digital minds, raising concerns that their moral significance may be underappreciated.](#welfare-capacity-estimation)  
+  \[^2\]
+- [**Protections and rights:** Public support for protections was expected to vary by level: moderate support for basic harm protections may emerge within a decade, while support for full civil rights was expected remain limited.](#harm-protection)  
+  \[^2\]
+- [**Political attention:** Participants were divided on whether digital mind rights will become a major political issue within a decade of the first digital mind.](#political-attention)  
+  \[^2\]
 - [**Moratorium:** Views were mixed—leaning slightly positive—on whether a moratorium on creating digital minds until 2040 would be good or bad. Arguments for a moratorium included buying time to prepare and indirect AI safety benefits. Arguments against included delayed integration of safety measures and risks of later creation in higher-stakes contexts.](#moratorium)
 - [**Interactions with AI safety:** There was little convergence among participants on whether AI safety and digital mind welfare efforts will align or conflict. Mentioned potential synergies included alignment reducing the need for coercive control and shared technical tools (e.g., interpretability methods). Potential conflicts included safety measures such as monitoring and shutdown protocols that could harm digital minds, welfare protections limiting the ability to control AI behavior, and competition for scarce funding, talent, and regulatory attention.](#interactions-with-ai-safety)
 
 We hope this survey helps inform future research, guide policy discussions, and lay a foundation for deeper exploration of this emerging field. At the same time, the quantitative forecasts should be interpreted with caution. Our sampling—drawn from digital mind research groups, academic networks, and AI safety and policy organizations—ensured strong domain expertise but likely overrepresented those who view digital minds as especially important. Given the speculative nature of this topic, we especially highlight the qualitative responses in this report, which provide nuanced reasoning beyond the numerical estimates. For a broader perspective, we recommend consulting complementary research such as [Dreksler, Caviola et al. (2025)](https://doi.org/10.48550/arXiv.2506.11945), which surveyed a larger and more representative sample of AI researchers on a narrower set of questions about subjective experience in AI.
-
-#
 
 ## Introduction
 

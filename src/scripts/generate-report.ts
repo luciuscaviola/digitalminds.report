@@ -20,11 +20,6 @@ const basicExtensions: ShowdownExtension[] = [
       return `<div class="authors">${match}<\/div>`;
     },
   },
-  {
-    type: "output",
-    regex: /<h([1-6]) id="([a-zA-Z0-9-]+?)\2">(.+?) {#[a-zA-Z0-9-]+?}<\/h[1-6]>/g,
-    replace: '<h$1 id="$2">$3</h$1>',
-  },
 ];
 
 const tocExtension: ShowdownExtension = {
@@ -47,7 +42,8 @@ const footnoteExtension: ShowdownExtension[] = [
   },
   {
     type: "lang",
-    regex: /\[\^(\d{1,3})\]/g,
+    /** This also supports escaped markdown footnote syntax */
+    regex: /\\?\[\^(\d{1,3})\\?\]/g,
     replace: (match: string, a: string) => getFootnoteLink(a),
   },
 ];
@@ -94,6 +90,8 @@ const mainFindingsExtension: ShowdownExtension = {
 };
 
 const converter = new showdown.Converter({
+  ghCompatibleHeaderId: true,
+  customizedHeaderId: true,
   extensions: [
     basicExtensions,
     tocExtension,

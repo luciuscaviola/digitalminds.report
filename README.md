@@ -25,7 +25,7 @@ This project generates a static HTML report from a Markdown file. It uses a comb
 │       └── generate-report.ts
 ├── package.json
 ├── tsconfig.json
-└── README.md 
+└── README.md
 ```
 
 ## How it Works
@@ -45,6 +45,10 @@ When the report is generated, the script processes the `report.md` file and igno
 ### Image Handling
 
 During generation, the script also processes the image references in the Markdown file. It uses the alt text of the images, which follows the format `my_name`, to generate the correct file path to the corresponding SVG image in the `forecasting-2025/images/` directory. This allows for a seamless integration of the images from the Google Docs export into the final HTML report.
+
+### Footnotes
+
+The script supports standard Markdown footnotes (e.g., `[^1]`) as well as escaped footnotes (e.g., `\[^1]`). This is useful for manually adding multiple references to the same footnote in the Google Doc source content.
 
 ## Development Workflow
 

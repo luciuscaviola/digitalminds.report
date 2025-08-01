@@ -249,13 +249,19 @@ ul.main-findings {
   padding: 0;
 }
 
-ul.main-findings li:not(:has(> a)),
+ul.main-findings li {
+  display: flex;
+  justify-content: space-between;
+  gap: 2px;
+}
+
 ul.main-findings li > a {
   display: block;
+  box-sizing: border-box;
+  flex: 0 1 calc(100% - 0.75em);
   background-color: #fff;
   border-radius: 8px;
   padding: calc(var(--content-padding) / 2);
-  margin-bottom: 1rem;
 
   color: var(--primary-color);
   border: 1px solid var(--separator-color);
@@ -269,11 +275,13 @@ ul.main-findings li > a:hover {
 ul.main-findings li > a:hover strong {
   color: var(--link-color);
 }
-
 ul.main-findings li strong {
   display: block;
   color: var(--accent-secondary);
   font-weight: 600;
+}
+ul.main-findings li sup {
+  margin-top: 0.75em;
 }
 
 .report-body img,

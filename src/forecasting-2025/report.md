@@ -16,7 +16,8 @@ This survey gathered insights from 67 participants with relevant expertise to ex
   [^2]
 - [**Types:** Brain simulations were viewed as most likely to support the capacity for subjective experience in principle, but machine learning–based AI systems were judged most likely to be the first digital minds.](#types)  
   \[^2\]
-- [**Social function:** Participants disagreed on what proportion of digital minds will be designed specifically for social interaction with humans. Most participants expected only a small minority (median 10%), while about one-third anticipated that the majority will serve such social roles.2](#social-function)
+- [**Social function:** Participants disagreed on what proportion of digital minds will be designed specifically for social interaction with humans. Most participants expected only a small minority (median 10%), while about one-third anticipated that the majority will serve such social roles.](#social-function)  
+  \[^2\]
 - [**Location:** Digital mind production in the first decade is expected to be concentrated in a few powerful countries, especially the USA and China, though some mentioned production in oceans, space, or outsourced locations.](#location)  
   \[^2\]
 - [**Producers:** Companies were widely expected to lead digital mind development in the first decade, outpacing governments, universities, and others—mirroring current AI research and commercialization trends.](#producers)  

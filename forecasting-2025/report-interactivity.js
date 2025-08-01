@@ -1,6 +1,13 @@
 const ANIMATION_DURATION = 800;
 const THROTTLE_DELAY = 100;
 
+window.dataLayer = window.dataLayer || [];
+function gtag() {
+  dataLayer.push(arguments);
+}
+gtag("js", new Date());
+gtag("config", "G-690N9JZYZC");
+
 document.addEventListener("DOMContentLoaded", function () {
   const navLinks = document.querySelectorAll(".nav-link");
   const mainFindingsLinks = document.querySelectorAll(".main-findings a");

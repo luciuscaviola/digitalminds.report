@@ -181,6 +181,7 @@ const html = `<!DOCTYPE html>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="${config.head.twitterHandle}">
   <link rel="stylesheet" href="styles/main.css?v=${Date.now()}">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-690N9JZYZC"></script>
 </head>
 <body>
   <div class="overlay"></div>

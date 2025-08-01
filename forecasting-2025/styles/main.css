@@ -521,9 +521,9 @@ hr {
   position: fixed;
   bottom: var(--content-padding);
   right: var(--content-padding);
-  font-size: 1em;
-  width: 3em;
-  height: 3em;
+  font-size: 1.5em;
+  width: 2em;
+  height: 2em;
   background-color: #fff;
   color: var(--link-color);
   border-radius: 50%;

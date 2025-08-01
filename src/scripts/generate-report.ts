@@ -150,7 +150,7 @@ const sliderHtml = `
         .join("\n")}
     </div>
     <div class="slider-controls">
-      <div><button class="arrow prev" aria-label="Previous slide">⬅</button></div>
+      <div><button class="arrow prev" aria-label="Previous slide">←</button></div>
       <div class="dots">
         ${config.heroSlides
           .map(
@@ -159,7 +159,7 @@ const sliderHtml = `
           .join("\n")}
       </div>
       <div>
-      <button class="arrow next" aria-label="Next slide">⮕</button>
+      <button class="arrow next" aria-label="Next slide">→</button>
       </div>
     </div>
   </div>

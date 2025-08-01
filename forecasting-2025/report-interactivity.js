@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const backToTopButton = document.createElement("a");
   backToTopButton.href = sectionIds[0];
   backToTopButton.classList.add("back-to-top-button");
-  backToTopButton.innerHTML = "&#9650;"; // UTF-8 arrow in circle
+  backToTopButton.innerHTML = "↑";
   document.body.appendChild(backToTopButton);
 
   window.addEventListener("scroll", () => {

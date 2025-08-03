@@ -24,7 +24,7 @@ export const config = {
         website: "https://luciuscaviola.com",
       },
       {
-        name: "Brad Saad",
+        name: "Bradford Saad",
         university: "University of Oxford",
         website: "https://sites.google.com/a/brown.edu/brad-saad/",
       },
@@ -32,6 +32,8 @@ export const config = {
     publicationDate: "August 2025",
     pdfLink: "digital_minds_forecasting_2025.pdf",
     pdfLabel: "PDF version",
+    codeLink: "/forecasting-2025/data/",
+    codeLabel: "Data",
     citeLink:
       "javascript:prompt('Citation (press Ctrl+C or Cmd+C to copy):', 'Caviola, L., & Saad, B. (2025). Futures with digital minds: Expert forecasts in 2025.');void 0",
     citeLabel: "Cite",

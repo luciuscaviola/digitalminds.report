@@ -12,7 +12,7 @@ export const config = {
     label: "Expert Forecasts in 2025",
     heading: "Futures with Digital Minds",
     subtitle:
-      "Most expert participants consider it at least 50% likely that computers capable of subjective experience will exist by 2050. Once created, their collective welfare capacity is estimated to exceed humanity’s within a decade. Views diverge on whether their welfare will be positive and on the implications for AI safety, governance, and society at large.",
+      "Most expert participants consider it at least 50% likely that computers capable of subjective experience will exist by 2050. Once created, their collective welfare capacity is estimated to exceed humanity’s within a decade. Views diverge on whether their welfare will be positive and on their implications for AI safety, governance, and society at large.",
   },
   tocTitle: "Table of Contents",
   meta: {

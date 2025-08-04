@@ -35,7 +35,7 @@ export const config = {
     codeLink: "/forecasting-2025/data/",
     codeLabel: "Data",
     citeLink:
-      "javascript:prompt('Citation (press Ctrl+C or Cmd+C to copy):', 'Caviola, L., & Saad, B. (2025). Futures with digital minds: Expert forecasts in 2025.');void 0",
+      "javascript:prompt('Citation (press Ctrl+C or Cmd+C to copy):', 'Caviola, L., & Saad, B. (2025). Futures with digital minds: Expert forecasts in 2025 (arXiv:2508.00536). arXiv. https://arxiv.org/abs/2508.00536');void 0",
     citeLabel: "Cite",
   },
   heroSlides: [

@@ -30,7 +30,7 @@ export const config = {
       },
     ],
     publicationDate: "August 2025",
-    pdfLink: "digital_minds_forecasting_2025.pdf",
+    pdfLink: "https://arxiv.org/abs/2508.00536",
     pdfLabel: "PDF version",
     codeLink: "/forecasting-2025/data/",
     codeLabel: "Data",

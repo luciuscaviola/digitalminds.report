@@ -2,7 +2,7 @@ export const config = {
   head: {
     title: "Expert Forecasts about Digital Minds",
     description:
-      "We asked experts to forecast scenarios for computers with subjective experience capacity. They predict relatively short timelines, fast takeoff, and uncertain societal impacts.",
+      "We asked experts to forecast scenarios involving computers with the capacity for subjective experience. They predict relatively short timelines, fast takeoff, and uncertain societal impacts.",
     url: "https://digitalminds.report",
     image: "https://digitalminds.report/images/timing.svg",
     twitterHandle: "@LuciusCaviola",

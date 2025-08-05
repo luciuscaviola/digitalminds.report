@@ -42,6 +42,14 @@ body {
   -webkit-text-size-adjust: none;
 }
 
+/* iPhone Landscape Safe Area */
+@media (orientation: landscape) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
 svg text {
   font-family: var(--primary-font);
   font-weight: var(--font-weight);
@@ -658,7 +666,6 @@ hr {
     overflow: hidden;
   }
 }
-
 
 /* Fix spacing for footnotes that are now inside the anchor tags */
 ul.main-findings li a sup {

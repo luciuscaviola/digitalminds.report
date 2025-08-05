@@ -10,7 +10,7 @@ gtag("config", "G-690N9JZYZC");
 
 document.addEventListener("DOMContentLoaded", function () {
   const navLinks = document.querySelectorAll(".nav-link");
-  const mainFindingsLinks = document.querySelectorAll(".main-findings a");
+  const mainFindingsLinks = document.querySelectorAll(".main-findings li");
   const sectionIds = Array.from(navLinks).map((link) => link.getAttribute("href"));
   const navigation = document.querySelector(".toc");
   const menuToggle = document.querySelector(".menu-toggle");
@@ -101,9 +101,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function handleNavClick(e) {
+    const href = e.target?.getAttribute("href") ?? this.querySelector("a").getAttribute("href");
     e.preventDefault();
     closeMenu();
-    scrollToId(this.getAttribute("href"));
+    scrollToId(href);
   }
 
   function scrollToId(targetId) {
@@ -235,28 +236,4 @@ document.addEventListener("DOMContentLoaded", function () {
     prevButton.style.display = currentSliderIndex === 0 ? "none" : "block";
     nextButton.style.display = currentSliderIndex === slides.length - 1 ? "none" : "block";
   }
-});
-
-
-// Move footnote references to the end of sentences within main-findings summary boxes
-document.addEventListener('DOMContentLoaded', function() {
-  const mainFindingsItems = document.querySelectorAll('.main-findings li');
-  
-  mainFindingsItems.forEach(item => {
-    const anchor = item.querySelector('a');
-    const footnoteRef = item.querySelector('.footnote-ref');
-    const brTag = item.querySelector('br');
-    
-    if (anchor && footnoteRef) {
-      // Remove the footnote from its current position
-      const footnoteClone = footnoteRef.cloneNode(true);
-      footnoteRef.remove();
-      
-      // Remove any <br> tags that might be left hanging
-      if (brTag) brTag.remove();
-      
-      // Add the footnote to the end of the anchor text (before closing </a>)
-      anchor.appendChild(footnoteClone);
-    }
-  });
 });
